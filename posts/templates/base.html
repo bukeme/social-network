@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}Social Net{% endblock title %} | Social Net</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-tertiary">
+	{% include 'navbar.html' %}
+
+	<div>
+		{% block content %}
+
+		{% endblock content %}
+	</div>
+
+	<script src="{% static 'js/jquery.slim.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/navbar.js' %}"></script>
+</body>
+</html>

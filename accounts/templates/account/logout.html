@@ -1,0 +1,22 @@
+{% extends 'account_base.html' %}
+
+{% block content %}
+
+<div class="w-100 vh-100 position-fixed background-lgrey d-flex justify-content-center align-items-center">
+	<div class="card p-4 m-4" style="width: 350px;">
+		<h2 class="text-center">Sign Out</h2>
+		<form method="post" class="mt-3">
+			{% csrf_token %}
+			<p class="f-w6 text-center">Are You Sure You Want To Logout</p>
+			<div class="d-flex justify-content-center">
+				<a href="javascript:history.back()" class="btn btn-warning mr-1">
+					<i class="fa fa-angle-double-left mr-1"></i>
+					<span>Go Back</span>
+				</a>
+				<button type="submit" class="btn btn-outline-danger">Yes, Logout</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock content %}

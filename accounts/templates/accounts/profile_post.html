@@ -1,0 +1,837 @@
+{% extends 'base.html' %}
+
+{% block title %}"{{user | capfirst}}" profile{% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+		{% include 'accounts/profile_start.html' %}
+
+		<div class="row p-3">
+			<div class="col-lg-5">
+
+				<!-- About -->
+
+				<div class="rounded card p-3 bg-white mt-2 text-muted">
+					<h4 class="text-dark font-weight-bold">About</h4>
+					<p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire difficulty gay assistance joy.</p>
+					<div>
+						<div>
+							<i class="fa fa-calendar mr-1"></i>
+							<span>Born: </span>
+							<span class="font-weight-bold">October 20, 1990</span>
+						</div>
+						<div>
+							<i class="fa fa-heart mr-1"></i>
+							<span>Status: </span>
+							<span class="font-weight-bold">Single</span>
+						</div>
+						<div>
+							<i class="fa fa-envelope mr-1"></i>
+							<span>Email: </span>
+							<span class="font-weight-bold">webestica@gmail.com</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Photos -->
+
+				<div class="rounded card p-3 bg-white mt-2">
+					<div class="d-flex justify-content-between">
+						<h4 class="font-weight-bold">Photos</h4>
+						<a href="#" class="btn btn-sm btn-outline-primary">See all photos</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); grid-gap: 10px;" class="mt-3">
+						<div>
+							<img src="../images/15.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/16.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/17.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/18.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/19.jpg" class="rounded">
+						</div>
+					</div>
+				</div>
+
+				<!-- Friends -->
+
+				<div class="rounded card p-3 bg-white mt-2">
+					<div class="d-flex justify-content-between">
+						<div class="d-flex align-items-center">
+							<h4 class="font-weight-bold">Friends</h4>
+							<span class="badge text-danger ml-2 p-2" style="background: #d6293e10;">230</span>
+						</div>
+						<div>
+							<a href="#" class="btn btn-sm btn-outline-primary">See all friends</a>
+						</div>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); grid-gap: 20px;" class="mt-3">
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/06.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Amanda Reed</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/09.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Samuel Bishop</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Bryan Knight</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/08.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Amanda Reed</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<!-- Create Post Section -->
+
+				<div class="p-3 mt-2 card rounded bg-white">
+					<form>
+						<div class="form-group position-relative">
+							<textarea class="form-control rounded pl-5" placeholder="What's on your mind?" rows="3"></textarea>
+							<div class="position-absolute rounded-circle" style="top: 7px; left: 7px; width: 30px; height: 30px;">
+								<img class="rounded-circle" style="width: 100%; height: 100%;" src="../images/07.jpg">
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="form-group">
+								<label class="btn btn-sm btn-light position-relative" style="padding-left: 35px;">
+									Images
+									<input class="d-none" type="file" name="images">
+									<i class="fa fa-images position-absolute text-success" style="top: 50%; left: 8px; transform: translateY(-50%);"></i>
+								</label>
+							</div>
+							<div class="form-group ml-3">
+								<label class="btn btn-sm btn-light position-relative" style="padding-left: 35px;">
+									Video
+									<input class="d-none" type="file" name="video">
+									<i class="fa fa-video position-absolute text-danger" style="top: 50%; left: 8px; transform: translateY(-50%);"></i>
+								</label>
+							</div>
+							<div class="form-group ml-auto">
+								<select class="form-control form-control-sm" style="width: 100px;">
+									<option value="public">Public</option>
+									<option value="friends">Friends</option>
+									<option value="only me">Only Me</option>
+								</select>
+							</div>
+							<div class="form-group ml-2">
+								<button class="btn btn-sm btn-primary" type="submit">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!-- Post List Section -->
+
+				<div class="pt-2">
+					<div class="card bg-white p-3 mt-3">
+						<div class="d-flex">
+							<div class="rounded-circle border border-primary" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column justify-content-center ml-2">
+								<span class="d-flex align-items-center">
+									<span class="font-weight-bold">Lori Ferguson</span>
+									<span class="text-muted mx-2">.</span>
+									<span class="text-muted small">2hr</span>
+								</span>
+								<span class="text-muted small">Web Developer at Webestica</span>
+							</div>
+							<div class="dropdown ml-auto">
+								<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item">Edit Post</a>
+									<div class="dropdown-divider"></div>
+									<a href="#" class="dropdown-item">Delete Post</a>
+								</div>
+							</div>
+						</div>
+						<div class="mt-3 text-muted">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</div>
+						<div class="mt-2 post-img-1" style="height: 280px;">
+							<div class="rounded" style="cursor: pointer;">
+								<img src="../images/01.jpg" class="rounded">
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-between">
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-heart"></i> Like (56)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-comment"></i> Comments (12)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-share"></i> Share (3)</button>
+						</div>
+						<hr>
+
+						<!-- Comment Section -->
+
+						<div>
+							<div class="d-flex">
+								<div class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+									<img src="../images/12.jpg" class="rounded-circle">
+								</div>
+								<form class="form-inline flex-grow-1 d-flex">
+									<div class="form-group flex-grow-1">
+										<textarea class="form-control w-100" rows="1" name="comment" placeholder="Add a comment..."></textarea>
+									</div>
+									<button type="submit" class="btn btn-primary ml-2">Post</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div class="card bg-white p-3 mt-3">
+						<div class="d-flex">
+							<div class="rounded-circle border border-primary" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column justify-content-center ml-2">
+								<span class="d-flex align-items-center">
+									<span class="font-weight-bold">Lori Ferguson</span>
+									<span class="text-muted mx-2">.</span>
+									<span class="text-muted small">2hr</span>
+								</span>
+								<span class="text-muted small">Web Developer at Webestica</span>
+							</div>
+							<div class="dropdown ml-auto">
+								<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item">Edit Post</a>
+									<div class="dropdown-divider"></div>
+									<a href="#" class="dropdown-item">Delete Post</a>
+								</div>
+							</div>
+						</div>
+						<div class="mt-3 text-muted">
+							<p>I'm so privileged to be involved in the @bootstrap hiring process! Interviewing with their team was fun and I hope this can be a valuable resource for folks! #inclusivebusiness #internship #hiring #apply.</p>
+						</div>
+
+						<!-- Post Image(s) -->
+
+						<div class="mt-2 post-img-3" style="height: 280px;">
+							<div class="rounded img-modal img-modal-id" style="cursor: pointer;" data-toggle="modal" data-target="#mymodal" data-carousel="mycarousel" data-class="img-modal-id">
+								<img src="../images/01.jpg" class="rounded">
+							</div>
+							<div class="rounded img-modal img-modal-id" style="cursor: pointer;" data-toggle="modal" data-target="#mymodal" data-carousel="mycarousel" data-class="img-modal-id">
+								<img src="../images/02.jpg" class="rounded">
+							</div>
+							<div class="rounded img-modal img-modal-id" style="cursor: pointer;" data-toggle="modal" data-target="#mymodal" data-carousel="mycarousel" data-class="img-modal-id">
+								<img src="../images/03.jpg" class="rounded">
+							</div>
+							<div class="modal fade" id="mymodal">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content" style="height: 500px;">
+										<!-- <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span>&times;</span>
+											</button>
+										</div> -->
+										<div class="modal-body h-100">
+											<div class="carousel slide h-100" id="mycarousel" data-ride="carousel">
+												<div class="carousel-inner h-100">
+													<div class="carousel-item active position-relative h-100">
+														<h1 class="position-absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Loading...</h1>
+													</div>
+												</div>
+												<a href="#mycarousel" class="carousel-control-prev" data-slide="prev">
+													<span class="carousel-control-prev-icon"></span>
+													<span class="sr-only">Previous</span>
+												</a>
+												<a href="#mycarousel" class="carousel-control-next" data-slide="next">
+													<span class="carousel-control-next-icon"></span>
+													<span class="sr-only">Next</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-between">
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-heart"></i> Like (56)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-comment"></i> Comments (12)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-share"></i> Share (3)</button>
+						</div>
+						<hr>
+
+						<!-- Comment Section -->
+
+						<div>
+							<div class="d-flex">
+								<div class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+									<img src="../images/12.jpg" class="rounded-circle">
+								</div>
+								<form class="form-inline flex-grow-1 d-flex">
+									<div class="form-group flex-grow-1">
+										<textarea class="form-control w-100" rows="1" name="comment" placeholder="Add a comment..."></textarea>
+									</div>
+									<button type="submit" class="btn btn-primary ml-2">Post</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div class="card bg-white p-3 mt-3">
+						<div class="d-flex">
+							<div class="rounded-circle border border-primary" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+								<img src="../images/12.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column justify-content-center ml-2">
+								<span class="d-flex align-items-center">
+									<span class="font-weight-bold">Joan Wallace</span>
+									<span class="text-muted mx-2">.</span>
+									<span class="text-muted small">1day</span>
+								</span>
+								<span class="text-muted small">12 January at 12:00</span>
+							</div>
+							<div class="dropdown ml-auto">
+								<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item">Edit Post</a>
+									<div class="dropdown-divider"></div>
+									<a href="#" class="dropdown-item">Delete Post</a>
+								</div>
+							</div>
+						</div>
+						<div class="mt-3 text-muted">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</div>
+						<div class="mt-2">
+							<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+								<video class="embed-responsive-item" controls poster="../images/poster.jpg">
+									<source src="../videos/video-feed.mp4" type="video/mp4">
+								</video>
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-between">
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-heart"></i> Like (56)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-comment"></i> Comments (12)</button>
+							<button class="btn btn-sm btn-outline-primary"><i class="fa fa-share"></i> Share (3)</button>
+						</div>
+						<hr>
+
+						<!-- Comment Section -->
+
+						<div>
+							<div class="d-flex">
+								<div class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+									<img src="../images/12.jpg" class="rounded-circle">
+								</div>
+								<form class="form-inline flex-grow-1 d-flex">
+									<div class="form-group flex-grow-1">
+										<textarea class="form-control w-100" rows="1" name="comment" placeholder="Add a comment..."></textarea>
+									</div>
+									<button type="submit" class="btn btn-primary ml-2">Post</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- About - Profile -->
+
+			<div class="col-lg-7 d-none">
+
+				<!-- Profile Info -->
+
+				<div class="p-3 mt-2 card bg-white">
+					<h4 class="mb-3 font-weight-bold">Profile Info</h4>
+					<div class="border rounded p-2">
+						<div class="d-flex justify-content-between align-items-center mb-2">
+							<h6 class="font-weight-bold">Overview</h6>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<p class="text-muted">
+							He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire difficulty gay assistance joy. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance.
+						</p>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-calendar mr-2"></i>
+								<span class="mr-2">Born: </span>
+								<span class="font-weight-bold">October 20, 1990</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-heart mr-2"></i>
+								<span class="mr-2">Status: </span>
+								<span class="font-weight-bold">Single</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-briefcase mr-2"></i>
+								<span class="font-weight-bold">Lead Developer</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-map-marker-alt mr-2"></i>
+								<span class="mr-2">Lives in: </span>
+								<span class="font-weight-bold">New Hampshire</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-calendar mr-2"></i>
+								<span class="mr-2">Joined on: </span>
+								<span class="font-weight-bold">Nov 26, 2019</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-envelope mr-2"></i>
+								<span class="mr-2">Email: </span>
+								<span class="font-weight-bold">webestica@gmail.com</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Likes -->
+
+				<div class="card bg-white p-3 mt-3">
+					<div class="d-flex justify-content-between">
+						<h4 class="f-lg font-weight-bold">Likes</h4>
+						<a href="#" class="btn btn-sm btn-outline-primary">See all</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); grid-column-gap: 20px; grid-row-gap: 30px;" class="mt-3">
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/04.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#" class="text-dark hover-blue">
+									<h6 class="text-dark hover-blue">Oracle</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/13.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">Apple</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/placeholder.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">Elon Musk</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/20.jpg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">The X Factor</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/12.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">GetBootstrap</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Photos -->
+
+			<div class="col-lg-7 d-none">
+				<div class="card p-3 bg-white mt-2">
+					<div class="d-flex justify-content-between">
+						<h4 class="font-weight-bold">Photos</h4>
+						<a href="#" class="btn btn-sm btn-outline-primary">See all photos</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); grid-gap: 10px;" class="mt-3">
+						<div>
+							<img src="../images/15.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/16.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/17.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/18.jpg" class="rounded">
+						</div>
+						<div>
+							<img src="../images/19.jpg" class="rounded">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Friends -->
+
+			<div class="col-lg-7 d-none">
+				<div class="card p-3 bg-white">
+					<div class="d-flex justify-content-between">
+						<h5 class="font-weight-bold">Friends</h5>
+						<div class="d-flex">
+							<form>
+								<div class="form-group position-relative">
+									<input type="search" class="form-control form-control-sm rounded-pill" name="friend" placeholder="Search friend..." style="padding-left: 35px;">
+									<i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
+								</div>
+							</form>
+							<div class="ml-3">
+								<a href="#" class=" font-weight-bold">Find Friends</a>
+							</div>
+						</div>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 20px;" class="mt-3">
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/06.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Amanda Reed</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/09.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Samuel Bishop</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Bryan Knight</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="card d-flex flex-column align-items-center p-2">
+							<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+								<img src="../images/08.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<a href="#" class="">
+								<h6 class="text-dark hover-blue">Amanda Reed</h6>
+							</a>
+							<span class="small text-muted mb-2">16 Mutual Friends</span>
+							<div>
+								<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+									<i class="fa fa-comment-alt"></i>
+								</a>
+								<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+									<i class="fa fa-user-minus"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Groups -->
+
+			<div class="col-lg-7 d-none">
+				<div class="card p-3">
+					<div>
+						<h5 class="font-weight-bold">Groups</h5>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 5px;" class="text-muted mt-4">
+						<div class="d-flex border border-light rounded-lg flex-nowrap p-3">
+							<div style="width: 60px; height: 60px;" class="rounded">
+								<img src="../images/django.png" class="rounded">
+							</div>
+							<div class="ml-2 d-flex flex-column">
+								<a href="#">
+									<h5 class="text-dark hover-blue">Django Developers' Network</h5>
+								</a>
+								<span>21.2K members</span>
+							</div>
+						</div>
+						<div class="d-flex border border-light rounded-lg flex-nowrap p-3">
+							<div style="width: 60px; height: 60px;" class="rounded">
+								<img src="../images/python.png" class="rounded">
+							</div>
+							<div class="ml-2 d-flex flex-column">
+								<a href="#">
+									<h5 class="text-dark hover-blue">Python Programming</h5>
+								</a>
+								<span>21.2K members</span>
+							</div>
+						</div>
+						<div class="d-flex border border-light rounded-lg flex-nowrap p-3">
+							<div style="width: 60px; height: 60px;" class="rounded">
+								<img src="../images/javascript.png" class="rounded">
+							</div>
+							<div class="ml-2 d-flex flex-column">
+								<a href="#">
+									<h5 class="text-dark hover-blue">JavaScript Developers</h5>
+								</a>
+								<span>21.2K members</span>
+							</div>
+						</div>
+						<div class="d-flex border border-light rounded-lg flex-nowrap p-3">
+							<div style="width: 60px; height: 60px;" class="rounded">
+								<img src="../images/web-dev.jpg" class="rounded">
+							</div>
+							<div class="ml-2 d-flex flex-column">
+								<a href="#">
+									<h5 class="text-dark hover-blue">Learn Web Development</h5>
+								</a>
+								<span>21.2K members</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+{% endblock content %}

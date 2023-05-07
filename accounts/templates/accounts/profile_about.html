@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+
+{% block title %}About "{{ user | title }}"{% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+		{% include 'accounts/profile_start.html' %}
+
+		<div class="row p-3">
+			<!-- About - Profile -->
+
+			<div class="col-12">
+
+				<!-- Profile Info -->
+
+				<div class="p-3 mt-2 card bg-white">
+					<h4 class="mb-3 font-weight-bold">Profile Info</h4>
+					<div class="border rounded p-2 mt-2">
+						{% if user.userprofile.overview %}
+
+							<div class="d-flex justify-content-between align-items-center mb-2">
+								<h6 class="font-weight-bold">Overview</h6>
+								<div class="dropdown">
+									<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+										<i class="fa fa-ellipsis-h"></i>
+									</button>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a href="#" class="dropdown-item hover-blue">
+											<i class="fa fa-edit mr-1"></i>
+											Edit
+										</a>
+										<a href="#" class="dropdown-item hover-blue">
+											<i class="fa fa-trash mr-1"></i>
+											Delete
+										</a>
+									</div>
+								</div>
+							</div>
+							<p class="text-muted">
+								He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire difficulty gay assistance joy. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance.
+							</p>
+
+						{% else %}
+							<div class="d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#form-user{{ user.pk }}" style="height: 100px; cursor: pointer;">
+								<p class="f-w6 text-muted">
+									<i class="fa fa-plus-circle"></i>
+									<span>Add Overview</span>
+								</p>
+							</div>
+
+						{% endif %}
+
+						<div class="modal fade" id="form-user{{ user.pk }}" tabindex="-1" aria-labelledby="form-user{{ user.pk }}Label" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">
+											{% if user.userprofile.overview %}
+												Edit
+											{% else %}
+												Add
+											{% endif %}
+											Overview
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label>Overview</label>
+												<textarea class="form-control" value={{form.overview.value}}></textarea>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">
+											{% if user.userprofile.overview %}
+												Edit
+											{% else %}
+												Add
+											{% endif %}
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-calendar mr-2"></i>
+								<span class="mr-2">Born: </span>
+								<span class="font-weight-bold">October 20, 1990</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-heart mr-2"></i>
+								<span class="mr-2">Status: </span>
+								<span class="font-weight-bold">Single</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-briefcase mr-2"></i>
+								<span class="font-weight-bold">Lead Developer</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-map-marker-alt mr-2"></i>
+								<span class="mr-2">Lives in: </span>
+								<span class="font-weight-bold">New Hampshire</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-calendar mr-2"></i>
+								<span class="mr-2">Joined on: </span>
+								<span class="font-weight-bold">Nov 26, 2019</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between p-2 rounded border">
+							<div class="d-flex align-items-center">
+								<i class="fa fa-envelope mr-2"></i>
+								<span class="mr-2">Email: </span>
+								<span class="font-weight-bold">webestica@gmail.com</span>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-edit mr-1"></i>
+										Edit
+									</a>
+									<a href="#" class="dropdown-item hover-blue">
+										<i class="fa fa-trash mr-1"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Likes -->
+
+				<div class="card bg-white p-3 mt-3">
+					<div class="d-flex justify-content-between">
+						<h4 class="f-lg font-weight-bold">Likes</h4>
+						<a href="#" class="btn btn-sm btn-outline-primary">See all</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-column-gap: 20px; grid-row-gap: 30px;" class="mt-4">
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/04.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#" class="text-dark hover-blue">
+									<h6 class="text-dark hover-blue">Oracle</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/13.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">Apple</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/placeholder.jpg" class="rounded-circle">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">Elon Musk</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/20.jpg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">The X Factor</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<div style="width: 60px; height: 60px;" class="position-relative">
+								<img src="../images/12.svg">
+								<a href="#" class="stretched-link"></a>
+							</div>
+							<div class="ml-2 d-flex flex-column justify-content-center">
+								<a href="#">
+									<h6 class="text-dark hover-blue">GetBootstrap</h6>
+								</a>
+								<span class="text-muted small">7,325 followers</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

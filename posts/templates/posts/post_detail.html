@@ -1,0 +1,432 @@
+{% extends 'base.html' %}
+{% load posts_tags %}
+
+{% block title %}{{ post.user.username }}'s Post{% endblock title %}
+
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row p-3">
+			{% include 'posts/left-section.html' %}
+
+			<div class="col-lg-6">
+				<div>
+					<div class="card bg-white p-3">
+						<div class="d-flex">
+							<div class="rounded-circle border border-primary flex-shrink-0" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+								<img src="{{ post.user.userprofile.get_profileimage }}">
+							</div>
+							<div class="d-flex flex-column justify-content-center ml-2">
+								<span class="d-flex align-items-center">
+									<a href="{% url 'profile_post' post.user.pk %}" class="font-weight-bold text-dark">{{ post.user.first_name }} {{ post.user.last_name }}</a>
+									<span class="text-muted mx-2 d-flex align-items-center justify-content-center"><i class="fa fa-circle" style="font-size: 5px;"></i></span>
+									<span class="text-muted small">{{ post.created | timesince | truncatechars:5 }}</span>
+								</span>
+								<a href="{% url 'profile_post' post.user.pk %}" class="text-muted small">@{{ post.user.username }}</a>
+							</div>
+							{% if request.user == post.user %}
+								{% include 'posts/post_dropdown.html' %}
+							{% endif %}
+						</div>
+						<div class="mt-3 text-muted">
+							<p>{{ post.content }}</p>
+						</div>
+
+						{% if post.postimage_set.all %}
+							<div class="mt-2 mb-3 post-img-detail">
+								{% for image in post.postimage_set.all %}
+									<div class="rounded img-modal-trigger" style="cursor: pointer;" data-toggle="modal" data-target="#post{{ post.pk }}-modal" data-imgid="#modal-img-{{ image.pk }}">
+										<img src="{{ image.image.url }}" class="rounded">
+									</div>
+								{% endfor %}
+								<div class="modal fade" id="post{{ post.pk }}-modal">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content" style="height: 500px;">
+											<div class="modal-body h-100">
+												<div class="carousel slide h-100" id="post{{ post.pk }}-carousel" data-ride="carousel">
+													<div class="carousel-inner h-100">
+														{% for image in post.postimage_set.all %}
+															<div class="carousel-item h-100" id="modal-img-{{ image.pk }}">
+																<img src="{{ image.image.url }}" class="d-block w-100">
+															</div>
+														{% endfor %}
+													</div>
+													<button type="button" class="carousel-control-prev" data-slide="prev" data-target="#post{{ post.pk }}-carousel">
+														<span class="carousel-control-prev-icon"></span>
+														<span class="sr-only">Previous</span>
+													</button>
+													<button type="button" class="carousel-control-next" data-slide="next" data-target="#post{{ post.pk }}-carousel">
+														<span class="carousel-control-next-icon"></span>
+														<span class="sr-only">Next</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+						{% if post.video %}
+
+							<div class="">
+								<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+									<video class="embed-responsive-item" controls>
+										<source src="{{ post.video.url }}#t=0.2" type="video/mp4">
+									</video>
+								</div>
+							</div>
+
+						{% endif %}
+
+						{% if post.shared_post %}
+							{% with post=post.shared_post %}
+
+								<div class="border border-primary rounded p-3">
+						        	<div class="d-flex">
+										<div class="rounded-circle border border-primary flex-shrink-0" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+											<img src="{{ post.user.userprofile.get_profileimage }}">
+										</div>
+										<div class="d-flex flex-column justify-content-center ml-2">
+											<span class="d-flex align-items-center">
+												<a href="{% url 'profile_post' post.user.pk %}" class="font-weight-bold text-dark">{{ post.user.first_name }} {{ post.user.last_name }}</a>
+												<span class="text-muted mx-1 d-flex align-items-center justify-content-center"><i class="fa fa-circle" style="font-size: 5px;"></i></span>
+												<span class="text-muted small">{{ post.created | timesince | truncatechars:5 }}</span>
+											</span>
+											<a href="{% url 'profile_post' post.user.pk %}" class="text-muted small">@{{ post.user.username }}</a>
+										</div>
+									</div>
+									<div class="mt-3 text-muted d-flex flex-column align-items-start mb-2">
+										<span>{{ post.content }}</span>
+										<!-- <a href="{% url 'post_detail' post.pk %}">View Details</a> -->
+									</div>
+
+									{% if post.postimage_set.all %}
+										<div class="mt-2 mb-3 post-img-{% if post.postimage_set.all.count > 3 %}3{% else %}{{ post.postimage_set.all.count }}{% endif %}" style="height: 280px;">
+											{% post_imgs post as images %}
+											{% for image in images %}
+												<div class="rounded img-modal-trigger" style="cursor: pointer;" data-toggle="modal" data-target="#post{{ post.pk }}-modal" data-imgid="#modal-img-{{ image.pk }}">
+													<img src="{{ image.image.url }}" class="rounded">
+												</div>
+											{% endfor %}
+											<div class="modal fade" id="post{{ post.pk }}-modal">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content" style="height: 500px;">
+														<div class="modal-body h-100">
+															<div class="carousel slide h-100" id="post{{ post.pk }}-carousel" data-ride="carousel">
+																<div class="carousel-inner h-100">
+																	{% for image in post.postimage_set.all %}
+																		<div class="carousel-item h-100" id="modal-img-{{ image.pk }}">
+																			<img src="{{ image.image.url }}" class="d-block w-100">
+																		</div>
+																	{% endfor %}
+																</div>
+																<button type="button" class="carousel-control-prev" data-slide="prev" data-target="#post{{ post.pk }}-carousel">
+																	<span class="carousel-control-prev-icon"></span>
+																	<span class="sr-only">Previous</span>
+																</button>
+																<button type="button" class="carousel-control-next" data-slide="next" data-target="#post{{ post.pk }}-carousel">
+																	<span class="carousel-control-next-icon"></span>
+																	<span class="sr-only">Next</span>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endif %}
+									{% if post.video %}
+
+										<div class="mt-4">
+											<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+												<video class="embed-responsive-item" controls>
+													<source src="{{ post.video.url }}#t=0.2" type="video/mp4">
+												</video>
+											</div>
+										</div>
+
+									{% endif %}
+						        </div>
+
+							{% endwith %}
+						{% endif %}
+						<hr>
+						<div class="d-flex justify-content-between">
+							<button class="btn btn-sm btn-outline-primary border-0 {% if request.user in post.likes.all %}bg-primary text-white{% endif %} like-btn" data-post_id="{{ post.pk }}">
+								<span class="small"><i class="fa fa-heart"></i> <span class="d-none d-md-inline-block">Like</span> (<span class="likes-count">{{ post.likes.all.count }}</span>)</span>
+							</button>
+							<button class="btn btn-sm btn-outline-primary border-0"><span class="small"><i class="fa fa-comment"></i> <span class="d-none d-md-inline-block">Comments</span> ({{ post.comment_count }})</span></button>
+							<button class="btn btn-sm btn-outline-primary border-0"><span class="small"><i class="fa fa-share"></i> <span class="d-none d-md-inline-block">Share</span> (3)</span></button>
+						</div>
+						<hr>
+
+						<!-- Comment Section -->
+
+						<div id="comment-section">
+							<div class="d-flex">
+								<div class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+									<img src="{{ request.user.userprofile.get_profileimage }}" class="rounded-circle">
+								</div>
+								<form method="post" action="{% url 'comment_create' post.pk %}" class="flex-grow-1">
+									{% csrf_token %}
+									<div class="input-group">
+										<textarea name="comment" class="form-control r-none"  rows="1" placeholder="Add a comment..."></textarea>
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-primary">Post</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							{% if post.comment_set.all %}
+
+								<div class="mt-3">
+									<h5 class="mb-1 text-muted">Comments</h5>
+									<!-- Comments -->
+									<div>
+										{% for comment in post.comment_set.all %}
+
+											<div class="mt-3">
+												<!-- Comment -->
+
+												<div class="d-flex">
+													<div class="rounded-circle flex-shrink-0 mr-2" style="width: 40px; height: 40px;">
+														<img src="{{ comment.user.userprofile.get_profileimage }}">
+													</div>
+													<div class="flex-grow-1">
+														<div class="bg-light rounded p-2">
+															<div class="d-flex justify-content-between align-items-center">
+																<div class="d-flex align-items-center">
+																	<span class="f-w6">{{ comment.user.first_name }} {{ comment.user.last_name }}</span>
+																	<span class="text-muted mx-2 d-flex align-items-center justify-content-center"><i class="fa fa-circle" style="font-size: 5px;"></i></span>
+																	<span class="text-muted small">{{ comment.created | timesince | truncatechars:5 }}</span>
+																</div>
+																{% if request.user == comment.user %}
+
+																	<div class="dropdown">
+																		<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+																			<i class="fa fa-ellipsis-h"></i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a href="#" class="dropdown-item" data-toggle="modal" data-target="#edit-comment-{{ comment.pk }}-modal">Edit</a>
+																			<div class="dropdown-divider"></div>
+																			<a href="#" class="dropdown-item" data-toggle="modal" data-target="#delete-comment-{{ comment.pk }}-modal">Delete</a>
+																		</div>
+																	</div>
+
+																	<!-- Edit Comment Modal -->
+
+																	<div class="modal fade" id="edit-comment-{{ comment.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="edit-comment-{{ comment.pk }}-modal-title" aria-hidden="true">
+																	  <div class="modal-dialog modal-dialog-centered" role="document">
+																	    <div class="modal-content">
+																	      <div class="modal-header">
+																	        <h5 class="modal-title" id="edit-comment-{{ comment.pk }}-modal-title">Edit Comment</h5>
+																	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	          <span aria-hidden="true">&times;</span>
+																	        </button>
+																	      </div>
+																	      <form method="post" action="{% url 'comment_edit' comment.pk %}">
+																	      	{% csrf_token %}
+																		    <div class="modal-body">
+																		    	<label>Comment</label>
+																		        <div class="form-group">
+																		        	<textarea class="form-control" name="comment" rows="1">{{ comment.comment }}</textarea>
+																		        </div>
+																			</div>
+																		    <div class="modal-footer">
+																		    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																		        <button type="submit" class="btn btn-primary">Edit</button>
+																		    </div>
+																	      </form>
+																	    </div>
+																	  </div>
+																	</div>
+
+																	<!-- Delete Comment Modal -->
+
+																	<div class="modal fade" id="delete-comment-{{ comment.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="delete-comment-{{ comment.pk }}-modal-title" aria-hidden="true">
+																	  <div class="modal-dialog modal-dialog-centered" role="document">
+																	    <div class="modal-content">
+																	      <div class="modal-header">
+																	        <h5 class="modal-title" id="delete-comment-{{ comment.pk }}-modal-title">Delete Comment</h5>
+																	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	          <span aria-hidden="true">&times;</span>
+																	        </button>
+																	      </div>
+																	      <div class="modal-body">
+																	        <p>Are you sure you want to delete the comment?</p>
+																	        <p class="font-italic text-danger">"{{ comment.comment }}"</p>
+																	      </div>
+																	      <div class="modal-footer">
+																	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+																	        <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-danger">Yes, Delete</a>
+																	      </div>
+																	    </div>
+																	  </div>
+																	</div>
+
+																{% endif %}
+															</div>
+															<p class="text-muted">{{ comment.comment }}</p>
+														</div>
+														<div class="d-flex mt-1 text-muted">
+															<span class="small c-pointer left-nav-link {% if request.user in comment.likes.all %}text-primary{% endif %} comment-like-element" data-comment_id="{{ comment.pk }}">
+																<i class="fa fa-heart"></i>
+																Like
+																(<span class="comment-likes-count">{{ comment.likes.all.count }}</span>)
+															</span>
+															<span class="mx-2 d-flex align-items-center justify-content-center">
+																<i class="fa fa-circle" style="font-size: 5px;"></i>
+															</span>
+															<span class="small c-pointer left-nav-link reply-element" data-form_id="#comment-{{ comment.pk }}-reply-form">
+																Reply
+																(<span>{{ comment.reply_set.all.count }}</span>)
+															</span>
+														</div>
+														<div class="mt-2 reply-form-container d-none" id="comment-{{ comment.pk }}-reply-form">
+															<form method="post" action="{% url 'reply_create' comment.pk %}">
+																{% csrf_token %}
+																<div class="input-group">
+																	<textarea name="reply" class="form-control form-control-sm r-none"  rows="1" placeholder="Type Reply..."></textarea>
+																	<div class="input-group-append">
+																		<button type="submit" class="btn btn-primary">Reply</button>
+																	</div>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+
+												<!-- Reply -->
+
+												{% if comment.reply_set.all %}
+													{% for reply in comment.reply_set.all %}
+
+														<div class="d-flex ml-5 mt-2">
+															<div class="rounded-circle flex-shrink-0 mr-2" style="width: 40px; height: 40px;">
+																<img src="{{ reply.user.userprofile.get_profileimage }}">
+															</div>
+															<div class="flex-grow-1">
+																<div class="bg-light rounded p-2">
+																	<div class="d-flex justify-content-between align-items-center">
+																		<div class="d-flex align-items-center">
+																			<span class="f-w6">{{ reply.user.first_name }} {{ reply.user.last_name }}</span>
+																			<span class="text-muted mx-2 d-flex align-items-center justify-content-center"><i class="fa fa-circle" style="font-size: 5px;"></i></span>
+																			<span class="text-muted small">{{ reply.created | timesince | truncatechars:5 }}</span>
+																		</div>
+																		{% if request.user == reply.user %}
+
+																			<div class="dropdown">
+																				<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+																					<i class="fa fa-ellipsis-h"></i>
+																				</button>
+																				<div class="dropdown-menu dropdown-menu-right">
+																					<a href="#" class="dropdown-item" data-toggle="modal" data-target="#edit-reply-{{ reply.pk }}-modal">Edit</a>
+																					<div class="dropdown-divider"></div>
+																					<a href="#" class="dropdown-item" data-toggle="modal" data-target="#delete-reply-{{ reply.pk }}-modal">Delete</a>
+																				</div>
+																			</div>
+
+																			<!-- Edit Reply Modal -->
+
+																			<div class="modal fade" id="edit-reply-{{ reply.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="edit-reply-{{ reply.pk }}-modal-title" aria-hidden="true">
+																			  <div class="modal-dialog modal-dialog-centered" role="document">
+																			    <div class="modal-content">
+																			      <div class="modal-header">
+																			        <h5 class="modal-title" id="edit-reply-{{ reply.pk }}-modal-title">Edit Reply</h5>
+																			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			          <span aria-hidden="true">&times;</span>
+																			        </button>
+																			      </div>
+																			      <form method="post" action="{% url 'reply_edit' reply.pk %}">
+																			      	{% csrf_token %}
+																				    <div class="modal-body">
+																				    	<label>Reply</label>
+																				        <div class="form-group">
+																				        	<textarea class="form-control" name="reply" rows="1">{{ reply.reply }}</textarea>
+																				        </div>
+																					</div>
+																				    <div class="modal-footer">
+																				    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																				        <button type="submit" class="btn btn-primary">Edit</button>
+																				    </div>
+																			      </form>
+																			    </div>
+																			  </div>
+																			</div>
+
+																			<!-- Delete Comment Modal -->
+
+																			<div class="modal fade" id="delete-reply-{{ reply.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="delete-reply-{{ reply.pk }}-modal-title" aria-hidden="true">
+																			  <div class="modal-dialog modal-dialog-centered" role="document">
+																			    <div class="modal-content">
+																			      <div class="modal-header">
+																			        <h5 class="modal-title" id="delete-reply-{{ reply.pk }}-modal-title">Delete Reply</h5>
+																			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			          <span aria-hidden="true">&times;</span>
+																			        </button>
+																			      </div>
+																			      <div class="modal-body">
+																			        <p>Are you sure you want to delete this reply?</p>
+																			        <p class="font-italic text-danger">"{{ reply.reply }}"</p>
+																			      </div>
+																			      <div class="modal-footer">
+																			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+																			        <a href="{% url 'reply_delete' reply.pk %}" class="btn btn-danger">Yes, Delete</a>
+																			      </div>
+																			    </div>
+																			  </div>
+																			</div>
+
+																		{% endif %}
+																	</div>
+																	<p class="text-muted">{{ reply.reply }}</p>
+																</div>
+																<div class="d-flex text-muted mt-1">
+																	<span class="small c-pointer left-nav-link {% if request.user in reply.likes.all %}text-primary{% endif %} reply-like-element" data-reply_id="{{ reply.pk }}">
+																		<i class="fa fa-heart"></i>
+																		Like
+																		(<span class="reply-likes-count">{{ reply.likes.all.count }}</span>)
+																	</span>
+																</div>
+															</div>
+														</div>
+
+													{% endfor %}
+												{% endif %}
+											</div>
+
+										{% endfor %}
+									</div>
+								</div>
+
+							{% else %}
+
+								<h4 class="mt-5 text-center text-muted">No Comments</h4>
+
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% chats %}
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block js %}
+
+	{% include 'posts/post_like_script.html' %}
+	<script>
+		const replyElements = document.querySelectorAll('.reply-element');
+
+		replyElements.forEach(function (replyElement) {
+			replyElement.addEventListener('click', function () {
+				const replyForm = document.querySelector(this.dataset.form_id);
+				replyForm.classList.toggle('d-none');
+			});
+		});
+	</script>
+
+{% endblock js %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if request.user == user %}
+        Your
+    {% else %}
+        {{ user.username | capfirst }}'s
+    {% endif %}
+    Friends
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row p-3">
+			<!-- Friends -->
+
+			<div class="col-12">
+				<div class="card p-4 bg-white">
+					<div class="d-flex justify-content-between">
+						<h5 class="font-weight-bold">Friends</h5>
+						<div class="d-flex">
+							<form>
+								<div class="form-group position-relative">
+									<input type="search" class="form-control form-control-sm rounded-pill" name="search_friend" placeholder="Search friend..." style="padding-left: 35px;">
+									<i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
+								</div>
+							</form>
+							<div class="ml-3">
+								<a href="#" class=" font-weight-bold">Find Friends</a>
+							</div>
+						</div>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 20px;" class="mt-3">
+                        {% for friend in friends %}
+                            <div class="card d-flex flex-column align-items-center p-2">
+                                <div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+                                    <img src="{{ friend.userprofile.get_profileimage }}">
+                                    <a href="{% url 'profile_post' friend.pk %}" class="stretched-link"></a>
+                                </div>
+                                <a href="{% url 'profile_post' friend.pk %}">
+                                    <h6 class="text-dark hover-blue">{{ friend.first_name }} {{ friend.last_name }}</h6>
+                                </a>
+                                <span class="small text-muted mb-2">16 Mutual Friends</span>
+                                <div>
+                                    <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+                                        <i class="fa fa-comment-alt"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+                                        <i class="fa fa-user-minus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+{% endblock content %}

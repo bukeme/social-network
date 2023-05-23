@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Edit Post{% endblock title %}
+
+{% block style %}
+	<style>
+		label {
+			font-weight: 700;
+		}
+	</style>
+{% endblock style %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card p-3 my-3 bg-white">
+					<h4 class="text-center mb-3">Edit Post</h4>
+
+					<!-- Content -->
+
+					<div class="">
+						<form method="post" class="content-form">
+							{% csrf_token %}
+							{{ form | crispy }}
+							<input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
+						</form>
+					</div>
+					{% if not post.shared_post %}
+					
+						<!-- Images -->
+
+						<div>
+							<span class="font-weight-bold">Image(s)</span>
+							<div class="d-flex align-items-center">
+								{% if post.postimage_set.all %}
+									{% for image in post.postimage_set.all %}
+										<div class="rounded position-relative mx-1 my-2" style="width: 80px; height: 80px;">
+											<img src="{{ image.image.url }}">
+											<span class="position-absolute text-danger c-pointer px-1" style="top: 0; right: 0; background: black;" data-toggle="modal" data-target="#modal-delete-img{{ image.pk }}">
+												<i class="far fa-trash-alt small"></i>
+											</span>
+
+											<!-- Modal -->
+											<div class="modal fade" id="modal-delete-img{{ image.pk }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-img{{ image.pk }}Title" aria-hidden="true">
+											  <div class="modal-dialog modal-dialog-centered" role="document">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <h5 class="modal-title" id="modal-delete-img{{ image.pk }}Title">Delete Image</h5>
+											        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											          <span aria-hidden="true">&times;</span>
+											        </button>
+											      </div>
+											      <div class="modal-body">
+											        <p>Are you sure you want to delete this image?</p>
+											        <div class="rounded mx-auto" style="width: 200px; height: 200px;">
+											        	<img src="{{ image.image.url }}" class="rounded">
+											        </div>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+											        <a href="{% url 'delete_postimage' image.pk %}" class="btn btn-danger">Yes, Delete</a>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</div>
+									{% endfor %}
+								{% endif %}
+
+								<button class="btn btn-primary mx-1 my-2" data-toggle="modal" data-target="#add-img-modal">
+									<i class="fa fa-plus" style="font-size: 15px;"></i>
+									<i class="fa fa-images ml-1" style="font-size: 15px;"></i>
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="add-img-modal" tabindex="-1" role="dialog" aria-labelledby="add-img-modal-title" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="add-img-modal-title">Add Image(s) To Post</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <form method="post" action="{% url 'add_postimage' post.pk %}" class="add-image-form" enctype="multipart/form-data">
+								      	{% csrf_token %}
+									    <div class="modal-body">
+									        <label class="btn btn-primary position-relative w-100">
+									        	<i class="fa fa-images text-danger"></i>
+												Upload Image(s)
+												<input class="d-none post-create-img-input" type="file" name="images" multiple accept="image/jpeg, image/png, image/jpg">
+											</label>
+											<div>
+												<div class="d-flex uploaded-img-container flex-wrap align-items-center"></div>
+											</div>
+										</div>
+									    <div class="modal-footer">
+									    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									        <button type="submit" class="btn btn-primary add-img-btn">Add</button>
+									    </div>
+								      </form>
+								    </div>
+								  </div>
+								</div>
+
+								{% if post.postimage_set.all %}
+
+									<button class="btn btn-danger mx-1 my-2" data-toggle="modal" data-target="#delete-imgs-modal">
+										<i class="fa fa-trash-alt" style="font-size: 15px;"></i>
+										<i class="fa fa-images ml-1" style="font-size: 15px;"></i>
+									</button>
+									<!-- Modal -->
+									<div class="modal fade" id="delete-imgs-modal" tabindex="-1" role="dialog" aria-labelledby="delete-imgs-modal-title" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="delete-imgs-modal-title">Delete All Image(s)</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        <p>Are you sure you want to delete all image(s)?</p>
+									        <div class="d-flex align-items-center">
+										        {% for image in post.postimage_set.all %}
+											        <div class="rounded mx-1 my-2" style="width: 80px; height: 80px;">
+											        	<img src="{{ image.image.url }}" class="rounded">
+											        </div>
+										        {% endfor %}
+									        </div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+									        <a href="{% url 'delete_all_postimage' post.pk %}" class="btn btn-danger">Yes, Delete</a>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+
+								{% endif %}
+							</div>
+						</div>
+
+						<!-- Video -->
+
+						<div class="d-flex flex-column align-items-start">
+							<span class="font-weight-bold">Video</span>
+							{% if post.video %}
+								<div class="d-flex align-items-center">
+									<div style="width: 200px;" class="m-1">
+										<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+											<video class="embed-responsive-item" controls>
+												<source src="{{ post.video.url }}" type="video/mp4">
+											</video>
+										</div>
+									</div>
+
+									<button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete-video-modal">
+										<i class="fa fa-trash-alt" style="font-size: 15px;"></i>
+										<i class="fa fa-video ml-1" style="font-size: 15px;"></i>
+									</button>
+
+									<!-- Modal -->
+
+									<div class="modal fade" id="delete-video-modal" tabindex="-1" role="dialog" aria-labelledby="delete-video-modal-title" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="delete-video-modal-title">Delete Video</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        <p>Are you sure you want to delete the post video?</p>
+									        <div style="width: 200px;" class="mx-auto">
+												<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+													<video class="embed-responsive-item" controls>
+														<source src="{{ post.video.url }}" type="video/mp4">
+													</video>
+												</div>
+											</div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+									        <a href="{% url 'post_video' post.pk %}" class="btn btn-danger">Yes, Delete</a>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+								</div>
+
+							{% else %}
+
+								<button class="btn btn-primary my-1" data-toggle="modal" data-target="#add-video-modal">
+									<i class="fa fa-plus" style="font-size: 15px;"></i>
+									<i class="fa fa-video ml-1" style="font-size: 15px;"></i>
+								</button>
+
+								<!-- Modal -->
+
+								<div class="modal fade" id="add-video-modal" tabindex="-1" role="dialog" aria-labelledby="add-video-modal-title" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="add-video-modal-title">Add Video To Post</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <form method="post" action="{% url 'post_video' post.pk %}" enctype="multipart/form-data">
+								      	{% csrf_token %}
+									    <div class="modal-body">
+									        <label class="btn btn-primary position-relative w-100">
+									        	<i class="fa fa-video text-danger"></i>
+												Upload Video
+												<input class="d-none post-create-video-input" type="file" name="video" multiple accept="video/mp4, video/ogg, video/webm">
+											</label>
+											<div>
+												<div class="d-flex uploaded-video-container flex-wrap align-items-center"></div>
+											</div>
+										</div>
+									    <div class="modal-footer">
+									    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									        <button type="submit" class="btn btn-primary">Add</button>
+									    </div>
+								      </form>
+								    </div>
+								  </div>
+								</div>
+
+							{% endif %}
+						</div>
+
+					{% endif %}
+					<button class="btn btn-primary ml-auto mt-2 content-submit-btn">Edit Post</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block js %}
+	<script src="{% static 'js/media-uploader.js' %}"></script>
+	<script>
+		const postContent = document.querySelector('#id_content');
+		const contentForm = document.querySelector('.content-form');
+		const contentSubmitBtn = document.querySelector('.content-submit-btn');
+
+		if (!localStorage.getItem("post-content")) {
+			localStorage.setItem("post-content", `{{ post.content }}`);
+		} else {
+			postContent.value = localStorage.getItem("post-content");
+		};
+
+		postContent.addEventListener('change', function() {
+			localStorage.setItem("post-content", this.value);
+		});
+
+		contentSubmitBtn.addEventListener('click', function() {
+			localStorage.removeItem("post-content");
+			contentForm.submit();
+		});
+	</script>
+{% endblock js %}

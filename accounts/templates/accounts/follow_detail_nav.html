@@ -1,0 +1,14 @@
+<div>
+    <div class="d-flex flex-column align-items-start">
+        <span class="font-weight-bold f-xl">{{ user.first_name }} {{ user.last_name }}</span>
+        <a href="{% url 'profile_post' user.pk %}" class="text-muted mt-n1">@{{user.username}}</a>
+    </div>
+    <ul class="nav justify-content-around">
+        <li class="nav-item">
+            <a href="{% url 'follow_list' user.pk 'followers' %}" class="nav-link nav-item-line {% if page == 'followers' %}active{% endif %} text-muted font-weight-bold profile__profile-nav-link" style="font-size: 17px;">Followers</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'follow_list' user.pk 'following' %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'following' %}active{% endif %}" style="font-size: 17px;">Following</a>
+        </li>
+    </ul>
+</div>

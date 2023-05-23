@@ -1,0 +1,106 @@
+{% load accounts_filters %}
+{% sent_friend_request user request.user as friend_request_sent %}
+<div class="row p-3">
+	<div class="col-12">
+		<div class="bg-white rounded-top">
+			<div style="height: 250px; background: url('{{ user.userprofile.get_coverimage }}') no-repeat center; background-size: cover;" class="rounded-top position-relative">
+				<div class="position-absolute d-flex justify-content-center justify-content-lg-start w-100" style="top: 100%; transform: translateY(-50%);">
+					<div class="rounded-circle p-1 bg-white ml-0 ml-lg-3 profile__profile-img">
+						<img src="{{ user.userprofile.get_profileimage }}" class="rounded-circle">
+					</div>
+				</div>
+				<div class="profile__name-row">
+					<div class="mt-2 mt-lg-0 d-flex d-lg-block flex-column align-items-center">
+						<div class="d-flex flex-column mb-1">
+							<h4 class="d-flex justify-content-center justify-content-lg-start">
+								{{ user.first_name }}
+								{{ user.last_name }}
+							</h4>
+							<span class="text-primary d-flex justify-content-center justify-content-lg-start" style="margin-top: -11px; font-size: 17px;">@{{ user.username }}</span>
+						</div>
+						<div class="d-flex align-items-center text-muted">
+							<a href="{% url 'follow_list' user.pk 'followers' %}" class="text-muted hover-blue"><span class="followers-count">{{ user.userprofile.followers.all.count }}</span> Followers</a>
+							<i class="fa fa-circle mx-2" style="font-size: 5px;"></i>
+							<a href="{% url 'follow_list' user.pk 'following' %}" class="text-muted hover-blue">{{ user.followed_users.all.count }} Following</a>
+						</div>
+					</div>
+					<div class="mt-4 mt-lg-0 d-flex flex-column flex-lg-row align-items-center align-items-lg-stretch">
+						{% if request.user != user %}
+							<div class="d-flex align-items-center flex-column flex-md-row">
+								{% if not request.user in user.userprofile.friends.all %}
+									{% if friend_request_sent %}
+										<form action="{% url 'delete_friend_request' user.pk request.user.pk %}" method="post">
+											{% csrf_token %}
+											<button type="submit" class="btn btn-primary rounded-pill">Cancel Friend Request</button>
+										</form>
+									{% else %}
+										<form action="{% url 'send_friend_request' user.pk %}" method="post">
+											{% csrf_token %}
+											<button type="submit" class="btn btn-primary rounded-pill">Add Friend</button>
+										</form>
+									{% endif %}
+								{% endif %}
+								<button class="btn btn-outline-primary rounded-pill px-4 ml-0 ml-md-2 mt-2 mt-md-0 f-w6 follow-btn">
+									{% if request.user in user.userprofile.followers.all %}
+										Following
+									{% else %}
+										Follow
+									{% endif %}
+								</button>
+							</div>
+						{% else %}
+							<div class="mt-2 mt-lg-0 ml-0 ml-lg-3">
+								<a href="{% url 'update_user_profile' user.pk %}" class="btn btn-danger">
+									<i class="fa fa-pen mr-2"></i>
+									Edit Profile
+								</a>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="bg-white profile__pre-about px-3 pb-1 mt-2">
+				<div class="d-flex justify-content-between justify-content-lg-start">
+					<div class="text-muted mr-3">
+						<i class="fa fa-briefcase mr-1"></i>
+						{% if user.userprofile.occupation %}
+							<span>{{ user.userprofile.occupation }}</span>
+						{% else %}
+							<span>No Occupation Added</span>
+						{% endif %}
+					</div>
+					<div class="text-muted mr-3">
+						<i class="fa fa-map-marker-alt mr-1"></i>
+						{% if user.userprofile.location %}
+							<span>{{ user.userprofile.location }}</span>
+						{% else %}
+							<span>No Location Added</span>
+						{% endif %}
+					</div>
+					<div class="text-muted mr-3">
+						<i class="fa fa-calendar mr-1"></i>
+						<span>Joined: {{ user.date_joined | date:"F d, Y" }}</span>
+					</div>
+				</div>
+				<hr class="mx-n3 my-4">
+				<ul class="nav nav-fill">
+					<li class="nav-item">
+						<a href="{% url 'profile_post' user.pk %}" class="nav-link nav-item-line {% if page == 'profile_post' %}active{% endif %} text-muted font-weight-bold profile__profile-nav-link" style="font-size: 17px;">Post</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'profile_about' user.pk %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_about' %}active{% endif %}" style="font-size: 17px;">About</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'friend_list' user.pk %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_friends' %}active{% endif %}" style="font-size: 17px;">Friends</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'profile_photos' user.pk %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_photos' %}active{% endif %}" style="font-size: 17px;">Photo</a>
+					</li>
+					<li class="nav-item">
+						<a href="../pages/profile-groups.html" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_groups' %}active{% endif %}" style="font-size: 17px;">Groups</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

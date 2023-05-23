@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}"{{user | capfirst}}" profile{% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+		{% include 'accounts/profile_start.html' %}
+
+		<div class="row p-3">
+			<div class="col-lg-5">
+
+				<!-- About -->
+
+				<div class="d-flex flex-column align-items-start rounded card p-3 bg-white mt-2 text-muted">
+					<h4 class="text-dark font-weight-bold">About</h4>
+					{% if user.userprofile.overview %}
+						<p>{{ user.userprofile.overview }}</p>
+					{% else %}
+						{% if request.user == user %}
+							<div class="d-flex align-items-center text-primary mb-2 f-w6" data-toggle="modal" data-target="#overview-update-form{{ user.pk }}" style="cursor: pointer;">
+								<i class="fa fa-plus-circle mr-1"></i>
+								<span>Add Overview</span>
+							</div>
+							{% include 'accounts/pa_modalform.html' with field_name='overview' model_name='userprofile' %}
+						{% else %}
+							<div class="d-flex align-items-center mb-2 f-w6">
+								<span>No Overview Added</span>
+							</div>
+						{% endif %}
+					{% endif %}
+					<div class="d-flex flex-column align-items-start">
+						<div>
+							{% if user.userprofile.birth_date %}
+								<i class="fa fa-calendar mr-1"></i>
+								<span>Born: </span>
+								<span class="font-weight-bold">{{ user.userprofile.birth_date | date:"F d, Y" }}</span>
+							{% else %}
+								{% if request.user == user %}
+									<div class="d-flex align-items-center text-primary f-w6" data-toggle="modal" data-target="#birth_date-update-form{{ user.pk }}" style="cursor: pointer;">
+										<i class="fa fa-plus-circle mr-1"></i>
+										<span>Add Date Of Birth</span>
+									</div>
+									{% include 'accounts/pa_modalform.html' with field_name='birth_date' model_name='userprofile' %}
+								{% else %}
+									<div class="d-flex align-items-center f-w6">
+										<span>No Date Of Birth Added</span>
+									</div>
+								{% endif %}
+							{% endif %}
+						</div>
+						<div>
+							{% if user.userprofile.marital_status %}
+								<i class="fa fa-heart mr-1"></i>
+								<span>Status: </span>
+								<span class="font-weight-bold">{{ user.userprofile.marital_status }}</span>
+							{% else %}
+								{% if request.user == user %}
+									<div class="d-flex align-items-center text-primary f-w6" data-toggle="modal" data-target="#marital_status-update-form{{ user.pk }}" style="cursor: pointer;">
+										<i class="fa fa-plus-circle mr-1"></i>
+										<span>Add Marital Status</span>
+									</div>
+									{% include 'accounts/pa_modalform.html' with field_name='marital_status' model_name='userprofile' %}
+								{% else %}
+									<div class="d-flex align-items-center f-w6">
+										<span>No Marital Status Added</span>
+									</div>
+								{% endif %}
+							{% endif %}
+						</div>
+						<div>
+							{% if user.email %}
+								<i class="fa fa-envelope mr-1"></i>
+								<span>Email: </span>
+								<span class="font-weight-bold">{{ user.email }}</span>
+							{% else %}
+								{% if request.user == user %}
+									<div class="d-flex align-items-center text-primary f-w6" data-toggle="modal" data-target="#email-update-form{{ user.pk }}" style="cursor: pointer;">
+										<i class="fa fa-plus-circle mr-1"></i>
+										<span>Add Email Address</span>
+									</div>
+									{% include 'accounts/pa_modalform.html' with field_name='email' model_name='user' %}
+								{% else %}
+									<div class="d-flex align-items-center f-w6">
+										<span>No Email Address Added</span>
+									</div>
+								{% endif %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+				<!-- Photos -->
+
+				<div class="rounded card p-3 bg-white mt-2">
+					<div class="d-flex justify-content-between">
+						<h4 class="font-weight-bold">Photos</h4>
+						<a href="{% url 'profile_photos' user.pk %}" class="btn btn-sm btn-outline-primary">See all photos</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); grid-gap: 10px;" class="mt-3">
+						{% for photo in recent_photos %}
+							<div>
+								<img src="{% if photo.profile_image %}{{ photo.profile_image.url }}{% elif photo.cover_image %}{{ photo.cover_image.url }}{% else %}{{ photo.image.url }}{% endif %}" class="rounded">
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<!-- Friends -->
+
+				<div class="rounded card p-3 bg-white mt-2">
+					<div class="d-flex justify-content-between">
+						<div class="d-flex align-items-center">
+							<h4 class="font-weight-bold">Friends</h4>
+							<span class="badge text-danger ml-2 p-2" style="background: #d6293e10;">{{ user.userprofile.friends.all.count }}</span>
+						</div>
+						<div>
+							<a href="{% url 'friend_list' user.pk %}" class="btn btn-sm btn-outline-primary">See all friends</a>
+						</div>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-gap: 20px;" class="mt-3">
+						{% for friend in user.userprofile.friends.all %}
+							<div class="card d-flex flex-column align-items-center p-2">
+								<div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+									<img src="{{ friend.userprofile.get_profileimage }}" class="rounded-circle">
+									<a href="{% url 'profile_post' friend.pk %}" class="stretched-link"></a>
+								</div>
+								<a href="{% url 'profile_post' friend.pk %}">
+									<h6 class="text-dark hover-blue">{{ friend.first_name }} {{ friend.last_name }}</h6>
+								</a>
+								<span class="small text-muted mb-2">16 Mutual Friends</span>
+								<div>
+									<a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+										<i class="fa fa-comment-alt"></i>
+									</a>
+									<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+										<i class="fa fa-user-minus"></i>
+									</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<!-- Create Post Section -->
+
+				{% if request.user == user %}
+					{% include 'posts/post-create.html' %}
+				{% endif %}
+
+				<!-- Post List Section -->
+
+				{% include 'posts/post-feeds.html' %}
+			</div>
+			
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block js %}
+	<script src="{% static 'js/media-uploader.js' %}"></script>
+	{% include 'posts/post_like_script.html' %}
+	{% include 'accounts/user_follow_script.html' %}
+{% endblock js %}

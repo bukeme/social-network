@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}'s photos{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        {% include 'accounts/profile_start.html' %}
+
+        <div class="row p-3">
+			<!-- Photos -->
+
+			<div class="col-12">
+				<div class="card p-3 bg-white mt-2">
+					<!-- <div class="d-flex justify-content-between">
+						<h4 class="font-weight-bold">Photos</h4>
+						<a href="#" class="btn btn-sm btn-outline-primary">See all photos</a>
+					</div> -->
+
+                    <h4 class="text-center mb-4 font-weight-bold">Photos</h4>
+                    <div>
+                        <h5 class="mb-3 f-w6">Profile Photo</h5>
+                        {% if user.userprofile.profileimage_set.all.count == 1 %}
+
+                            <h4 class="text-muted text-center">No Profile Photo</h4>
+                
+                        {% else %}
+
+                            <div class="d-flex flex-wrap">
+                                {% for image in user.userprofile.profileimage_set.all %}
+                                    {% if not forloop.last %}
+                                        <div style="width: 150px;" class="mx-2">
+                                            <img src="{{ image.profile_image.url }}" class="rounded">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="mt-3">
+                        <h5 class="mb-3 f-w6">Cover Photo</h5>
+                        {% if user.userprofile.coverimage_set.all.count == 1 %}
+
+                            <h4 class="text-muted text-center">No Cover Photo</h4>
+                
+                        {% else %}
+
+                            <div class="d-flex flex-wrap">
+                                {% for image in user.userprofile.coverimage_set.all %}
+                                    {% if not forloop.last %}
+                                        <div style="width: 150px;" class="mx-2">
+                                            <img src="{{ image.cover_image.url }}" class="rounded">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="mt-3">
+                        <h5 class="mb-3 f-w6">
+                            {% if request.user == user %}Your{% endif %} Photos
+                        </h5>
+                        {% if post_photos.count == 0 %}
+
+                            <h4 class="text-muted text-center">No Photos</h4>
+                
+                        {% else %}
+
+                            <div class="d-flex flex-wrap">
+                                {% for photo in post_photos %}
+                                    <div style="width: 150px;" class="mx-2">
+                                        <img src="{{ photo.image.url }}" class="rounded">
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    {% include 'accounts/user_follow_script.html' %}
+{% endblock js %}

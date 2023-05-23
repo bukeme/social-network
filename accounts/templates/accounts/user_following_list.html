@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}'s followers{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card p-3 mt-3">
+                    {% include 'accounts/follow_detail_nav.html' %}
+                    <div class="mt-2">
+                        {% for userprofile in user.followed_users.all %}
+
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="rounded-circle mr-2" style="width: 50px; height: 50px;">
+                                    <img src="{{ userprofile.get_profileimage }}" alt="profile image">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span class="f-w6">{{userprofile.user.first_name}} {{ userprofile.user.last_name }}</span>
+                                    <a href="{% url 'profile_post' userprofile.user.pk %}" class="mt-n1">@{{ userprofile.user.username }}</a>
+                                </div>
+                                <div class="ml-auto">
+                                    <button class="btn btn-outline-primary rounded-pill">
+                                        {% if request.user in userprofile.followers.all %}
+                                            Following
+                                        {% else %}
+                                            Follow
+                                        {% endif %}
+                                    </button>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -19,209 +19,136 @@
 					<div class="border rounded p-2 mt-2">
 						{% if user.userprofile.overview %}
 
-							<div class="d-flex justify-content-between align-items-center mb-2">
+							<div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
 								<h6 class="font-weight-bold">Overview</h6>
-								<div class="dropdown">
-									<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-										<i class="fa fa-ellipsis-h"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a href="#" class="dropdown-item hover-blue">
-											<i class="fa fa-edit mr-1"></i>
-											Edit
-										</a>
-										<a href="#" class="dropdown-item hover-blue">
-											<i class="fa fa-trash mr-1"></i>
-											Delete
-										</a>
+								{% if request.user == user %}
+
+									<div class="dropdown">
+										<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-ellipsis-h"></i>
+										</button>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a href="javascript:void()" class="dropdown-item hover-blue" data-toggle="modal" data-target="#overview-update-form{{ user.pk }}">
+												<i class="fa fa-edit mr-1"></i>
+												Edit
+											</a>
+											<a href="#" class="dropdown-item hover-blue" data-toggle="modal" data-target="#overview-delete-form{{ user.pk }}">
+												<i class="fa fa-trash mr-1"></i>
+												Delete
+											</a>
+										</div>
 									</div>
-								</div>
+
+								{% endif %}
 							</div>
 							<p class="text-muted">
-								He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire difficulty gay assistance joy. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance.
+								{{ user.userprofile.overview }}
 							</p>
 
 						{% else %}
-							<div class="d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#form-user{{ user.pk }}" style="height: 100px; cursor: pointer;">
-								<p class="f-w6 text-muted">
-									<i class="fa fa-plus-circle"></i>
-									<span>Add Overview</span>
-								</p>
-							</div>
+
+							{% if request.user == user %}
+
+								<div class="d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#overview-update-form{{ user.pk }}" style="height: 100px; cursor: pointer;">
+									<p class="f-w6 text-muted">
+										<i class="fa fa-plus-circle"></i>
+										<span>Add Overview</span>
+									</p>
+								</div>
+
+							{% else %}
+
+								<div class="d-flex align-items-center justify-content-center" style="height: 100px;">
+									<p class="f-w6 text-muted">
+										<span>No Overview Added</span>
+									</p>
+								</div>
+
+							{% endif %}
 
 						{% endif %}
 
-						<div class="modal fade" id="form-user{{ user.pk }}" tabindex="-1" aria-labelledby="form-user{{ user.pk }}Label" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title">
-											{% if user.userprofile.overview %}
-												Edit
-											{% else %}
-												Add
-											{% endif %}
-											Overview
-										</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<form>
-											<div class="form-group">
-												<label>Overview</label>
-												<textarea class="form-control" value={{form.overview.value}}></textarea>
-											</div>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">
-											{% if user.userprofile.overview %}
-												Edit
-											{% else %}
-												Add
-											{% endif %}
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
+						{% include 'accounts/pa_modalform.html' with field_name='overview' model=user.userprofile model_name='userprofile' %}
 						
 					</div>
 					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-calendar mr-2"></i>
-								<span class="mr-2">Born: </span>
-								<span class="font-weight-bold">October 20, 1990</span>
+						{% for field_name, content in field_dict.items %}
+							<div class="d-flex flex-wrap justify-content-between p-2 rounded border">
+								{% if content.field_value %}
+
+									<div class="d-flex align-items-center">
+										<i class="{{ content.icon_class }} mr-2"></i>
+										<span class="mr-2">{{ content.field_note }}: </span>
+										<span class="font-weight-bold">
+											{% if field_name == 'birth_date' or field_name == 'date_joined' %}
+												{{ content.field_value | date:"F d, Y" }}
+											{% else %}
+												{{ content.field_value }}
+											{% endif %}
+										</span>
+									</div>
+									{% if request.user == user and field_name != 'date_joined' %}
+										<div class="dropdown">
+											<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-ellipsis-h"></i>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a href="javascript:void()" class="dropdown-item hover-blue" data-toggle="modal" data-target="#{{ field_name }}-update-form{{ user.pk }}">
+													<i class="fa fa-edit mr-1"></i>
+													Edit
+												</a>
+												<a href="javascript:void()" class="dropdown-item hover-blue" data-toggle="modal" data-target="#{{ field_name }}-delete-form{{ user.pk }}">
+													<i class="fa fa-trash mr-1"></i>
+													Delete
+												</a>
+											</div>
+										</div>
+									{% endif %}
+
+								{% else %}
+
+									{% if request.user == user %}
+
+										<div class="d-flex align-items-center justify-content-center w-100 f-w6" data-toggle="modal" data-target="#{{ field_name }}-update-form{{ user.pk }}" style="cursor: pointer;">
+											<i class="fa fa-plus-circle mr-1"></i>
+											<span>
+												Add 
+												{% if field_name == 'birth_date' %}
+													Date Of Birth
+												{% elif field_name == 'marital_status' %}
+													Marital Status
+												{% else %}
+													{{ field_name|capfirst }}
+												{% endif %}
+											</span>
+										</div>
+
+									{% else %}
+
+										<div class="d-flex align-items-center justify-content-center w-100 f-w6">
+											<span>
+												No 
+												{% if field_name == 'birth_date' %}
+													Date Of Birth
+												{% elif field_name == 'marital_status' %}
+													Marital Status
+												{% else %}
+													{{ field_name|capfirst }}
+												{% endif %}
+											</span>
+										</div>
+
+									{% endif %}
+
+								{% endif %}
+
+								{% if content.model_name == 'userprofile' %}
+									{% include 'accounts/pa_modalform.html' with field_name=field_name model_name='userprofile' %}
+								{% else %}
+									{% include 'accounts/pa_modalform.html' with field_name=field_name model_name='user' %}
+								{% endif %}
 							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-heart mr-2"></i>
-								<span class="mr-2">Status: </span>
-								<span class="font-weight-bold">Single</span>
-							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-briefcase mr-2"></i>
-								<span class="font-weight-bold">Lead Developer</span>
-							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-map-marker-alt mr-2"></i>
-								<span class="mr-2">Lives in: </span>
-								<span class="font-weight-bold">New Hampshire</span>
-							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-calendar mr-2"></i>
-								<span class="mr-2">Joined on: </span>
-								<span class="font-weight-bold">Nov 26, 2019</span>
-							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between p-2 rounded border">
-							<div class="d-flex align-items-center">
-								<i class="fa fa-envelope mr-2"></i>
-								<span class="mr-2">Email: </span>
-								<span class="font-weight-bold">webestica@gmail.com</span>
-							</div>
-							<div class="dropdown">
-								<button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-ellipsis-h"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-edit mr-1"></i>
-										Edit
-									</a>
-									<a href="#" class="dropdown-item hover-blue">
-										<i class="fa fa-trash mr-1"></i>
-										Delete
-									</a>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 
@@ -300,3 +227,7 @@
 	</div>
 
 {% endblock content %}
+
+{% block js %}
+	{% include 'accounts/user_follow_script.html' %}
+{% endblock js %}

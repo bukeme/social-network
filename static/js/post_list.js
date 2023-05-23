@@ -1,29 +1,13 @@
-const imgModals = document.querySelectorAll('.img-modal');
+const imgModalTrigger = document.querySelectorAll('.img-modal-trigger');
 
-
-imgModals.forEach(function(imgModal) {
-	imgModal.addEventListener('click', function() {
-		const imgClass = this.dataset.class;
-		const imgIndex = Array.from(document.querySelectorAll(`.${imgClass}`)).indexOf(this);
-		console.log(imgIndex);
-		let carouselItem = '';
-		let i, j;
-		for (i = 1; i < 4; i++) {
-			if (i == imgIndex + 1) {
-				carouselItem += `
-				<div class="carousel-item active h-100">
-					<img src="../images/0${i}.jpg" class="d-block w-100">
-				</div>
-				`;
-			} else {
-				carouselItem += `
-				<div class="carousel-item h-100">
-					<img src="../images/0${i}.jpg" class="d-block w-100">
-				</div>
-				`;
-			}
-		};
-		let carouselId = this.dataset.carousel; 
-		document.querySelector(`#${carouselId} .carousel-inner`).innerHTML = carouselItem;
-	})
+imgModalTrigger.forEach(function(trigger) {
+	trigger.addEventListener('click', function() {
+		const imgID = trigger.dataset.imgid;
+		const img = document.querySelector(imgID);
+		const siblings = img.parentElement.querySelectorAll('.carousel-item');
+		siblings.forEach(function(item) {
+			item.classList.remove('active');
+		});
+		img.classList.add('active');
+	});
 });

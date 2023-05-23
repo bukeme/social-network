@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend Request List{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card p-3 mt-3">
+                    <h4 class="mb-4">Friend Request</h4>
+                    <div class="d-flex">
+                        {% for fr_user in friend_request_from_users %}
+                            <div class="card pb-2 shadow-lg" style="width: 250px;">
+                                <div class="rounded">
+                                    <img src="{{ fr_user.userprofile.get_profileimage }}" alt="">
+                                </div>
+                                <div class="mt-2 px-2 text-center">
+                                    <h5 class="font-weight-lighter">{{ fr_user.first_name }} {{ fr_user.last_name }}</h5>
+                                    <span></span>
+                                </div>
+                                <div class="mt-3 px-2">
+                                    <div>
+                                        <form action="{% url 'accept_friend_request' fr_user.pk %}" method="post" class="w-100">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-primary w-100">Accept Request</button>
+                                        </form>
+                                    </div>
+                                    <div class="mt-2">
+                                        <form action="{% url 'delete_friend_request' request.user.pk fr_user.pk %}" method="post" class="w-100">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-danger w-100">Delete Request</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% empty %}
+
+                            <h4 class="mx-auto text-muted">No Friend Request</h4>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

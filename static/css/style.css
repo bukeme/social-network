@@ -5,6 +5,7 @@
 	--color-grey: rgba(0,0,0,.5);
 	--color-light-grey: rgba(0, 0, 0, .1);
 	--color-lighter-grey: rgba(0, 0, 0, .05);
+	--color-transparent-red: #dc354540;
 	height: 100%;
 }
 
@@ -12,10 +13,15 @@ body {
 /*	height: 100%;*/
 	min-height: 100%;
 	padding-top: 68px;
+	padding-bottom: 20px;
 }
 
 body.stop-scroll {
 	overflow: hidden;
+}
+
+.c-pointer {
+	cursor: pointer;
 }
 
 .asteriskField {
@@ -86,6 +92,10 @@ body.stop-scroll {
 	font-weight: 600;
 }
 
+.f-w5 {
+	font-weight: 500;
+}
+
 .color-grey {
 	color: var(--color-grey);
 }
@@ -110,6 +120,10 @@ body.stop-scroll {
 	background-color: var(--secondary-color-light);
 }
 
+.bg-t-red {
+	background-color: var(--color-transparent-red);
+}
+
 .profile-btn,
 .blue-link {
 	color: var(--secondary-color);
@@ -125,7 +139,7 @@ img {
 	width: 100%;
 	height: 100% !important;
 	object-fit: cover;
-	cursor: pointer;
+	border-radius: inherit;
 }
 
 a:link,
@@ -160,6 +174,17 @@ a:active {
 	grid-gap: 15px;
 }
 
+.post-img-detail {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
+}
+
+.post-img-detail > div.img-modal-trigger {
+	height: 350px;
+}
+
 .post-img-3 > div:first-child {
 	grid-column: 1 / 2;
 	grid-row: 1 / 3;
@@ -179,7 +204,8 @@ a:active {
 	transition: all 0.25s ease-in-out;
 }
 
-a.left-nav-link:hover {
+a.left-nav-link:hover,
+.left-nav-link:hover {
 	color: var(--secondary-color) !important;
 }
 
@@ -252,6 +278,18 @@ a.left-nav-link:hover {
 	color: var(--secondary-color) !important;
 }
 
+.r-none {
+	resize: none;
+}
+
+/*.post-edit-imgs {
+	display: grid;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	grid-template-rows: auto;
+	grid-template-columns: repeat(auto-fill, 80px);
+}*/
+
 @media screen and (max-width: 991px) {
 	.profile__profile-img {
 		width: 100px;
@@ -262,14 +300,14 @@ a.left-nav-link:hover {
 		top: calc(100% + 50px);
 		left: 50%;
 		transform: translateX(-50%);
-		width: initial;
+		width: 100%;
 		padding-right: 0;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.profile__pre-about {
-		padding-top: 180px;
+		padding-top: 250px;
 	}
 
 	.chat-container,
@@ -311,5 +349,9 @@ a.left-nav-link:hover {
 	.n-img {
 		width: 50px !important;
 		height: 50px !important;
+	}
+
+	.post-img-detail > div.img-modal-trigger {
+		height: 250px;
 	}
 }

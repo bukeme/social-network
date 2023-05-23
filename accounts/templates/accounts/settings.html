@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Settings{% endblock title %}
+
+{% block content %}
+
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card p-3">
+					<h4>Account Settings</h4>
+					<div class="mt-2">
+						<form method="post">
+							{% csrf_token %}
+							{% if user_form.non_field_errors or profile.non_field_errors %}
+								<div class="p-3 d-flex flex-column text-danger bg-t-red">
+									{% for error in user_form.non_field_errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+									{% for error in profile_form.non_field_errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% endif %}
+							<div class="form-row">
+								<div class="col-md-4 form-group">
+									<label>First name</label>
+									<input type="text" name="first_name" class="form-control {% if user_form.first_name.errors %}is-invalid{% endif %}" value="{% if user_form.first_name.value %}{{ user_form.first_name.value }}{% endif %}" id="id_first_name" aria-describedby="id_first_name_feedback">
+									{% if user_form.first_name.errors %}
+										<div class="invalid-feedback" id="id_first_name_feedback d-flex flex-column">
+											{% for error in user_form.first_name.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+								<div class="col-md-4 form-group">
+									<label>Last name</label>
+									<input type="text" name="last_name" class="form-control {% if user_form.last_name.errors %}is-invalid{% endif %}" value="{% if user_form.last_name.value %}{{ user_form.last_name.value }}{% endif %}" id="id_last_name" aria-describedby="id_last_name_feedback">
+									{% if user_form.last_name.errors %}
+										<div class="invalid-feedback" id="id_last_name_feedback d-flex flex-column">
+											{% for error in user_form.last_name.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+								<div class="col-md-4 form-group">
+									<label>Other name</label>
+									<input type="text" name="other_name" class="form-control {% if profile_form.other_name.errors %}is-invalid{% endif %}"  value="{% if profile_form.other_name.value %}{{ profile_form.other_name.value }}{% endif %}" id="id_other_name" aria-describedby="id_other_name_feedback">
+									{% if profile_form.other_name.errors %}
+										<div class="invalid-feedback" id="id_other_name_feedback d-flex flex-column">
+											{% for error in profile_form.other_name.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" name="username" class="form-control {% if user_form.username.errors %}is-invalid{% endif %}" value="{% if user_form.username.value %}{{ user_form.username.value }}{% endif %}" id="id_username" aria-describedby="id_username_feedback" required>
+								{% if user_form.username.errors %}
+									<div class="invalid-feedback" id="id_username_feedback d-flex flex-column">
+										{% for error in user_form.username.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+							<div class="form-row">
+								<div class="col-md-6 form-group">
+									<label>Phone Number</label>
+									<input type="text" name="phone" class="form-control {% if profile_form.phone.errors %}is-invalid{% endif %}"  value="{% if profile_form.phone.value %}{{ profile_form.phone.value }}{% endif %}" id="id_phone" aria-describedby="id_phone_feedback">
+									{% if profile_form.phone.errors %}
+										<div class="invalid-feedback" id="id_phone_feedback d-flex flex-column">
+											{% for error in profile_form.phone.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Email</label>
+									<input type="email" name="email" class="form-control {% if user_form.email.errors %}is-invalid{% endif %}" value="{% if user_form.email.value %}{{ user_form.email.value }}{% endif %}" id="id_email" aria-describedby="id_email_feedback">
+									{% if user_form.email.errors %}
+										<div class="invalid-feedback" id="id_email_feedback d-flex flex-column">
+											{% for error in user_form.email.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+							</div>
+							<button type="submit" name="user-profile-form" class="btn btn-primary d-block ml-auto">Save changes</button>
+						</form>
+					</div>
+				</div>
+				<div class="card p-3 mt-3">
+					<h4>Change Password</h4>
+					<div>
+						<form method="post">
+							{% csrf_token %}
+							{{ password_form | crispy }}
+							<button type="submit" name="password-form" class="btn btn-primary d-block ml-auto">Update Password</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

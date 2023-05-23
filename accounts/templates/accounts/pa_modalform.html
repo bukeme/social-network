@@ -1,0 +1,119 @@
+{% load accounts_filters %}
+{% if model_name == 'userprofile' %}
+
+	{% define user.userprofile as model %}
+	{% define userprofile_form as u_form %}
+
+{% else %}
+
+	{% define user as model %}
+	{% define user_form as u_form %}
+
+{% endif %}
+<div class="modal fade" id="{{ field_name }}-update-form{{ user.pk }}" tabindex="-1" aria-labelledby="{{ field_name }}-update-form{{ user.pk }}Label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">
+					{% if model|fieldvalue:field_name %}
+						Edit
+					{% else %}
+						Add
+					{% endif %}
+					{% if field_name == 'marital_status' %}
+						Marital Status
+					{% elif field_name == 'birth_date' %}
+						Date Of Birth
+					{% else %}
+						{{ field_name|capfirst }}
+					{% endif %}
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<form method="post" action="{% if model_name == 'userprofile' %}{% url 'userprofile_update' user.pk %}{% else %}{% url 'user_update' user.pk %}{% endif %}">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="form-group">
+						{% if field_name == 'birth_date' %}
+							<label>Date Of Birth</label>
+							<input type="date" name="birth_date" class="form-control" value="{{ model|fieldvalue:field_name | date:'Y-m-d' }}">
+						{% elif field_name == 'overview' %}
+							<label>Overview</label>
+							<textarea name="overview" class="form-control">{% if model|fieldvalue:field_name %}{{ model|fieldvalue:field_name }}{% endif %}</textarea>
+						{% else %}
+							<label>{{ field_name|capfirst }}</label>
+							<input type="text" name="{{field_name}}" class="form-control" value="{% if model|fieldvalue:field_name %}{{ model|fieldvalue:field_name }}{% endif %}">
+						{% endif %}
+						<div class="d-none">
+							{% for field in u_form %}
+								{% if field.name != field_name %}
+									{{field}}
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">
+						{% if model|fieldvalue:field_name %}
+							Edit
+						{% else %}
+							Add
+						{% endif %}
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="{{ field_name }}-delete-form{{ user.pk }}" tabindex="-1" aria-labelledby="{{ field_name }}-delete-form{{ user.pk }}Label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete 
+					{% if field_name == 'birth_date' %}
+						Date Of Birth
+					{% elif field_name == 'marital_status' %}
+						Marital Status
+					{% else %}
+						{{ field_name }}
+					{% endif %}
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<form method="post" action="{% if model_name == 'userprofile' %}{% url 'userprofile_update' user.pk %}{% else %}{% url 'user_update' user.pk %}{% endif %}">
+				{% csrf_token %}
+				<div class="modal-body">
+					<input type="hidden" name="{{ field_name }}" class="form-control" value="">
+					<span class="text-dark">Are you sure you want to delete "
+						{% if field_name == 'birth_date' %}
+							Date Of Birth
+						{% elif field_name == 'marital_status' %}
+							Marital Status
+						{% else %}
+							{{ field_name }}
+						{% endif %}
+					"?</span>
+					<div class="d-none">
+						{% for field in u_form %}
+							{% if field.name != field_name %}
+								{{field}}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-danger">Yes, Delete</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,59 @@
+<script>
+	const likeBtns = document.querySelectorAll('.like-btn');
+	const commentLikeElements = document.querySelectorAll('.comment-like-element');
+	const replyLikeElements = document.querySelectorAll('.reply-like-element');
+
+	async function like(url, element, class1, class2, count_class) {
+		fetch(
+			url,
+			{
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json',
+			        "X-Requested-With": "XMLHttpRequest",
+			        "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
+					'X-CSRFToken': '{{csrf_token}}',
+				},
+				body: JSON.stringify({csrfmiddlewaretoken: '{{csrf_token}}'})
+			}
+		)
+		.then(response => response.json())
+		.then(data => {
+			if (data.status === 'not logged in') {
+				console.log('You are not logged in');
+			} else if (data.status === 'ok') {
+				if (data.action === 'like') {
+					element.classList.add(class1);
+					element.classList.add(class2);
+				} else if (data.action === 'unlike') {
+					element.classList.remove(class1);
+					element.classList.remove(class2);
+				}
+				element.querySelector(`.${count_class}`).innerHTML = data.num_of_likes;
+			} else {
+				console.log('An error occured');
+			}
+		});
+	}
+
+	likeBtns.forEach(function (likeBtn) {
+		likeBtn.addEventListener('click', function () {
+			const url = `/post/${this.dataset.post_id}/like/`;
+			like(url, likeBtn, 'bg-primary', 'text-white', 'likes-count');
+		});
+	});
+
+	commentLikeElements.forEach(function (commentLikeElement) {
+		commentLikeElement.addEventListener('click', function () {
+			const url = `/comment/${this.dataset.comment_id}/like/`;
+			like(url, commentLikeElement, 'text-primary', 'text-primary', 'comment-likes-count');
+		});
+	});
+
+	replyLikeElements.forEach(function (replyLikeElement) {
+		replyLikeElement.addEventListener('click', function () {
+			const url = `/reply/${this.dataset.reply_id}/like/`;
+			like(url, replyLikeElement, 'text-primary', 'text-primary', 'reply-likes-count');
+		});
+	});
+</script>

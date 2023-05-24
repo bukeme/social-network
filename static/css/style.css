@@ -181,6 +181,12 @@ a:active {
 	grid-gap: 10px;
 }
 
+.grid-container {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-gap: 20px;
+}
+
 .post-img-detail > div.img-modal-trigger {
 	height: 350px;
 }

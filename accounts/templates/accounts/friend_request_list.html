@@ -9,10 +9,10 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card p-3 mt-3">
                     <h4 class="mb-4">Friend Request</h4>
-                    <div class="d-flex">
+                    <div class="d-flex flex-wrap">
                         {% for fr_user in friend_request_from_users %}
-                            <div class="card pb-2 shadow-lg" style="width: 250px;">
-                                <div class="rounded">
+                            <div class="card mx-2 pb-2 shadow" style="width: 250px;">
+                                <div class="rounded" style="height: 200px;">
                                     <img src="{{ fr_user.userprofile.get_profileimage }}" alt="">
                                 </div>
                                 <div class="mt-2 px-2 text-center">
@@ -23,13 +23,13 @@
                                     <div>
                                         <form action="{% url 'accept_friend_request' fr_user.pk %}" method="post" class="w-100">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-outline-primary w-100">Accept Request</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-primary w-100">Accept Request</button>
                                         </form>
                                     </div>
                                     <div class="mt-2">
                                         <form action="{% url 'delete_friend_request' request.user.pk fr_user.pk %}" method="post" class="w-100">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-outline-danger w-100">Delete Request</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger w-100">Delete Request</button>
                                         </form>
                                     </div>
                                 </div>

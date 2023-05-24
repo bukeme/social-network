@@ -17,42 +17,84 @@
 
 			<div class="col-12">
 				<div class="card p-4 bg-white">
-					<div class="d-flex justify-content-between">
-						<h5 class="font-weight-bold">Friends</h5>
-						<div class="d-flex">
+					<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+						<span class="font-weight-bold f-lg flex-shrink-0">Friends</span>
+						<div class="d-flex flex-column align-items-start align-items-md-center flex-md-row">
 							<form>
-								<div class="form-group position-relative">
+								<div class="form-group position-relative mb-n1 mr-2 flex-shrink-0">
 									<input type="search" class="form-control form-control-sm rounded-pill" name="search_friend" placeholder="Search friend..." style="padding-left: 35px;">
 									<i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
 								</div>
 							</form>
-							<div class="ml-3">
-								<a href="#" class=" font-weight-bold">Find Friends</a>
+							<div class="flex-shrink-0 mt-1 mt-md-0">
+								<a href="#" class="f-w6 small">Find Friends</a>
 							</div>
 						</div>
 					</div>
-					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 20px;" class="mt-3">
-                        {% for friend in friends %}
-                            <div class="card d-flex flex-column align-items-center p-2">
-                                <div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
-                                    <img src="{{ friend.userprofile.get_profileimage }}">
-                                    <a href="{% url 'profile_post' friend.pk %}" class="stretched-link"></a>
-                                </div>
-                                <a href="{% url 'profile_post' friend.pk %}">
-                                    <h6 class="text-dark hover-blue">{{ friend.first_name }} {{ friend.last_name }}</h6>
-                                </a>
-                                <span class="small text-muted mb-2">16 Mutual Friends</span>
-                                <div>
-                                    <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
-                                        <i class="fa fa-comment-alt"></i>
+                    {% if friends %}
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-gap: 20px;" class="mt-3">
+                            {% for friend in friends %}
+                                <div class="card d-flex flex-column align-items-center p-2">
+                                    <div class="rounded-circle position-relative" style="width: 70px; height: 70px;">
+                                        <img src="{{ friend.userprofile.get_profileimage }}">
+                                        <a href="{% url 'profile_post' friend.pk %}" class="stretched-link"></a>
+                                    </div>
+                                    <a href="{% url 'profile_post' friend.pk %}">
+                                        <h6 class="text-dark hover-blue">{{ friend.first_name }} {{ friend.last_name }}</h6>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
-                                        <i class="fa fa-user-minus"></i>
-                                    </a>
+                                    <span class="small text-muted mb-2">16 Mutual Friends</span>
+                                    <div>
+                                        <span>
+                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send Message">
+                                                <i class="fa fa-comment-alt"></i>
+                                            </a>
+                                        </span>
+                                        <span data-toggle="modal" data-target="#remove-user-{{ friend.pk }}-modal">
+                                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Remove Friend">
+                                                <i class="fa fa-user-minus"></i>
+                                            </button>
+                                        </span>
+
+                                        <!-- Remove Friend Modal -->
+
+                                        <div class="modal fade" id="remove-user-{{ friend.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="remove-user-{{ friend.pk }}-modal-title" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="remove-user-{{ friend.pk }}-modal-title">Remove Friend</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <p>Are you sure you want to remove "{{ friend.first_name }} {{ friend.last_name }}" as your friend?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a href="{% url 'remove_friend' friend.pk %}" class="btn btn-danger">Yes, Remove</a>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-					</div>
+                                
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+
+                        <div class="p-3 mt-3 bg-white">
+                            <h4 class="text-muted text-center">
+                                No Friends
+                                {% if request.GET.search_friend %}
+                                    Named "{{ request.GET.search_friend }}"
+                                {% endif %}
+                            </h4>
+                        </div>
+
+                    {% endif %}
 				</div>
 			</div>
 		</div>

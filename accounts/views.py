@@ -289,7 +289,7 @@ class SendFriendRequestView(LoginRequiredMixin, UserPassesTestMixin, View):
 
 	def test_func(self):
 		to_user = User.objects.get(pk=self.kwargs['to_user_pk'])
-		return self.request.user != to_user
+		return self.request.user != to_user and to_user not in self.request.user.userprofile.friends.all()
 
 send_friend_request_view = SendFriendRequestView.as_view()
 
@@ -344,7 +344,8 @@ class FriendListView(LoginRequiredMixin, TemplateView):
 		user = User.objects.get(pk=kwargs['user_pk'])
 		search_friend = self.request.GET.get('search_friend', '')
 		context['friends'] = user.userprofile.friends.all().filter(
-			Q(userprofile__full_name__icontains=search_friend) |
+			Q(first_name__icontains=search_friend) |
+			Q(last_name__icontains=search_friend) |
 			Q(username__icontains=search_friend)
 		)
 		context['user'] = user
@@ -352,4 +353,14 @@ class FriendListView(LoginRequiredMixin, TemplateView):
 		return context
 
 friend_list_view = FriendListView.as_view()
+
+class RemoveFriendView(LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		friend = User.objects.get(pk=kwargs['user_pk'])
+		friend_name = friend.userprofile.full_name
+		request.user.userprofile.friends.remove(friend)
+		messages.error(request, f'You have removed {friend_name} as your friend')
+		return redirect(request.META.get('HTTP_REFERER'))
+
+remove_friend_view = RemoveFriendView.as_view()
 

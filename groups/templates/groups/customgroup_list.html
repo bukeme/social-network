@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Groups{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid" style="height: calc(100vh - 68px);">
+        <div class="row group-row h-100">
+            <div class="col-md-4 h-100" style="padding-left: 0;">
+                <div class="bg-white border pl-3 pr-md-3 py-3 group-side h-100">
+                    <div>
+                        <h4 class="font-weight-bold">Groups</h4>
+                    </div>
+                    <div class="mt-3">
+                        <form class="position-relative">
+                            <input class="form-control background-llgrey rounded-pill" placeholder="Search groups..." type="text" name="search" style="padding-left: 40px;">
+                            <i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
+                        </form>
+                    </div>
+                    <div class="mt-4">
+                        <div class="d-flex flex-column">
+                            <a href="{% url 'my_groups' 'all-groups' %}" class="text-dark group-link {% if 'all-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                        <i class="fa fa-globe-americas position-relative"></i>
+                                    </div>
+                                    <span class="ml-2 f-w6">Discover</span>
+                                </div>
+                            </a>
+                            <a href="{% url 'my_groups' 'my-groups' %}" class="text-dark group-link {% if 'my-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                        <i class="fa fa-users position-relative"></i>
+                                    </div>
+                                    <span class="ml-2 f-w6">Your Groups</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <div class="mt-2">
+                        <a href="{% url 'group_create' %}" class="btn bg-secondary-light blue-link w-100">
+                            <i class="fa fa-plus mr-1"></i>
+                            Create new group
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 h-100" style="overflow-y: auto;">
+                <div class="px-md-3 py-3 h-100">
+                    {% if 'my-groups' in request.path %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="f-w6" style="font-size: 17px;">All groups you have joined (260)</span>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown">Sort</button>
+                                <div class="dropdown-menu dropdown-menu-right" style="width: 250px;">
+                                    <a href="#" class="dropdown-item d-flex justify-content-between">
+                                        <span>Alphabetically</span>
+                                        <i class="fa fa-check text-primary"></i>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex justify-content-between">
+                                        <span>Recently joined first</span>
+                                        <i class="fa fa-check text-primary d-none"></i>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex justify-content-between">
+                                        <span>Earliest joined first</span>
+                                        <i class="fa fa-check text-primary d-none"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-gap: 10px;" class="text-muted mt-1">
+                        {% for group in object_list %}
+                            <div class="bg-white group-item rounded-lg border border-light p-2 p-md-2">
+                                <div class="d-flex flex-nowrap align-items-center">
+                                    <div class="rounded group-img-con">
+                                        <img src="{{ group.get_profileimage }}" class="rounded">
+                                    </div>
+                                    <div class="ml-3 d-flex flex-column">
+                                        <a href="#">
+                                            <span class="text-dark hover-blue f-w6">{{ group.name }}</span>
+                                        </a>
+                                        <span class="small">{{ group.members.all.count }} members</span>
+                                    </div>
+                                </div>
+                                <div class="d-none d-md-flex mt-3">
+                                    <a href="#" class="btn bg-secondary-light blue-link rounded-lg flex-grow-1">View group</a>
+                                    <div class="dropdown">
+                                        <button class="h-100 ml-3 btn btn-light dropdown-toggle" data-toggle="dropdown" type="button">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item">
+                                                    <i class="fa fa-user-times mr-2 text-danger"></i>
+                                                    Leave group
+                                                </a>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+
+    <script>
+        // const groupSide = document.querySelector('.group-side');
+        // groupSide.style.height = `${window.innerHeight - groupSide.getBoundingClientRect().top}px`;
+    </script>
+
+{% endblock js %}

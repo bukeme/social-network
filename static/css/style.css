@@ -287,6 +287,14 @@ a.left-nav-link:hover,
 	resize: none;
 }
 
+.modal-close-btn {
+	top: 20px;
+	right: 20px;
+	width: 30px;
+	height: 30px;
+	z-index: 1;
+}
+
 /*.post-edit-imgs {
 	display: grid;
 	grid-column-gap: 10px;
@@ -324,6 +332,10 @@ a.left-nav-link:hover,
 	.chat-container > div > div:nth-child(4){
 		width: 100% !important;
 		height: initial !important;
+	}
+
+	.modal-height {
+		height: 300px;
 	}
 }
 

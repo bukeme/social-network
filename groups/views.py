@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.views.generic import (
     TemplateView,
@@ -70,7 +71,19 @@ class GroupMembersListView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['group_members'] = self.object.members.all().difference(self.object.admin_members.all(), User.objects.filter(pk=self.request.user.pk))
+        query = self.request.GET.get('search_member')
+        if query:
+            group_members = []
+            members = list(self.object.members.all())
+            for member in members:
+                if (query.lower() in member.userprofile.full_name.lower()) or (query.lower() in member.username.lower()):
+                    group_members.append(member)
+        else:
+            group_members = self.object.members.all().difference(
+                self.object.admin_members.all(),
+                User.objects.filter(pk=self.request.user.pk)
+            )
+        context['group_members'] = group_members
         return context 
 
 group_members_list_view = GroupMembersListView.as_view()
@@ -78,10 +91,12 @@ group_members_list_view = GroupMembersListView.as_view()
 class JoinGroupView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         group = CustomGroup.objects.get(pk=kwargs['group_pk'])
-        if request.user in group.members.all():
-            group.members.remove(request.user)
+        user = User.objects.get(pk=kwargs['user_pk'])
+        if user in group.members.all():
+            group.members.remove(user)
+            group.admin_members.remove(user)
         else:
-            group.members.add(request.user)
+            group.members.add(user)
         group.save()
         return redirect(request.META.get('HTTP_REFERER'))
 

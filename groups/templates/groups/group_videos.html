@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ group.name }} members{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row group-row">
+            <div class="col-md-8 offset-md-2">
+                <div class="py-3">
+                    {% include 'groups/group_detail_start.html' %}
+                    <div class="card p-3">
+                        {% include 'groups/group_media_nav.html' %}
+                        <div>
+                            {% if videos %}
+
+                                <div class="grid-container" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+                                    {% for video in videos %}
+
+                                        <div>
+                                            <div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+                                                <video class="embed-responsive-item" controls>
+                                                    <source src="{{ video.url }}#t=0.2" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+
+                            {% else %}
+
+                                <h5 class="m-3 text-muted text-center">No Photos</h5>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

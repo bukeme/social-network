@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -9,9 +10,10 @@ from django.views.generic import (
     DetailView,
     View
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from groups.models import CustomGroup
-from groups.forms import GroupCreateForm
+from groups.forms import GroupCreateForm, GroupProfileImageForm
+from groups.utils import get_all_group_photos, get_all_group_videos
 
 # Create your views here.
 
@@ -101,3 +103,57 @@ class JoinGroupView(LoginRequiredMixin, View):
         return redirect(request.META.get('HTTP_REFERER'))
 
 join_group_view = JoinGroupView.as_view()
+
+class GroupPhotosView(LoginRequiredMixin, TemplateView):
+    template_name = 'groups/group_photos.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['photos'] = get_all_group_photos(kwargs['group_pk'])
+        context['group'] = CustomGroup.objects.get(pk=kwargs['group_pk'])
+        return context 
+
+group_photos_view = GroupPhotosView.as_view()
+
+class GroupVideosView(LoginRequiredMixin, TemplateView):
+    template_name = 'groups/group_videos.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['videos'] = get_all_group_videos(kwargs['group_pk'])
+        context['group'] = CustomGroup.objects.get(pk=kwargs['group_pk'])
+        return context
+
+group_videos_view = GroupVideosView.as_view()
+
+class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
+    template_name = 'groups/group_settings.html'
+    group = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.group = CustomGroup.objects.get(pk=kwargs['group_pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        group = self.group
+        context['image_form'] = GroupProfileImageForm()
+        context['group_form'] = GroupCreateForm(initial=model_to_dict(group))
+        return context
+
+    def post(self, request, *args, **kwargs):
+        image_form = GroupProfileImageForm(request.POST, request.FILES)
+        group_form = GroupCreateForm(request.POST, instance=self.group)
+
+        if image_form.is_valid() and group_form.is_valid():
+            group_form.save()
+            if request.FILES.get('image'):
+                image_form.save(commit=False)
+                image_form.group = self.group
+                image_form.save()
+            messages.success(request, 'Group Update Was Successful')
+            return redirect(request.META.get('HTTP_REFERER'))
+        return self.render_to_response({'image_form': image_form, 'group_form': group_form})
+
+group_settings_view = GroupSettingsView.as_view()
+

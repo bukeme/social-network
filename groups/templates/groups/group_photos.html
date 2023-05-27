@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ group.name }} members{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row group-row">
+            <div class="col-md-8 offset-md-2">
+                <div class="py-3">
+                    {% include 'groups/group_detail_start.html' %}
+                    <div class="card p-3">
+                        {% include 'groups/group_media_nav.html' %}
+                        <div>
+                            {% if photos %}
+
+                                <div class="grid-container" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
+                                    {% for image in photos %}
+                                        <div class="rounded img-modal-trigger" style="cursor: pointer;" data-toggle="modal" data-target="#group{{ group.pk }}-modal" data-imgid="#modal-img-{{ image.pk }}">
+                                            <img src="{{ image.image.url }}" class="rounded">
+                                        </div>
+                                    {% endfor %}
+                                    <div class="modal fade" id="group{{ group.pk }}-modal">
+                                        <div class="modal-dialog modal-dialog-centered h-100">
+                                            <div class="modal-content position-relative modal-height" style="height: 500px;">
+                                                <div class="modal-body h-100">
+                                                    <div class="carousel slide h-100" id="group{{ group.pk }}-carousel" data-ride="carousel">
+                                                        <div class="carousel-inner h-100">
+                                                            {% for image in photos %}
+                                                                <div class="carousel-item h-100" id="modal-img-{{ image.pk }}">
+                                                                    <img src="{{ image.image.url }}" class="d-block w-100">
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <button type="button" class="carousel-control-prev" data-slide="prev" data-target="#group{{ group.pk }}-carousel">
+                                                            <span class="carousel-control-prev-icon"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </button>
+                                                        <button type="button" class="carousel-control-next" data-slide="next" data-target="#group{{ group.pk }}-carousel">
+                                                            <span class="carousel-control-next-icon"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-light rounded-circle position-absolute p-0 modal-close-btn" data-dismiss="modal">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% else %}
+
+                                <h5 class="m-3 text-muted text-center">No Videos</h5>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

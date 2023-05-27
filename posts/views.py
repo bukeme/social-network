@@ -8,11 +8,18 @@ from posts.forms import PostCreateForm, PostEditForm, CommentForm, ReplyForm
 from posts.models import PostImage, Post, Comment, Reply
 from posts.utils import get_feeds_queryset
 from posts.decorators import AjaxRequiredOnlyMixin
+from groups.models import CustomGroup
 
 # Create your views here.
 
-class HomePageView(LoginRequiredMixin, TemplateView):
+class HomePageView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 	template_name = 'posts/home.html'
+	group = None
+
+	def dispatch(self, request, *args, **kwargs):
+		if kwargs.get('group_pk'):
+			self.group = CustomGroup.objects.get(pk=kwargs['group_pk'])
+		return super().dispatch(request, *args, **kwargs)
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
@@ -27,6 +34,10 @@ class HomePageView(LoginRequiredMixin, TemplateView):
 		if post_form.is_valid():
 			post_form = post_form.save(commit=False)
 			post_form.user = request.user
+			print('hello')
+			if self.group:
+				post_form.group = self.group
+				post_form.visibility = 'public'
 			try:
 				post_form.shared_post = Post.objects.get(pk=kwargs['post_pk'])
 			except:
@@ -38,6 +49,11 @@ class HomePageView(LoginRequiredMixin, TemplateView):
 					PostImage.objects.create(post=post_form, image=image)
 			return redirect('home')
 		return self.render_to_response({'post_form': post_form,})
+
+	def test_func(self):
+		if self.group:
+			return self.request.user in self.group.members.all()
+		return True
 
 home_page_view = HomePageView.as_view()
 
@@ -131,7 +147,10 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, View):
 		return redirect('home')
 
 	def test_func(self):
-		return self.request.user == Post.objects.get(pk=self.kwargs['post_pk']).user
+		post = Post.objects.get(pk=self.kwargs['post_pk'])
+		if post.group:
+			return self.request.user == post.user or self.request.user in post.group.members.all()
+		return self.request.user == post.user
 
 post_delete_view = PostDeleteView.as_view()
 

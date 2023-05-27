@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}About {{ group.name }} Group{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row group-row">
+            <div class="col-md-8 offset-md-2">
+                <div class="px-md-3 py-3">
+                    {% include 'groups/group_detail_start.html' %}
+                    <div class="card p-3">
+                        <h5 class="mb-2 text-dark font-weight-bold">About</h5>
+                        {% if group.about %}
+                            <p class="text-secondary">{{ group.about }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

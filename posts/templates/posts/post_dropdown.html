@@ -3,8 +3,10 @@
 		<i class="fa fa-ellipsis-h"></i>
 	</button>
 	<div class="dropdown-menu dropdown-menu-right">
-		<a href="{% url 'post_edit' post.pk %}" class="dropdown-item">Edit Post</a>
-		<div class="dropdown-divider"></div>
+    {% if request.user == post.user %}
+      <a href="{% url 'post_edit' post.pk %}" class="dropdown-item">Edit Post</a>
+      <div class="dropdown-divider"></div>
+    {% endif %}
 		<a href="javascript:void()" class="dropdown-item" data-toggle="modal" data-target="#delete-post{{post.pk}}-modal">Delete Post</a>
 	</div>
 </div>

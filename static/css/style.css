@@ -13,7 +13,6 @@ body {
 /*	height: 100%;*/
 	min-height: 100%;
 	padding-top: 68px;
-	padding-bottom: 20px;
 }
 
 body.stop-scroll {
@@ -334,7 +333,7 @@ a.left-nav-link:hover,
 		height: 40px;
 	}
 
-	.group-side,
+	.group,
 	.group-item {
 		height: initial !important;
 		border: none !important;

@@ -1,0 +1,8 @@
+<ul class="nav mb-4 justify-content-around justify-content-md-start">
+    <li class="nav-item">
+        <a href="{% url 'group_photos' group.pk %}" class="nav-link nav-item-line {% if 'photos' in request.path %}active{% endif %} text-muted f-w6 profile__profile-nav-link" style="font-size: 17px;">Photos</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'group_videos' group.pk %}" class="nav-link nav-item-line text-muted f-w6 profile__profile-nav-link {% if 'videos' in request.path %}active{% endif %}" style="font-size: 17px;">Videos</a>
+    </li>
+</ul>

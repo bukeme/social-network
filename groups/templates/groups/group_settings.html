@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}About {{ group.name }} Group{% endblock title %}
+{% block title %}{{ group.name }} members{% endblock title %}
 
 {% block content %}
 
@@ -10,10 +10,7 @@
                 <div class="py-3">
                     {% include 'groups/group_detail_start.html' %}
                     <div class="card p-3">
-                        <h5 class="mb-2 text-dark font-weight-bold">About</h5>
-                        {% if group.about %}
-                            <p class="text-secondary">{{ group.about }}</p>
-                        {% endif %}
+
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 from django import forms
-from groups.models import CustomGroup
+from groups.models import CustomGroup, GroupProfileImage
 
 
 
@@ -10,3 +10,8 @@ class GroupCreateForm(forms.ModelForm):
     class Meta:
         model = CustomGroup
         fields = ['name', 'about',]
+
+class GroupProfileImageForm(forms.ModelForm):
+    class Meta:
+        model = GroupProfileImage
+        fields = ['image',]

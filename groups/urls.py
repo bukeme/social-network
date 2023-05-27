@@ -9,4 +9,7 @@ urlpatterns = [
     path('group/<int:group_pk>/join/<int:user_pk>/', views.join_group_view, name='join_group'),
     path('group/<int:pk>/about/', views.group_about_view, name='group_about'),
     path('group/<int:pk>/members/', views.group_members_list_view, name='group_members'),
+    path('group/<int:group_pk>/media/photos/', views.group_photos_view, name='group_photos'),
+    path('group/<int:group_pk>/media/videos/', views.group_videos_view, name='group_videos'),
+    path('group/<int:group_pk>/settings/', views.group_settings_view, name='group_settings'),
 ]

@@ -33,7 +33,7 @@
             </div>
         </div>
         <hr>
-        <ul class="nav mb-1">
+        <ul class="nav mb-1 justify-content-around justify-content-md-start">
             <li class="nav-item">
                 <a href="{% url 'group_detail' group.pk %}" class="nav-link nav-item-line {% if posts and 'about' not in request.path %}active{% endif %} text-muted f-w6 profile__profile-nav-link" style="font-size: 17px;">Feeds</a>
             </li>
@@ -44,7 +44,7 @@
                 <a href="{% url 'group_members' group.pk %}" class="nav-link nav-item-line text-muted f-w6 profile__profile-nav-link {% if 'members' in request.path %}active{% endif %}" style="font-size: 17px;">Members</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link nav-item-line text-muted f-w6 profile__profile-nav-link {% if 'media' in request.path %}active{% endif %}" style="font-size: 17px;">Media</a>
+                <a href="{% url 'group_photos' group.pk %}" class="nav-link nav-item-line text-muted f-w6 profile__profile-nav-link {% if 'media' in request.path %}active{% endif %}" style="font-size: 17px;">Media</a>
             </li>
         </ul>
     </div>

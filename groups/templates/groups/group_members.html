@@ -11,47 +11,147 @@
                     {% include 'groups/group_detail_start.html' %}
                     <div class="card p-3">
                         <div class="d-flex align-items-center">
-                            <span class="font-weight-bold f-lg">Members</span>
+                            <a href="{% url 'group_members' group.pk %}" class="font-weight-bold f-lg text-dark">Members</a>
                             <i class="fa fa-circle text-muted mx-2" style="font-size: 3px;"></i>
                             <span class="text-muted font-weight-bold">{{ group.members.all.count }}</span>
                         </div>
                         <div class="mt-3">
                             <form class="position-relative">
-                                <input class="form-control rounded-pill bg-light" placeholder="Find a member" type="text" name="search" style="padding-left: 40px;">
+                                <input class="form-control rounded-pill bg-light" placeholder="Find a member" type="text" name="search_member" style="padding-left: 40px;">
                                 <i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
                                 <a href="#" class="d-md-none mr-2">
                                     <i class="fa fa-search icon-lg color-secondary"></i>
                                 </a>
                             </form>
                         </div>
-                        {% if request.user in group.members.all %}
+                        {% if not request.GET.search_member %}
+                            {% if request.user in group.members.all %}
 
-                            <hr>
-                            <div class="d-flex">
-                                <div class="rounded-circle flex-shrink-0 mr-2" style="width: 50px; height: 50px;">
-                                    <img src="{{ request.user.userprofile.get_profileimage }}" alt="">
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <span class="font-weight-bold">{{ request.user.first_name }} {{ request.user.last_name }}</span>
-                                    <span>
-                                        {% if request.user.userprofile.occupation %}
-                                            Works at {{ request.user.userprofile.occupation }}
-                                        {% endif %}
-                                    </span>
-                                </div>
-                                <div class="ml-auto">
-                                    <div class="dropdown">
-                                        <button type="button" class="dropdown-toggle btn btn-light" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a href=""></a>
+                                <hr>
+                                <div class="d-flex align-items-start">
+                                    <div class="rounded-circle flex-shrink-0 mr-2" style="width: 50px; height: 50px;">
+                                        <img src="{{ request.user.userprofile.get_profileimage }}" alt="">
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <span class="font-weight-bold">{{ request.user.userprofile.full_name }}</span>
+                                        <span>
+                                            {% if request.user.userprofile.occupation %}
+                                                Works at {{ request.user.userprofile.occupation }}
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <div class="dropdown">
+                                            <button type="button" class="dropdown-toggle btn btn-light btn-sm" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="{% url 'join_group' group.pk request.user.pk %}" class="dropdown-item">Leave group</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            {% endif %}
+                            <hr>
+                            <div class="mt-n1">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="font-weight-bold f-lg">Admins</span>
+                                    <i class="fa fa-circle text-muted mx-2" style="font-size: 3px;"></i>
+                                    <span class="text-muted font-weight-bold">{{ group.admin_members.all.count }}</span>
+                                </div>
+                                <div>
+                                    {% for admin in group.admin_members.all %}
+
+                                        <div class="d-flex align-items-start mt-2">
+                                            <div class="rounded-circle flex-shrink-0 mr-2" style="width: 50px; height: 50px;">
+                                                <img src="{{ admin.userprofile.get_profileimage }}" alt="">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <span class="font-weight-bold">{{ admin.userprofile.full_name }}</span>
+                                                <span>
+                                                    {% if admin.userprofile.occupation %}
+                                                        Works at {{ admin.userprofile.occupation }}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                            {% if request.user in group.admin_members.all %}
+                                                <div class="ml-auto">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="dropdown-toggle btn btn-light btn-sm" data-toggle="dropdown">
+                                                            <i class="fa fa-ellipsis-h"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="{% url 'join_group' group.pk admin.pk %}" class="dropdown-item">
+                                                                {% if request.user == admin %}
+                                                                    Leave group
+                                                                {% else %}
+                                                                    Remove {{ admin.userprofile.full_name }}
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
                         {% endif %}
+                        <hr>
+                        <div class="mt-n1">
+                            {% if request.GET.search_member %}
+
+                                <h6 class="font-weight-bold mb-2">Search results</h6>
+
+                            {% else %}
+
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="font-weight-bold f-lg">Group Members</span>
+                                    <i class="fa fa-circle text-muted mx-2" style="font-size: 3px;"></i>
+                                    <span class="text-muted font-weight-bold">{{ group_members.all.count }}</span>
+                                </div>
+
+                            {% endif %}
+                            <div>
+                                {% for member in group_members %}
+
+                                    <div class="d-flex align-items-start mt-2">
+                                        <div class="rounded-circle flex-shrink-0 mr-2" style="width: 50px; height: 50px;">
+                                            <img src="{{ member.userprofile.get_profileimage }}" alt="">
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span class="font-weight-bold">{{ member.userprofile.full_name }}</span>
+                                            <span>
+                                                {% if member.userprofile.occupation %}
+                                                    Works at {{ member.userprofile.occupation }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        {% if request.user in group.admin_members.all or request.user == member %}
+                                            <div class="ml-auto">
+                                                <div class="dropdown">
+                                                    <button type="button" class="dropdown-toggle btn btn-light btn-sm" data-toggle="dropdown">
+                                                        <i class="fa fa-ellipsis-h"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{% url 'join_group' group.pk member.pk %}" class="dropdown-item">
+                                                            {% if request.user == admin %}
+                                                                Leave group
+                                                            {% else %}
+                                                                Remove {{ member.userprofile.full_name }}
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

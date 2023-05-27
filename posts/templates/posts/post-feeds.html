@@ -5,7 +5,7 @@
 <div class="pt-2">
 	{% for post in posts %}
 
-		<div class="card bg-white p-3 {% if not forloop.first %}mt-3{% endif %}">
+		<div class="card bg-white p-3 {% if not forloop.first %}mt-2{% endif %}">
 			{% if post.shared_post %}
 				<div>
 					<div class="d-flex">
@@ -151,8 +151,8 @@
 							</div>
 						{% endfor %}
 						<div class="modal fade" id="post{{ post.pk }}-modal">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content" style="height: 500px;">
+							<div class="modal-dialog modal-dialog-centered h-100">
+								<div class="modal-content position-relative modal-height" style="height: 500px;">
 									<div class="modal-body h-100">
 										<div class="carousel slide h-100" id="post{{ post.pk }}-carousel" data-ride="carousel">
 											<div class="carousel-inner h-100">
@@ -172,6 +172,9 @@
 											</button>
 										</div>
 									</div>
+									<button class="btn btn-light rounded-circle position-absolute p-0 modal-close-btn" data-dismiss="modal">
+										<i class="fa fa-times"></i>
+									</button>
 								</div>
 							</div>
 						</div>

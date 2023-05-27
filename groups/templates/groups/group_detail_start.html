@@ -17,7 +17,7 @@
                 <span class="f-w6 text-muted">{{ group.members.all.count }} members</span>
             </div>
             <div class="mt-2 mt-lg-0">
-                <a href="{% url 'join_group' group.pk %}" class="btn bg-secondary-light blue-link mr-1">
+                <a href="{% url 'join_group' group.pk request.user.pk %}" class="btn bg-secondary-light blue-link mr-1">
                     {% if request.user in group.members.all %}
                         <i class="fa fa-user-check mr-1"></i>
                         Joined

@@ -24,7 +24,7 @@ class CustomGroup(models.Model):
 
     def get_absolute_url(self):
         # return reverse('home')
-        return reverse('groups')
+        return reverse('group_detail', args=[self.pk,])
 
     def get_profileimage(self):
         return self.groupprofileimage_set.first().image.url

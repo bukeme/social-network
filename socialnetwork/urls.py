@@ -27,7 +27,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     path('accounts/', include('allauth.account.urls')),
     path('', include('posts.urls')),
-    path('group/', include('groups.urls')),
+    path('groups/', include('groups.urls')),
 ]
 
 if settings.DEBUG:

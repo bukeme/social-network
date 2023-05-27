@@ -4,53 +4,86 @@
 
 {% block content %}
 
-    <div class="container-fluid" style="height: calc(100vh - 68px);">
+    <div class="container-fluid group" style="height: calc(100vh - 68px);">
         <div class="row group-row h-100">
             <div class="col-md-4 h-100" style="padding-left: 0;">
-                <div class="bg-white border pl-3 pr-md-3 py-3 group-side h-100">
+                <div class="bg-white border pl-3 pr-3 py-3 h-100 group">
                     <div>
-                        <h4 class="font-weight-bold">Groups</h4>
+                        <a href="{% url 'groups' 'all-groups' %}" class="d-inline-block text-dark">
+                            <h4 class="font-weight-bold">Groups</h4>
+                        </a>
                     </div>
                     <div class="mt-3">
-                        <form class="position-relative">
-                            <input class="form-control background-llgrey rounded-pill" placeholder="Search groups..." type="text" name="search" style="padding-left: 40px;">
+                        <form method="get" action="{% url 'search_groups' 'all-groups' %}" class="position-relative">
+                            <input class="form-control background-llgrey rounded-pill" placeholder="Search groups..." type="text" name="query" style="padding-left: 40px;">
                             <i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
                         </form>
                     </div>
-                    <div class="mt-4">
-                        <div class="d-flex flex-column">
-                            <a href="{% url 'my_groups' 'all-groups' %}" class="text-dark group-link {% if 'all-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
-                                        <i class="fa fa-globe-americas position-relative"></i>
-                                    </div>
-                                    <span class="ml-2 f-w6">Discover</span>
+                    {% if 'search' in request.path %}
+
+                        <div class="mt-3">
+                            <hr>
+                            <h6 class="font-weight-bold">Filter</h6>
+
+                            <div class="mt-2">
+                                <div class="d-flex flex-column">
+                                    <a href="{% url 'search_groups' 'all-groups' %}?query={{ request.GET.query }}" class="text-dark group-link {% if 'all-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                                <i class="fa fa-globe-americas position-relative"></i>
+                                            </div>
+                                            <span class="ml-2 f-w6">All</span>
+                                        </div>
+                                    </a>
+                                    <a href="{% url 'search_groups' 'my-groups' %}?query={{ request.GET.query }}" class="text-dark group-link {% if 'my-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                                <i class="fa fa-users position-relative"></i>
+                                            </div>
+                                            <span class="ml-2 f-w6">My Groups</span>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="{% url 'my_groups' 'my-groups' %}" class="text-dark group-link {% if 'my-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
-                                        <i class="fa fa-users position-relative"></i>
+                                
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <div class="mt-4">
+                            <div class="d-flex flex-column">
+                                <a href="{% url 'groups' 'all-groups' %}" class="text-dark group-link {% if 'all-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                            <i class="fa fa-globe-americas position-relative"></i>
+                                        </div>
+                                        <span class="ml-2 f-w6">Discover</span>
                                     </div>
-                                    <span class="ml-2 f-w6">Your Groups</span>
-                                </div>
+                                </a>
+                                <a href="{% url 'groups' 'my-groups' %}" class="text-dark group-link {% if 'my-groups' in request.path %}active{% endif %} p-2 rounded-lg mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="background-lgrey rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
+                                            <i class="fa fa-users position-relative"></i>
+                                        </div>
+                                        <span class="ml-2 f-w6">Your Groups</span>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                        <div class="mt-2">
+                            <a href="{% url 'group_create' %}" class="btn bg-secondary-light blue-link w-100">
+                                <i class="fa fa-plus mr-1"></i>
+                                Create new group
                             </a>
                         </div>
-                        
-                    </div>
-                    <div class="mt-2">
-                        <a href="{% url 'group_create' %}" class="btn bg-secondary-light blue-link w-100">
-                            <i class="fa fa-plus mr-1"></i>
-                            Create new group
-                        </a>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-8 h-100" style="overflow-y: auto;">
                 <div class="px-md-3 py-3 h-100">
-                    {% if 'my-groups' in request.path %}
+                    {% if 'my-groups' in request.path and 'search' not in request.path %}
                         <div class="d-flex justify-content-between mb-2">
-                            <span class="f-w6" style="font-size: 17px;">All groups you have joined (260)</span>
+                            <span class="f-w6" style="font-size: 17px;">All groups you have joined ({{ object_list.count }})</span>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown">Sort</button>
                                 <div class="dropdown-menu dropdown-menu-right" style="width: 250px;">
@@ -78,14 +111,14 @@
                                         <img src="{{ group.get_profileimage }}" class="rounded">
                                     </div>
                                     <div class="ml-3 d-flex flex-column">
-                                        <a href="#">
+                                        <a href="{{ group.get_absolute_url }}">
                                             <span class="text-dark hover-blue f-w6">{{ group.name }}</span>
                                         </a>
                                         <span class="small">{{ group.members.all.count }} members</span>
                                     </div>
                                 </div>
                                 <div class="d-none d-md-flex mt-3">
-                                    <a href="#" class="btn bg-secondary-light blue-link rounded-lg flex-grow-1">View group</a>
+                                    <a href="{{ group.get_absolute_url }}" class="btn bg-secondary-light blue-link rounded-lg flex-grow-1">View group</a>
                                     <div class="dropdown">
                                         <button class="h-100 ml-3 btn btn-light dropdown-toggle" data-toggle="dropdown" type="button">
                                             <i class="fa fa-ellipsis-h"></i>

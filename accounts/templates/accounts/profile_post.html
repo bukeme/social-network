@@ -147,7 +147,8 @@
 				<!-- Create Post Section -->
 
 				{% if request.user == user %}
-					{% include 'posts/post-create.html' %}
+					{% url 'home' as post_url %}
+					{% include 'posts/post-create.html' with post_url=post_url %}
 				{% endif %}
 
 				<!-- Post List Section -->

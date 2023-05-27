@@ -333,7 +333,7 @@ a.left-nav-link:hover,
 		height: 40px;
 	}
 
-	.group-side,
+	.group,
 	.group-item {
 		height: initial !important;
 		border: none !important;

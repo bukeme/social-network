@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ group.name }}{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row group-row">
+            <div class="col-md-8 offset-md-2">
+                <div class="px-md-3 py-3">
+                    {% include 'groups/group_detail_start.html' %}
+                    <div class="">
+                        {% if request.user in group.members.all %}
+
+                            {% url 'create_group_post' group.pk as post_url %}
+                            <div class="card">
+                                {% include 'posts/post-create.html' with post_url=post_url %}
+                            </div>
+
+                        {% endif %}
+
+                        <!-- Post List Section -->
+
+                        <div class="mt-2">
+                            {% include 'posts/post-feeds.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+	<script src="{% static 'js/media-uploader.js' %}"></script>
+	{% include 'posts/post_like_script.html' %}
+{% endblock js %}

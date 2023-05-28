@@ -36,6 +36,11 @@
 				<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
 			</a>
 		</li>
+		<li class="nav-item d-none d-sm-block mx-3">
+			<a href="{% url 'groups' 'all-groups' %}" class="nav-link nav-item-line position-relative {% if 'groups' in request.path and 'group-search' not in request.path %}active{% endif %}">
+				<i class="fa fa-users icon-lg"></i>
+			</a>
+		</li>
 		<li class="nav-item d-sm-none mx-3 position-relative">
 			<a href="#" class="nav-link bar-nav">
 				<i class="fa fa-bars icon-lg color-secondary"></i>

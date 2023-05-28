@@ -21,3 +21,21 @@ def get_friend_request_object(to_user_pk, from_user_pk):
 	to_user = User.objects.get(pk=to_user_pk)
 	from_user = User.objects.get(pk=from_user_pk)
 	return FriendRequest.objects.get(to_user=to_user, from_user=from_user)
+
+def get_user_post_feeds(request, user_pk):
+	user = User.objects.get(pk=user_pk)
+	posts = user.post_set.all()
+	user_posts = posts.filter(group__isnull=True)
+	group_posts = posts.filter(group__isnull=False)
+	if request.user == user:
+		return posts
+	elif request.user in user.userprofile.followers.all() or request.user in user.userprofile.friends.all():
+		q1 = user_posts.filter(Q(visibility='public') | Q(visibility='friends'))
+		q2 = group_posts.filter(group__members__in=[request.user])
+		q = q1.union(q2)
+		return q
+	else:
+		q1 = user_posts.filter(visibility='public')
+		q2 = group_posts.filter(group__members__in=[request.user])
+		q = q1.union(q2)
+		return q.order_by('-created')

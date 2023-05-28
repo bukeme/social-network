@@ -11,6 +11,7 @@ from django.views.generic import (
     View
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from groups.models import CustomGroup
 from groups.forms import GroupCreateForm, GroupProfileImageForm
 from groups.utils import get_all_group_photos, get_all_group_videos
@@ -83,7 +84,6 @@ class GroupMembersListView(LoginRequiredMixin, DetailView):
         else:
             group_members = self.object.members.all().difference(
                 self.object.admin_members.all(),
-                User.objects.filter(pk=self.request.user.pk)
             )
         context['group_members'] = group_members
         return context 
@@ -137,6 +137,7 @@ class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         group = self.group
+        context['group'] = group
         context['image_form'] = GroupProfileImageForm()
         context['group_form'] = GroupCreateForm(initial=model_to_dict(group))
         return context
@@ -148,12 +149,26 @@ class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
         if image_form.is_valid() and group_form.is_valid():
             group_form.save()
             if request.FILES.get('image'):
-                image_form.save(commit=False)
+                image_form = image_form.save(commit=False)
+                print(self.group)
                 image_form.group = self.group
                 image_form.save()
             messages.success(request, 'Group Update Was Successful')
             return redirect(request.META.get('HTTP_REFERER'))
         return self.render_to_response({'image_form': image_form, 'group_form': group_form})
 
+    def test_func(self):
+        return self.request.user in self.group.admin_members.all()
+
 group_settings_view = GroupSettingsView.as_view()
+
+class GroupSearchView(LoginRequiredMixin, ListView):
+    template_name = 'groups/group_search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', '')
+        queryset = CustomGroup.objects.filter(name__icontains=query)
+        return queryset
+
+group_search_view = GroupSearchView.as_view()
 

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Search "{{request.GET.query}}"{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card p-3 mt-3">
+                    {% include 'accounts/search_nav.html' %}
+                    <div class="mt-2">
+                        {% for group in object_list %}
+
+                            <div class="d-flex mt-3">
+                                <div class="rounded" style="width: 50px; height: 50px;">
+                                    <img src="{{ group.get_profileimage }}">
+                                </div>
+                                <div class="d-flex flex-column ml-2">
+                                    <a href="{{ group.get_absolute_url }}" class="font-weight-bold text-dark">{{ group.name }}</a>
+                                    <span class="text-muted small">{{ group.members.all.count }} members</span>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -23,9 +23,10 @@ class HomePageView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
-		context['posts'] = Post.objects.filter(
-			Q(visibility='public') | Q(user=self.request.user)
-		).order_by('-created')
+		# context['posts'] = Post.objects.filter(
+		# 	Q(visibility='public') | Q(user=self.request.user)
+		# ).order_by('-created')
+		context['posts'] = get_feeds_queryset(self.request)
 		context['page'] = 'home'
 		return context
 

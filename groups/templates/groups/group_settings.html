@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ group.name }} members{% endblock title %}
+
+{% block style %}
+
+    <style>
+        label {
+            font-weight: 700 !important;
+            color: black;
+        }
+    </style>
+
+{% endblock style %}
 
 {% block content %}
 
@@ -10,7 +22,25 @@
                 <div class="py-3">
                     {% include 'groups/group_detail_start.html' %}
                     <div class="card p-3">
-
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <label class="font-weight-bold">Group Profile Image</label>
+                                <div class="d-flex justify-content-center">
+                                    <div class="rounded position-relative" style="width: 150px; height: 150px;">
+                                        <img src="{{ group.get_profileimage }}">
+                                        <label class="position-absolute bg-danger text-white rounded p-1 c-pointer" style="top: 70%; left: 80%; z-index: 2;">
+                                            <i class="fa fa-pen"></i>
+                                            <!-- <span>Update Image</span> -->
+                                            <input type="file" class="d-none img-input" name="image">
+                                        </label>
+                                        <div class="position-absolute w-100 h-100 rounded img-preview" style="top: 0; left: 0;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ group_form | crispy }}
+                            <button type="submit" class="btn btn-primary ml-auto">Update Group</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -18,3 +48,37 @@
     </div>
 
 {% endblock content %}
+
+{% block js %}
+    <script>
+        const imgInput = document.querySelectorAll('.img-input');
+        let imagesArray = [];
+
+        imgInput.forEach(function(input, i) {
+            input.addEventListener('change', function() {
+                const file = this.files;
+                imagesArray = [];
+                for (let key in file) {
+                    imagesArray.push(file[key]);
+                };
+                imagesArray.splice(imagesArray.length - 2, 2);
+                displayUploadedImgs(this, i);
+            });
+        });
+
+        function displayUploadedImgs(input, i) {
+            let images = '';
+            imagesArray.forEach(function(image, index) {
+                images += `<img src="${URL.createObjectURL(image)}" alt="image">`;
+                images += `<a href="javascript:void()" onclick="clearImgs(${i})" class="btn btn-sm btn-danger position-absolute rounded-pill" style="top: -5%; left: 80%;">Undo</i></a>`;
+            });
+            input.parentElement.parentElement.querySelector('.img-preview').innerHTML = images;
+        };
+
+        function clearImgs(index) {
+            imgInput[index].value = null;
+            imagesArray = [];
+            displayUploadedImgs(imgInput[index], index);
+        };
+    </script>
+{% endblock js %}

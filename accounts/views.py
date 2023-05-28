@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.db.models import Q
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
@@ -19,7 +19,7 @@ from accounts.forms import (
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms.models import model_to_dict
 from posts.models import Post, PostImage
-from accounts.utils import get_all_photos, get_friend_request_object
+from accounts.utils import get_all_photos, get_friend_request_object, get_user_post_feeds
 from posts.decorators import AjaxRequiredOnlyMixin
 from accounts.models import UserProfile, FriendRequest
 
@@ -36,7 +36,7 @@ class ProfilePostView(LoginRequiredMixin, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data()
 		user = get_object_or_404(User, pk=kwargs['user_pk'])
-		context['posts'] = Post.objects.filter(user=user)
+		context['posts'] = get_user_post_feeds(self.request, kwargs['user_pk'])
 		context['recent_photos'] = get_all_photos(self.request, user.pk)[:6]
 		context['user'] = user
 		context['page'] = 'profile_post'
@@ -363,4 +363,19 @@ class RemoveFriendView(LoginRequiredMixin, View):
 		return redirect(request.META.get('HTTP_REFERER'))
 
 remove_friend_view = RemoveFriendView.as_view()
+
+class UserSearchView(LoginRequiredMixin, ListView):
+	template_name = 'accounts/user_search.html'
+
+	def get_queryset(self):
+		query = self.request.GET.get('query', '')
+		users_list = list(User.objects.all())
+		queryset = []
+		for user in users_list:
+			if query.lower() in user.userprofile.full_name.lower() or query.lower() in user.username:
+				queryset.append(user)
+		return queryset
+
+user_search_view = UserSearchView.as_view()
+
 

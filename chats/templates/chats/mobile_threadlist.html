@@ -1,0 +1,33 @@
+<div class="position-fixed d-flex flex-column bg-white w-75 chat-left-mobile" style="z-index: 2000; top: 68px; left: -75%; height: calc(100vh - 68px)">
+	<div class="px-3 pt-3 pb-2 d-flex justify-content-end">
+		<i class="fa fa-times close-chat-left c-pointer" style="font-size: 25px;"></i>
+	</div>
+	<hr class="w-100">
+	<div class="mx-3 mt-2">
+		<form>
+			<div class="form-group position-relative">
+				<input type="text" name="search-chat" class="form-control text-muted" placeholder="Search for chats..." style="padding-right: 35px;">
+				<button type="submit" class="bg-transparent position-absolute border-0" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+					<i class="fa fa-search text-muted"></i>
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="flex-grow-1 chat-list" style="overflow-y: auto;">
+		{% for user in thread_users %}
+			<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative {% if user == chat_user %}current-chat{% endif %}">
+				<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+					<img src="{{ user.userprofile.get_profileimage }}" class="rounded-circle">
+					<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+						<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+					</span>
+				</div>
+				<div class="d-flex flex-column ml-2">
+					<span class="font-weight-bold">{{ user.userprofile.full_name }}</span>
+					<span class="small text-muted">Frances sent a photo.</span>
+				</div>
+				<a href="{% url 'thread_chat' user.pk %}" class="stretched-link"></a>
+			</div>
+		{% endfor %}
+	</div>
+</div>

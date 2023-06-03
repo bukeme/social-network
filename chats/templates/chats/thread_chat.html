@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load chats_tags %}
+{% load static %}
+
+{% block title %}Chats{% endblock title %}
+
+{% block content %}
+
+	<div style="height: calc(100vh - 68px);">
+	    <div style="height: 100%;" class="d-flex flex-column justify-content-center align-items-center chat-container">
+	        
+	        <div class="d-flex flex-column flex-lg-row my-3" style="height: calc(100% - 40px); width: 90%;">
+
+	        	<!-- Hamburger Menu -->
+
+	        	<div class="bg-primary rounded chat-hamburger-menu d-flex flex-column justify-content-center align-items-center d-lg-none my-2" style="width: 45px; height: 45px; cursor: pointer;">
+	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 10px 1.5px 0;"></div>
+	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 0;"></div>
+	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px -10px 1.5px 0;"></div>
+	        	</div>
+
+	        	{% mobile_thread_list %}
+
+	        	<!-- Chat Overlay (Mobile) -->
+
+	        	<div class="position-fixed w-100 h-100 chat-overlay-mobile" style="top: 0; left: 0; z-index: 3; background: rgba(0, 0, 0, 0.5); visibility: hidden; opacity: 0;"></div>
+
+	            {% thread_list %}
+
+	            <div class="rounded border bg-white px-4 py-3 d-flex flex-column flex-grow-1 flex-lg-grow-0 main-chat" style="height: 100%; width: 66.66%;">
+
+	            	<!-- Main Chat Header -->
+
+	            	<div class="d-flex justify-content-between align-items-center">
+	            		<div class="d-flex align-items-center">
+	            			<div class="rounded-circle" style="width: 50px; height: 50px;">
+	            				<img src="{{ chat_user.userprofile.get_profileimage }}" class="rounded-circle">
+	            			</div>
+	            			<div class="d-flex flex-column ml-2">
+	            				<span class="font-weight-bold">{{ chat_user.userprofile.full_name }}</span>
+	            				<div class="d-flex align-items-center">
+	            					<span class="bg-success rounded-circle mr-1" style="width: 12px; height: 12px;"></span>
+	            					<span class="small">Online</span>
+	            				</div>
+	            			</div>
+	            		</div>
+	            		<div class="dropdown">
+	            			<button class="btn bg-secondary-light rounded-circle profile-btn d-flex align-items-center justify-content-center dropdown-toggle" data-toggle="dropdown" style="width: 30px; height: 30px;"><i class="fa fa-ellipsis-v"></i></button>
+	            			<div class="dropdown-menu dropdown-menu-right" style="min-width: 200px;">
+	            				<a href="#" class="dropdown-item d-flex align-items-center">
+	            					<i class="fa fa-user mr-1"></i>
+	            					<span>View Profile</span>
+	            				</a>
+	            				<div class="dropdown-divider"></div>
+	            				<a href="#" class="dropdown-item d-flex align-items-center">
+	            					<i class="fa fa-trash-alt mr-1"></i>
+	            					<span>Delete Chat</span>
+	            				</a>
+	            			</div>
+	            		</div>
+	            	</div>
+
+	            	<hr class="my-3 w-100">
+
+	            	<!-- Messages -->
+
+	            	<div class="flex-grow-1 chat-list" style="overflow-y: auto;">
+	            		<div>
+	            			<div class="text-center">Jul 16, 2022, 06:15 am</div>
+	            			<div class="d-flex my-3">
+	            				<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+	            					<img src="../images/04.jpg" class="rounded-circle">
+	            				</div>
+	            				<div class="d-flex flex-column ml-2">
+	            					<span class="rounded background-llgrey mb-1 py-1 px-2">Applauded no discovery in newspaper allowance am northward</span>
+	            					<span class="text-muted small">6:15 AM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex justify-content-end my-3">
+	            				<div class="d-flex flex-column align-items-end">
+	            					<span class="rounded bg-primary text-white mb-1 py-1 px-2">With pleasure</span>
+	            					<span class="rounded bg-primary text-white mb-1 py-1 px-2">No visited raising gravity outward subject my cottage Mr be.</span>
+	            					<span class="text-muted small">6:20 AM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex my-3">
+	            				<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+	            					<img src="../images/04.jpg" class="rounded-circle">
+	            				</div>
+	            				<div class="d-flex flex-column ml-2">
+	            					<span class="rounded background-llgrey mb-1 py-1 px-2">Please find the attached updated files</span>
+	            					<span class="text-muted small">12:16 PM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex my-3">
+	            				<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+	            					<img src="../images/04.jpg" class="rounded-circle">
+	            				</div>
+	            				<div class="d-flex flex-column ml-2">
+	            					<span class="rounded background-llgrey mb-1 py-1 px-2">How promotion excellent curiosity yet attempted happiness Gay prosperous impression</span>
+	            					<span class="text-muted small">3:22 PM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex justify-content-end my-3">
+	            				<div class="d-flex flex-column align-items-end">
+	            					<span class="rounded bg-primary text-white mb-1 py-1 px-2">And sir dare view but over man So at within mr to simple assure Mr disposing.</span>
+	            					<span class="text-muted small">5:35 PM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex justify-content-end my-3">
+	            				<div class="d-flex flex-column align-items-end">
+	            					<div class="mb-1" style="width: 200px">
+	            						<img src="../images/08.jpg" style="height: auto;">
+	            					</div>
+	            					<span class="text-muted small">5:36 PM</span>
+	            				</div>
+	            			</div>
+	            			<div class="d-flex my-3">
+	            				<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+	            					<img src="../images/04.jpg" class="rounded-circle">
+	            				</div>
+	            				<div class="d-flex flex-column ml-2">
+	            					<span class="rounded background-llgrey mb-1 py-1 px-2">Traveling alteration impression 🤐 six all uncommonly Chamber hearing inhabit joy highest private.</span>
+	            					<span class="text-muted small">3:22 PM</span>
+	            				</div>
+	            			</div>
+	            		</div>
+	            	</div>
+
+	            	<hr class="my-3 w-100">
+
+	            	<!-- Main Chat Send Chat Input -->
+
+	            	<div>
+	            		<div class="d-flex uploaded-img-container flex-wrap align-items-center"></div>
+	            		<form class="form-inline chat-form justify-content-end align-items-center chat-form" method="post" action="{% url 'chat_image_upload' thread.pk %}" enctype="multipart/form-data">
+	            			{% csrf_token %}
+	            			<div class="form-group flex-grow-1 mb-2 mb-md-0">
+	            				<input type="text" name="message" class="form-control w-100 chat-message" placeholder="Type a message">
+	            			</div>
+	            			<div class="form-group ml-2 mb-0">
+	            				<label class="btn background-lgrey py-2">
+	            					<input type="file" name="chat-image" class="d-none post-create-img-input chat-image" multiple="multiple">
+	            					<i class="fa fa-images"></i>
+	            				</label>
+	            			</div>
+	            			<button type="submit" class="btn btn-primary ml-2 align-self-start align-self-md-stretch py-2 py-md-0" style="padding: 0.275rem 0.75rem;">
+	            				<i class="far fa-paper-plane"></i>
+	            			</button>
+	            		</form>
+	            	</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+{% endblock content %}
+
+{% block js %}
+	<script src="{% static 'js/chat.js' %}"></script>
+	<script src="{% static 'js/media-uploader.js' %}"></script>
+	<script>
+		const chatForm = document.querySelector('.chat-form');
+		const chatMessage = document.querySelector('.chat-message');
+		const chatImage = document.querySelector('.chat-image');
+		const formData = new FormData();
+
+		async function submitFormData(formData) {
+			const url = `{% url 'chat_image_upload' thread.pk %}`
+			try {
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+				        "X-Requested-With": "XMLHttpRequest",
+				        "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
+						'X-CSRFToken': '{{csrf_token}}',
+					},
+					body: formData,
+				});
+				const result = await response.json();
+				console.log(result)
+				return result;
+			} catch (error) {
+				console.log('Error', error);
+			};
+		};
+
+		chatForm.addEventListener('submit', function(e) {
+			e.preventDefault();
+			formData.append(chatMessage.getAttribute('name'), chatMessage.value);
+			const photos = chatImage.files;
+			for (let i = 0; i < photos.length; i++) {
+				formData.append('chat-image', photos[i]);
+			};
+			submitFormData(formData);
+		})
+	</script>
+{% endblock js %}

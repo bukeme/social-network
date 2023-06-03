@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('allauth.account.urls')),
     path('', include('posts.urls')),
     path('groups/', include('groups.urls')),
+    path('chats/', include('chats.urls')),
 ]
 
 if settings.DEBUG:

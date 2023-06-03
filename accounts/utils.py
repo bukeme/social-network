@@ -39,3 +39,19 @@ def get_user_post_feeds(request, user_pk):
 		q2 = group_posts.filter(group__members__in=[request.user])
 		q = q1.union(q2)
 		return q.order_by('-created')
+
+def filter_user_queryset(queryset, query):
+    result = []
+    queryset = list(queryset)
+    for user in queryset:
+        if (query.lower() in user.userprofile.full_name.lower()) or (query.lower() in user.username.lower()):
+            result.append(user)
+    return result
+
+# def filter_user_queryset(queryset, query):
+# 	result = []
+# 	queryset = list(queryset)
+# 	for user in queryset:
+# 	    if (query.lower() in user.userprofile.full_name.lower()) or (query.lower() in user.username.lower()):
+# 	        result.append(user)
+#     # return result

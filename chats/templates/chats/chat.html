@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Social Network</title>
+	<link rel="stylesheet" type="text/css" href="../font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body class="bg-tertiary">
+
+	<!-- Nav Section -->
+
+	<nav class="navbar navbar-expand-sm navbar-light bg-white d-flex justify-content-start justify-content-sm-between fixed-top">
+		<a href="#" class="navbar-brand flex-grow-1 flex-sm-grow-0 d-flex justify-content-center">
+			<h3 class="color-secondary" style="font-family: cursive;">SocialNet</h3>
+		</a>
+		<ul class="navbar-nav">
+			<li class="nav-item d-none d-sm-block mx-3">
+				<a href="#" class="nav-link nav-item-line active position-relative">
+					<i class="fa fa-home icon-lg"></i>
+				</a>
+			</li>
+			<li class="nav-item d-none d-sm-block mx-3">
+				<a href="#" class="nav-link nav-item-line position-relative">
+					<i class="fa fa-user-friends icon-lg"></i>
+					<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
+				</a>
+			</li>
+			<li class="nav-item d-none d-sm-block mx-3">
+				<a href="#" class="nav-link nav-item-line position-relative">
+					<i class="fa fa-comments icon-lg"></i>
+					<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
+				</a>
+			</li>
+			<li class="nav-item d-none d-sm-block mx-3">
+				<a href="#" class="nav-link nav-item-line position-relative">
+					<i class="fa fa-bell icon-lg"></i>
+					<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
+				</a>
+			</li>
+			<li class="nav-item d-sm-none mx-3 position-relative">
+				<a href="#" class="nav-link bar-nav">
+					<i class="fa fa-bars icon-lg color-secondary"></i>
+				</a>
+				<div class="position-absolute rounded bg-white d-none shadow mobile-nav" style="top: 105%; right: 0; z-index: 3;">
+					<ul class="list-group">
+						<li class="list-group-item d-flex align-items-center">
+							<a href="#" class="d-flex align-items-center w-100">
+								<div class="p-1 rounded-circle bg-light">
+									<i class="fa fa-user-friends"></i>
+								</div>
+								<span class="ml-2 mr-3">Friends</span>
+								<span class="badge badge-pill badge-danger ml-auto">9+</span>
+							</a>
+						</li>
+						<li class="list-group-item d-flex align-items-center">
+							<a href="#" class="d-flex align-items-center w-100">
+								<div class="p-1 rounded-circle bg-light">
+									<i class="fa fa-comments"></i>
+								</div>
+								<span class="ml-2 mr-3">Chats</span>
+								<span class="badge badge-pill badge-danger ml-auto">9+</span>
+							</a>
+						</li>
+						<li class="list-group-item">
+							<a href="#" class="d-flex align-items-center w-100">
+								<div class="p-1 rounded-circle bg-light">
+									<i class="fa fa-bell"></i>
+								</div>
+								<span class="ml-2 mr-3">Notifications</span>
+								<span class="badge badge-pill badge-danger ml-auto">9+</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="d-flex align-items-center">
+			<form class="position-relative">
+				<input class="form-control d-none d-md-block rounded-pill" placeholder="Search website..." type="text" name="search" style="padding-left: 40px;">
+				<i class="fa fa-search position-absolute text-muted d-none d-md-block" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
+				<a href="#" class="d-md-none mr-2">
+					<i class="fa fa-search icon-lg color-secondary"></i>
+				</a>
+			</form>
+			<div style="width: 40px; height: 40px;" class="rounded ml-2 position-relative">
+				<img src="../images/07.jpg" style="width: 100%; height: 100%; cursor: pointer;" class="rounded profile-img">
+				<div class="position-absolute bg-white px-3 py-4 shadow profile-element d-none" style="top: 100%; right: -10px; min-width: 250px; z-index: 5;">
+					<div class="d-flex align-items-center rounded">
+						<div class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+							<img src="../images/07.jpg" style="width: 100%; height: 100%;" class="rounded-circle">
+						</div>
+						<div class="d-flex flex-column">
+							<span class="f-lg font-weight-bold">Lori Ferguson</span>
+							<span class="small">Web Developer</span>
+						</div>
+					</div>
+					<div class="my-2">
+						<a href="#" class="btn bg-secondary-light w-100 profile-btn">View Profile</a>
+					</div>
+					<div class="mt-3">
+						<div class="mt-2">
+							<a href="#" class="d-flex align-items-center">
+								<i class="fa fa-cog"></i>
+								<span class="ml-2">Settings & Privacy</span>
+							</a>
+						</div>
+						<div class="mt-2">
+							<a href="#" class="d-flex align-items-center text-danger">
+								<i class="fa fa-power-off"></i>
+								<span class="ml-2">Sign Out</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</nav>
+
+	<div style="height: calc(100% - 68px); margin-top: 68px;" class="d-flex flex-column justify-content-center align-items-center chat-container">
+		
+		<div class="d-flex flex-column flex-lg-row my-3" style="height: calc(100% - 40px); width: 90%;">
+
+			<!-- Hamburger Menu -->
+
+			<div class="bg-primary rounded chat-hamburger-menu d-flex flex-column justify-content-center align-items-center d-lg-none my-2" style="width: 45px; height: 45px; cursor: pointer;">
+				<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 10px 1.5px 0;"></div>
+				<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 0;"></div>
+				<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px -10px 1.5px 0;"></div>
+			</div>
+
+			<!-- Chat Left (Mobile) -->
+
+			<div class="position-fixed d-flex flex-column bg-white w-75 h-100 chat-left-mobile" style="z-index: 5; top: 0; left: -75%;">
+				<div class="px-3 pt-3 pb-2 d-flex justify-content-end">
+					<i class="fa fa-times close-chat-left" style="font-size: 25px;"></i>
+				</div>
+				<hr class="w-100">
+				<div class="mx-3 mt-2">
+					<form>
+						<div class="form-group position-relative">
+							<input type="text" name="search-chat" class="form-control text-muted" placeholder="Search for chats..." style="padding-right: 35px;">
+							<button type="submit" class="bg-transparent position-absolute border-0" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+								<i class="fa fa-search text-muted"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div class="flex-grow-1 chat-list" style="overflow-y: auto;">
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative current-chat">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/08.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-danger rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Carolyn Ortiz</span>
+							<span class="small text-muted">You missed a call form</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/12.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Billy Vasquez</span>
+							<span class="small text-muted">Day sweetness </span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Chat Overlay (Mobile) -->
+
+			<div class="position-fixed w-100 h-100 chat-overlay-mobile" style="top: 0; left: 0; z-index: 3; background: rgba(0, 0, 0, 0.5); visibility: hidden; opacity: 0;"></div>
+
+			<!-- Chat Left -->
+
+			<div class="rounded border p-3 bg-white d-flex flex-column" style="height: 100%; width: 33.33%;">
+				<div>
+					<div class="d-flex align-items-center">
+						<h5 class="font-weight-bold" style="font-size: 22px;">Chats</h5>
+						<span class="badge badge-success ml-1 font-weight-normal" style="font-size: 14px;">9</span>
+					</div>
+				</div>
+				<hr class="mx-n3 d-none d-lg-block">
+				<div class="d-none d-lg-block">
+					<form>
+						<div class="form-group position-relative">
+							<input type="text" name="search-chat" class="form-control text-muted" placeholder="Search for chats..." style="padding-right: 35px;">
+							<button type="submit" class="bg-transparent position-absolute border-0" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+								<i class="fa fa-search text-muted"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div class="flex-grow-1 chat-list d-none d-lg-block" style="overflow-y: auto;">
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative current-chat">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/08.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-danger rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Carolyn Ortiz</span>
+							<span class="small text-muted">You missed a call form</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/12.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Billy Vasquez</span>
+							<span class="small text-muted">Day sweetness </span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+					<div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative">
+						<div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+							<span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
+								<span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
+							</span>
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Frances Guerrero</span>
+							<span class="small text-muted">Frances sent a photo.</span>
+						</div>
+						<a href="#" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main Chat -->
+
+			<div class="rounded border bg-white px-4 py-3 d-flex flex-column flex-grow-1 flex-lg-grow-0" style="height: 100%; width: 66.66%;">
+
+				<!-- Main Chat Header -->
+
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex align-items-center">
+						<div class="rounded-circle" style="width: 50px; height: 50px;">
+							<img src="../images/04.jpg" class="rounded-circle">
+						</div>
+						<div class="d-flex flex-column ml-2">
+							<span class="font-weight-bold">Judy Nguyen</span>
+							<div class="d-flex align-items-center">
+								<span class="bg-success rounded-circle mr-1" style="width: 12px; height: 12px;"></span>
+								<span class="small">Online</span>
+							</div>
+						</div>
+					</div>
+					<div class="dropdown">
+						<button class="btn bg-secondary-light rounded-circle profile-btn d-flex align-items-center justify-content-center dropdown-toggle" data-toggle="dropdown" style="width: 30px; height: 30px;"><i class="fa fa-ellipsis-v"></i></button>
+						<div class="dropdown-menu dropdown-menu-right" style="min-width: 200px;">
+							<a href="#" class="dropdown-item d-flex align-items-center">
+								<i class="fa fa-user mr-1"></i>
+								<span>View Profile</span>
+							</a>
+							<div class="dropdown-divider"></div>
+							<a href="#" class="dropdown-item d-flex align-items-center">
+								<i class="fa fa-trash-alt mr-1"></i>
+								<span>Delete Chat</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<hr class="my-3 w-100">
+
+				<!-- Messages -->
+
+				<div class="flex-grow-1 chat-list" style="overflow-y: auto;">
+					<div>
+						<div class="text-center">Jul 16, 2022, 06:15 am</div>
+						<div class="d-flex my-3">
+							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column ml-2">
+								<span class="rounded background-llgrey mb-1 py-1 px-2">Applauded no discovery in newspaper allowance am northward</span>
+								<span class="text-muted small">6:15 AM</span>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end my-3">
+							<div class="d-flex flex-column align-items-end">
+								<span class="rounded bg-primary text-white mb-1 py-1 px-2">With pleasure</span>
+								<span class="rounded bg-primary text-white mb-1 py-1 px-2">No visited raising gravity outward subject my cottage Mr be.</span>
+								<span class="text-muted small">6:20 AM</span>
+							</div>
+						</div>
+						<div class="d-flex my-3">
+							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column ml-2">
+								<span class="rounded background-llgrey mb-1 py-1 px-2">Please find the attached updated files</span>
+								<span class="text-muted small">12:16 PM</span>
+							</div>
+						</div>
+						<div class="d-flex my-3">
+							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column ml-2">
+								<span class="rounded background-llgrey mb-1 py-1 px-2">How promotion excellent curiosity yet attempted happiness Gay prosperous impression</span>
+								<span class="text-muted small">3:22 PM</span>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end my-3">
+							<div class="d-flex flex-column align-items-end">
+								<span class="rounded bg-primary text-white mb-1 py-1 px-2">And sir dare view but over man So at within mr to simple assure Mr disposing.</span>
+								<span class="text-muted small">5:35 PM</span>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end my-3">
+							<div class="d-flex flex-column align-items-end">
+								<div class="mb-1" style="width: 200px">
+									<img src="../images/08.jpg" style="height: auto;">
+								</div>
+								<span class="text-muted small">5:36 PM</span>
+							</div>
+						</div>
+						<div class="d-flex my-3">
+							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+								<img src="../images/04.jpg" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column ml-2">
+								<span class="rounded background-llgrey mb-1 py-1 px-2">Traveling alteration impression 🤐 six all uncommonly Chamber hearing inhabit joy highest private.</span>
+								<span class="text-muted small">3:22 PM</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr class="my-3 w-100">
+
+				<!-- Main Chat Send Chat Input -->
+
+				<div>
+					<form class="form-inline chat-form justify-content-end align-items-center">
+						<div class="form-group flex-grow-1 mb-2 mb-md-0">
+							<input type="text" name="message" class="form-control w-100" placeholder="Type a message">
+						</div>
+						<div class="form-group ml-2 mb-0">
+							<label class="btn background-lgrey py-2">
+								<input type="file" name="chat-image" class="d-none">
+								<i class="fa fa-images"></i>
+							</label>
+						</div>
+						<button type="submit" class="btn btn-primary ml-2 align-self-start align-self-md-stretch py-2 py-md-0" style="padding: 0.275rem 0.75rem;">
+							<i class="far fa-paper-plane"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/jquery.slim.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/post_list.js"></script>
+	<script src="../js/chat.js"></script>
+	<script>
+		const profileImg = document.querySelector('.profile-img');
+		const profileElement = document.querySelector('.profile-element');
+		const barNav = document.querySelector('.bar-nav');
+		const mobileNav = document.querySelector('.mobile-nav');
+
+		profileImg.addEventListener('click', function() {
+			profileElement.classList.toggle('d-none')
+		});
+
+		barNav.addEventListener('click', function() {
+			mobileNav.classList.toggle('d-none');
+		})
+
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+
+</body>

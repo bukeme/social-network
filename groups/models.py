@@ -33,7 +33,7 @@ class CustomGroup(models.Model):
         ordering = ['-created']
 
 class GroupProfileImage(models.Model):
-    image = models.ImageField(upload_to='group_profile_images/%Y-%m-%d/', default='group_profile_images/placeholder.jpg')
+    image = models.ImageField(upload_to='group_profile_images/%Y-%m-%d/', default='group_profile_images/placeholder.png')
     group = models.ForeignKey(CustomGroup, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 

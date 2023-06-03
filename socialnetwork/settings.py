@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'posts.apps.PostsConfig',
     'groups.apps.GroupsConfig',
+    'chats.apps.ChatsConfig',
 
     # Installed Apps
 

@@ -24,11 +24,9 @@
 			</div>
 		{% endfor %}
 	{% endif %}
-	<div>
-		{% block content %}
+	{% block content %}
 
-		{% endblock content %}
-	</div>
+	{% endblock content %}
 
 	<script src="{% static 'js/jquery.slim.min.js' %}"></script>
 	<script src="{% static 'js/popper.min.js' %}"></script>

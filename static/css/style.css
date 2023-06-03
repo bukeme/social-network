@@ -328,8 +328,8 @@ a.left-nav-link:hover,
 		height: initial !important;
 	}
 
-	.chat-container > div > div:last-child,
-	.chat-container > div > div:nth-child(4){
+	.chat-container .chat-left,
+	.chat-container .main-chat{
 		width: 100% !important;
 		height: initial !important;
 	}

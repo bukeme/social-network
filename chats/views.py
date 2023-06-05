@@ -5,7 +5,8 @@ from chats.models import Thread
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from posts.decorators import AjaxRequiredOnlyMixin
-from chats.models import Thread, ChatImageFrame, ChatImage
+from chats.models import Thread, ChatImageFrame, ChatImage, ChatMessage
+from chats.utils import get_thread_chat_data
 
 # Create your views here.
 
@@ -27,22 +28,30 @@ class ThreadChatView(LoginRequiredMixin, TemplateView):
 		user_pk = kwargs['user_pk']
 		thread = Thread.objects.get_or_new(user_pk=self.request.user.pk, other_user_pk=user_pk)
 		context['thread'] = thread[0]
-		print(thread[0])
 		context['chat_user'] = User.objects.get(pk=user_pk)
+		context['thread_data'] = get_thread_chat_data(thread[0].pk)
 		return context 
 
 thread_chat_view = ThreadChatView.as_view()
 
-class ChatImageUploadView(View):
+class ChatImageUploadView(AjaxRequiredOnlyMixin ,View):
 	def post(self, request, *args, **kwargs):
 		if not request.user.is_authenticated:
 			return JsonResponse({'status': 'not logged in'})
-		images = request.POST.getlist('chat-image')
+		response = {'status': 'success'}
+		message = request.POST.get('message')
+		images = request.FILES.getlist('chat-image')
 		thread = Thread.objects.get(pk=kwargs['thread_pk'])
-		image_frame = ChatImageFrame.objects.create(user=request.user, thread=thread)
-		for image in images:
-			ChatImage.objects.create(frame=image_frame, image=image)
-		return JsonResponse({'status': 'success', 'image_frame_pk': image_frame.pk})
+		if message:
+			chat_message = ChatMessage.objects.create(user=request.user, thread=thread, message=message)
+			response['chat_message_pk'] = chat_message.pk
+		if images:
+			image_frame = ChatImageFrame.objects.create(user=request.user, thread=thread)
+			for image in images:
+				ChatImage.objects.create(frame=image_frame, image=image)
+			response['image_frame_pk'] = image_frame.pk
+
+		return JsonResponse(response)
 
 chat_image_upload_view = ChatImageUploadView.as_view()
 

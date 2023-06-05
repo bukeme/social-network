@@ -18,5 +18,5 @@ urlpatterns = [
 	path('friend-request-list/', views.friend_request_list_view, name='friend_request_list'),
 	path('friend-list/<int:user_pk>/', views.friend_list_view, name='friend_list'),
 	path('remove-friend/<int:user_pk>/', views.remove_friend_view, name='remove_friend'),
-	path('user-search/', views.user_search_view, name='user_search'),
+	path('user-search', views.user_search_view, name='user_search'),
 ]

@@ -21,7 +21,7 @@
                                     <a href="{% url 'profile_post' userprofile.user.pk %}" class="mt-n1">@{{ userprofile.user.username }}</a>
                                 </div>
                                 <div class="ml-auto">
-                                    <button class="btn btn-outline-primary rounded-pill">
+                                    <button class="btn btn-outline-primary rounded-pill follow-btn" data-user_pk="{{ userprofile.user.pk }}">
                                         {% if request.user in userprofile.followers.all %}
                                             Following
                                         {% else %}
@@ -39,3 +39,7 @@
     </div>
 
 {% endblock content %}
+
+{% block js %}
+    {% include 'accounts/user_follow_script.html' %}
+{% endblock js %}

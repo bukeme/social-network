@@ -2,6 +2,8 @@ media/cover_images/*
 media/profile_images/*
 media/group_profile_images/*
 media/post_images/
+media/chat_images
+media/post_video
 !media/cover_images/placeholder.jpg
 !media/profile_images/placeholder.jpg
 !media/group_profile_images/placeholder.png

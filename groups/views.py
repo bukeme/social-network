@@ -60,7 +60,7 @@ class GroupDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['posts'] = self.object.post_set.all()
+        context['posts'] = self.object.post_set.all().order_by('-created')
         return context
     
 group_detail_view = GroupDetailView.as_view()

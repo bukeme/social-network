@@ -50,7 +50,8 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
-    'crispy_forms',
+    'crispy_forms', 
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'socialnetwork.wsgi.application'
+ASGI_APPLICATION = "socialnetwork.asgi.application"
 
 
 # Database
@@ -146,3 +148,19 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'account_login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+            # "hosts": ['redis://' + "127.0.0.1" + ':' + '6379' + '/1'],
+        },
+    },
+}
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }

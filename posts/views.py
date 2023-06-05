@@ -32,13 +32,14 @@ class HomePageView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 
 	def post(self, request, *args, **kwargs):
 		post_form = PostCreateForm(request.POST, request.FILES)
+		redirect_url = 'home'
 		if post_form.is_valid():
 			post_form = post_form.save(commit=False)
 			post_form.user = request.user
-			print('hello')
 			if self.group:
 				post_form.group = self.group
 				post_form.visibility = 'public'
+				redirect_url = self.group.get_absolute_url()
 			try:
 				post_form.shared_post = Post.objects.get(pk=kwargs['post_pk'])
 			except:
@@ -48,7 +49,7 @@ class HomePageView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 			if images:
 				for image in images:
 					PostImage.objects.create(post=post_form, image=image)
-			return redirect('home')
+			return redirect(redirect_url)
 		return self.render_to_response({'post_form': post_form,})
 
 	def test_func(self):

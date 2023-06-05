@@ -79,8 +79,8 @@
 		</li>
 	</ul>
 	<div class="d-flex align-items-center">
-		<form class="position-relative">
-			<input class="form-control d-none d-md-block rounded-pill" placeholder="Search website..." type="text" name="search" style="padding-left: 40px;">
+		<form class="position-relative" action="{% url 'user_search' %}">
+			<input class="form-control d-none d-md-block rounded-pill" placeholder="Search website..." type="text" name="query" style="padding-left: 40px;">
 			<i class="fa fa-search position-absolute text-muted d-none d-md-block" style="top: 50%; left: 15px; transform: translateY(-50%);"></i>
 			<a href="#" class="d-md-none mr-2">
 				<i class="fa fa-search icon-lg color-secondary"></i>

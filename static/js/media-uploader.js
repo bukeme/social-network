@@ -24,7 +24,7 @@ function displayUploadedImgs() {
 					<img src="${URL.createObjectURL(image)}" alt="image" class="rounded">
 				</div>`;
 		if (index + 1 == imagesArray.length) {
-			images += `<a href="javascript:void()" onclick="clearImgs()" class="btn btn-sm btn-danger f-xl ml-2 px-2"><i class="fa fa-trash"></i></a>`;
+			images += `<a href="javascript:void()" onclick="clearImgs()" class="btn btn-sm btn-danger f-xl ml-2 px-2 clear-imgs-btn"><i class="fa fa-trash"></i></a>`;
 		};
 	});
 	uploadedImgContainer.innerHTML = images;

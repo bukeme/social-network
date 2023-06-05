@@ -22,6 +22,10 @@
                                 </div>
                             </div>
 
+                        {% empty %}
+
+                            <h4 class="text-center text-muted my-3">No result for "{{request.GET.query}}"</h4>
+
                         {% endfor %}
                     </div>
                 </div>

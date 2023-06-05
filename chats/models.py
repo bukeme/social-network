@@ -49,6 +49,9 @@ class Thread(models.Model):
 
 	objects = ThreadManager()
 
+	class Meta:
+		ordering = ['-updated',]
+
 
 class ChatMessage(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -57,7 +60,7 @@ class ChatMessage(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):
-		self.thread.updated = timezone.now
+		self.thread.updated = timezone.now()
 		self.thread.save()
 		return super(ChatMessage, self).save(*args, **kwargs)
 

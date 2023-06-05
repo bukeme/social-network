@@ -34,7 +34,7 @@ class UserSignUpForm(SignupForm):
 class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
-		exclude = ['id', 'user']
+		exclude = ['id', 'user', 'friends', 'followers']
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)

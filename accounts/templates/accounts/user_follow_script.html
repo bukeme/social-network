@@ -1,36 +1,40 @@
 <script>
-    const followBtn = document.querySelector('.follow-btn');
+    const followBtns = document.querySelectorAll('.follow-btn');
     const followersCount = document.querySelector('.followers-count');
 
-    followBtn.addEventListener('click', function () {
-		console.log('clicked');
-        fetch(
-			`{% url 'follow' user.pk %}`,
-			{
-				method: "POST",
-				headers: {
-					'Content-Type': 'application/json',
-			        "X-Requested-With": "XMLHttpRequest",
-			        "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
-					'X-CSRFToken': '{{csrf_token}}',
-				},
-				body: JSON.stringify({csrfmiddlewaretoken: '{{csrf_token}}'})
-			}
-		)
-		.then(response => response.json())
-		.then(data => {
-			if (data.status === 'not logged in') {
-				console.log('You are not logged in');
-			} else if (data.status === 'ok') {
-				if (data.action === 'follow') {
-					followBtn.innerHTML = 'Following';
-				} else if (data.action === 'unfollow') {
-					followBtn.innerHTML = 'Follow';
+    followBtns.forEach(function(followBtn) {
+    	followBtn.addEventListener('click', function () {
+			console.log('clicked');
+			let url = `/account/follow/${this.dataset.user_pk}/`
+	        fetch(
+				url,
+				{
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json',
+				        "X-Requested-With": "XMLHttpRequest",
+				        "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
+						'X-CSRFToken': '{{csrf_token}}',
+					},
+					body: JSON.stringify({csrfmiddlewaretoken: '{{csrf_token}}'})
 				}
-				followersCount.innerHTML = data.num_of_followers;
-			} else {
-				console.log('An error occured');
-			}
-		});
+			)
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'not logged in') {
+					console.log('You are not logged in');
+				} else if (data.status === 'ok') {
+					if (data.action === 'follow') {
+						followBtn.innerHTML = 'Following';
+					} else if (data.action === 'unfollow') {
+						followBtn.innerHTML = 'Follow';
+					}
+					if (followersCount) followersCount.innerHTML = data.num_of_followers;
+				} else {
+					console.log('An error occured');
+				}
+			});
+	    })
     })
+    
 </script>

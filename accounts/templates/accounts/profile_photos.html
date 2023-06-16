@@ -29,7 +29,7 @@
                             <div class="d-flex flex-wrap">
                                 {% for image in user.userprofile.profileimage_set.all %}
                                     {% if not forloop.last %}
-                                        <div style="width: 150px;" class="mx-2">
+                                        <div style="width: 250px;" class="m-2">
                                             <img src="{{ image.profile_image.url }}" class="rounded">
                                         </div>
                                     {% endif %}
@@ -49,7 +49,7 @@
                             <div class="d-flex flex-wrap">
                                 {% for image in user.userprofile.coverimage_set.all %}
                                     {% if not forloop.last %}
-                                        <div style="width: 150px;" class="mx-2">
+                                        <div style="width: 250px;" class="m-2">
                                             <img src="{{ image.cover_image.url }}" class="rounded">
                                         </div>
                                     {% endif %}
@@ -62,21 +62,15 @@
                         <h5 class="mb-3 f-w6">
                             {% if request.user == user %}Your{% endif %} Photos
                         </h5>
-                        {% if post_photos.count == 0 %}
-
-                            <h4 class="text-muted text-center">No Photos</h4>
-                
-                        {% else %}
-
-                            <div class="d-flex flex-wrap">
-                                {% for photo in post_photos %}
-                                    <div style="width: 150px;" class="mx-2">
-                                        <img src="{{ photo.image.url }}" class="rounded">
-                                    </div>
-                                {% endfor %}
-                            </div>
-
-                        {% endif %}
+                        <div class="d-flex flex-wrap">
+                            {% for photo in post_photos %}
+                                <div style="width: 250px;" class="m-2">
+                                    <img src="{{ photo.image.url }}" class="rounded">
+                                </div>
+                            {% empty %}
+                                <h4 class="text-muted mx-auto">No Photos</h4>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

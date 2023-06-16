@@ -18,17 +18,19 @@
 
 			<div class="col-12">
 				<div class="card p-4 bg-white">
-					<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+					<div class="d-flex flex-wrap align-items-md-center justify-content-between">
 						<span class="font-weight-bold f-lg flex-shrink-0">Friends</span>
-						<div class="d-flex flex-column align-items-start align-items-md-center flex-md-row">
-							<form>
-								<div class="form-group position-relative mb-n1 mr-2 flex-shrink-0">
-									<input type="search" class="form-control form-control-sm rounded-pill" name="search_friend" placeholder="Search friend..." style="padding-left: 35px;">
-									<i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
-								</div>
-							</form>
+						<div class="d-flex flex-wrap align-items-start align-items-md-center">
+                            {% if friends %}
+    							<form>
+    								<div class="form-group position-relative mb-n1 mr-2 flex-shrink-0">
+    									<input type="search" class="form-control form-control-sm rounded-pill" name="search_friend" placeholder="Search friend..." style="padding-left: 35px;">
+    									<i class="fa fa-search position-absolute text-muted" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
+    								</div>
+    							</form>
+                            {% endif %}
 							<div class="flex-shrink-0 mt-1 mt-md-0">
-								<a href="#" class="f-w6 small">Find Friends</a>
+								<a href="{% url 'user_search' %}" class="f-w6 small">Find Friends</a>
 							</div>
 						</div>
 					</div>

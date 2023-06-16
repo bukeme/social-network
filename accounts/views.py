@@ -19,7 +19,7 @@ from accounts.forms import (
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms.models import model_to_dict
 from posts.models import Post, PostImage
-from accounts.utils import get_all_photos, get_friend_request_object, get_user_post_feeds
+from accounts.utils import get_all_photos, get_friend_request_object, get_user_post_feeds, get_all_post_photos, filter_user_queryset
 from posts.decorators import AjaxRequiredOnlyMixin
 from accounts.models import UserProfile, FriendRequest
 
@@ -40,8 +40,8 @@ class ProfilePostView(LoginRequiredMixin, TemplateView):
 		context['recent_photos'] = get_all_photos(self.request, user.pk)[:6]
 		context['user'] = user
 		context['page'] = 'profile_post'
-		context['userprofile_form'] = UserProfileForm(initial=model_to_dict(user.userprofile))
-		context['user_form'] = UserForm(initial=model_to_dict(user))
+		context['userprofile_form'] = UserProfileForm(instance=user.userprofile)
+		context['user_form'] = UserForm(instance=user)
 		return context
 
 profile_post_view = ProfilePostView.as_view()
@@ -88,19 +88,13 @@ class ProfilePhotosView(LoginRequiredMixin, TemplateView):
 		context = super().get_context_data(*args, **kwargs)
 		user = User.objects.get(pk=kwargs['user_pk'])
 		context['user'] = user
-		context['post_photos'] = PostImage.objects.filter(
-			post__user=user
-		).filter(
-			Q(post__visibility='public') | Q(post__user=self.request.user)
-		)
+		context['post_photos'] = get_all_post_photos(self.request, kwargs['user_pk'])
 		context['page'] = 'profile_photos'
 		return context
 
 profile_photos_view = ProfilePhotosView.as_view()
 
 class UpdateUserProfileDataView(UserPassesTestMixin, LoginRequiredMixin, View):
-	user = None
-
 	def dispatch(self, request, *args, **kwargs):
 		self.user = get_object_or_404(User, pk=kwargs['user_pk'])
 		return super().dispatch(request, *args, **kwargs)
@@ -120,8 +114,6 @@ class UpdateUserProfileDataView(UserPassesTestMixin, LoginRequiredMixin, View):
 update_user_profile_data_view = UpdateUserProfileDataView.as_view()
 
 class UpdateUserDataView(UserPassesTestMixin, LoginRequiredMixin, View):
-	user = None
-
 	def dispatch(self, request, *args, **kwargs):
 		self.user = get_object_or_404(User, pk=kwargs['user_pk'])
 		return super().dispatch(request, *args, **kwargs)
@@ -176,10 +168,13 @@ user_settings_view = UserSettingsView.as_view()
 class UpdateUserProfileView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 	template_name = 'accounts/profile-edit.html'
 
+	def dispatch(self, request, *args, **kwargs):
+		self.user = User.objects.get(pk=kwargs['user_pk'])
+		return super().dispatch(request, *args, **kwargs)
+
 	def post(self, request, *args, **kwargs):
-		user = User.objects.get(pk=kwargs['user_pk'])
-		user_form = UserForm(request.POST, instance=user)
-		profile_form = UserProfileForm(request.POST, instance=user.userprofile)
+		user_form = UserForm(request.POST, instance=self.user)
+		profile_form = UserProfileForm(request.POST, instance=self.user.userprofile)
 		profile_image_form = UserProfileImageForm(request.POST, request.FILES)
 		cover_image_form = UserCoverImageForm(request.POST, request.FILES)
 
@@ -205,16 +200,15 @@ class UpdateUserProfileView(UserPassesTestMixin, LoginRequiredMixin, TemplateVie
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
-		user = User.objects.get(pk=kwargs['user_pk'])
-		context['user'] = user
-		context['user_form'] = UserForm(initial=model_to_dict(user))
-		context['profile_form'] = UserProfileForm(initial=model_to_dict(user.userprofile))
+		context['user'] = self.user
+		context['user_form'] = UserForm(instance=self.user)
+		context['profile_form'] = UserProfileForm(instance=self.user.userprofile)
 		context['profile_image_form'] = UserProfileImageForm()
 		context['cover_image_form'] = UserCoverImageForm()
 		return context 
 
 	def test_func(self):
-		return self.request.user == User.objects.get(pk=self.kwargs['user_pk'])
+		return self.request.user == self.user
 
 update_user_profile_view = UpdateUserProfileView.as_view()
 
@@ -239,28 +233,6 @@ class FollowView(AjaxRequiredOnlyMixin, View):
 		)
 
 follow_view = FollowView.as_view()
-
-# class FollowersListView(LoginRequiredMixin, TemplateView):
-# 	template_name = 'accounts/user_followers_list.html'
-
-# 	def get_context_data(self, *args, **kwargs):
-# 		context = super().get_context_data(*args, **kwargs)
-# 		context['user'] = User.objects.get(pk=kwargs['user_pk'])
-# 		context['page'] = 'followers'
-# 		print(self.request.user.followed_users.all())
-# 		return context
-
-# followers_list_view = FollowersListView.as_view()
-
-# class FollowingListView(LoginRequiredMixin, TemplateView):
-# 	template_name = 'accounts/user_following_list.html'
-
-# 	def get_context_data(self, *args, **kwargs):
-# 		context = super().get_context_data(*args, **kwargs)
-# 		context['user'] = User.objects.get(pk=kwargs['user_pk'])
-# 		context['page'] = 'following'
-# 		# context['followed_users'] = UserProfile.objects.filter(followers__in=)
-
 
 class FollowListView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
@@ -309,16 +281,21 @@ class DeleteFriendRequestView(LoginRequiredMixin, UserPassesTestMixin, View):
 
 delete_friend_request_view = DeleteFriendRequestView.as_view()
 
-class AcceptFriendRequestView(LoginRequiredMixin, View):
-	def post(self, request, *args, **kwargs):
-		friend_request = get_friend_request_object(
+class AcceptFriendRequestView(UserPassesTestMixin, LoginRequiredMixin, View):
+	def dispatch(self, request, *args, **kwargs):
+		self.friend_request = get_friend_request_object(
 			to_user_pk=request.user.pk, from_user_pk=kwargs['from_user_pk']
 		)
-		to_user, from_user = friend_request.to_user, friend_request.from_user
-		to_user.userprofile.friends.add(from_user)
-		from_user.userprofile.friends.add(to_user)
-		friend_request.delete()
+		self.to_user, self.from_user = self.friend_request.to_user, self.friend_request.from_user
+		return super().dispatch(request, *args, **kwargs)
+	def post(self, request, *args, **kwargs):
+		self.to_user.userprofile.friends.add(self.from_user)
+		self.from_user.userprofile.friends.add(self.to_user)
+		self.friend_request.delete()
 		return redirect(request.META.get('HTTP_REFERER'))
+
+	def test_func(self):
+		return self.request.user == self.to_user
 
 accept_friend_request_view = AcceptFriendRequestView.as_view()
 
@@ -343,11 +320,7 @@ class FriendListView(LoginRequiredMixin, TemplateView):
 		context = super().get_context_data(*args, **kwargs)
 		user = User.objects.get(pk=kwargs['user_pk'])
 		search_friend = self.request.GET.get('search_friend', '')
-		context['friends'] = user.userprofile.friends.all().filter(
-			Q(first_name__icontains=search_friend) |
-			Q(last_name__icontains=search_friend) |
-			Q(username__icontains=search_friend)
-		)
+		context['friends'] = filter_user_queryset(user.userprofile.friends.all(), search_friend)
 		context['user'] = user
 		context['page'] = 'profile_friends'
 		return context
@@ -359,6 +332,7 @@ class RemoveFriendView(LoginRequiredMixin, View):
 		friend = User.objects.get(pk=kwargs['user_pk'])
 		friend_name = friend.userprofile.full_name
 		request.user.userprofile.friends.remove(friend)
+		friend.userprofile.friends.remove(request.user)
 		messages.error(request, f'You have removed {friend_name} as your friend')
 		return redirect(request.META.get('HTTP_REFERER'))
 
@@ -369,11 +343,8 @@ class UserSearchView(LoginRequiredMixin, ListView):
 
 	def get_queryset(self):
 		query = self.request.GET.get('query', '')
-		users_list = list(User.objects.all())
-		queryset = []
-		for user in users_list:
-			if query.lower() in user.userprofile.full_name.lower() or query.lower() in user.username:
-				queryset.append(user)
+		users = User.objects.all()
+		queryset = filter_user_queryset(users, query)
 		return queryset
 
 user_search_view = UserSearchView.as_view()

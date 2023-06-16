@@ -323,6 +323,10 @@ a.left-nav-link:hover,
 		padding-top: 250px;
 	}
 
+	.profile-cm{
+		padding-top: 220px !important;
+	}
+
 	.chat-container,
 	.chat-container > div {
 		height: initial !important;

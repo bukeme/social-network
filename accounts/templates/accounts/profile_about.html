@@ -71,12 +71,12 @@
 						{% include 'accounts/pa_modalform.html' with field_name='overview' model=user.userprofile model_name='userprofile' %}
 						
 					</div>
-					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
 						{% for field_name, content in field_dict.items %}
-							<div class="d-flex flex-wrap justify-content-between p-2 rounded border">
+							<div class="d-flex flex-wrap align-items-center justify-content-between p-2 rounded border">
 								{% if content.field_value %}
 
-									<div class="d-flex align-items-center">
+									<div class="d-flex flex-wrap align-items-center">
 										<i class="{{ content.icon_class }} mr-2"></i>
 										<span class="mr-2">{{ content.field_note }}: </span>
 										<span class="font-weight-bold">
@@ -109,7 +109,7 @@
 
 									{% if request.user == user %}
 
-										<div class="d-flex align-items-center justify-content-center w-100 f-w6" data-toggle="modal" data-target="#{{ field_name }}-update-form{{ user.pk }}" style="cursor: pointer;">
+										<div class="d-flex flex-wrap align-items-center justify-content-lg-center w-100 f-w6" data-toggle="modal" data-target="#{{ field_name }}-update-form{{ user.pk }}" style="cursor: pointer;">
 											<i class="fa fa-plus-circle mr-1"></i>
 											<span>
 												Add 
@@ -125,7 +125,7 @@
 
 									{% else %}
 
-										<div class="d-flex align-items-center justify-content-center w-100 f-w6">
+										<div class="d-flex flex-wrap align-items-center justify-content-lg-center w-100 f-w6">
 											<span>
 												No 
 												{% if field_name == 'birth_date' %}
@@ -149,77 +149,6 @@
 								{% endif %}
 							</div>
 						{% endfor %}
-					</div>
-				</div>
-
-				<!-- Likes -->
-
-				<div class="card bg-white p-3 mt-3">
-					<div class="d-flex justify-content-between">
-						<h4 class="f-lg font-weight-bold">Likes</h4>
-						<a href="#" class="btn btn-sm btn-outline-primary">See all</a>
-					</div>
-					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-column-gap: 20px; grid-row-gap: 30px;" class="mt-4">
-						<div class="d-flex align-items-center">
-							<div style="width: 60px; height: 60px;" class="position-relative">
-								<img src="../images/04.svg">
-								<a href="#" class="stretched-link"></a>
-							</div>
-							<div class="ml-2 d-flex flex-column justify-content-center">
-								<a href="#" class="text-dark hover-blue">
-									<h6 class="text-dark hover-blue">Oracle</h6>
-								</a>
-								<span class="text-muted small">7,325 followers</span>
-							</div>
-						</div>
-						<div class="d-flex align-items-center">
-							<div style="width: 60px; height: 60px;" class="position-relative">
-								<img src="../images/13.svg">
-								<a href="#" class="stretched-link"></a>
-							</div>
-							<div class="ml-2 d-flex flex-column justify-content-center">
-								<a href="#">
-									<h6 class="text-dark hover-blue">Apple</h6>
-								</a>
-								<span class="text-muted small">7,325 followers</span>
-							</div>
-						</div>
-						<div class="d-flex align-items-center">
-							<div style="width: 60px; height: 60px;" class="position-relative">
-								<img src="../images/placeholder.jpg" class="rounded-circle">
-								<a href="#" class="stretched-link"></a>
-							</div>
-							<div class="ml-2 d-flex flex-column justify-content-center">
-								<a href="#">
-									<h6 class="text-dark hover-blue">Elon Musk</h6>
-								</a>
-								<span class="text-muted small">7,325 followers</span>
-							</div>
-						</div>
-						<div class="d-flex align-items-center">
-							<div style="width: 60px; height: 60px;" class="position-relative">
-								<img src="../images/20.jpg">
-								<a href="#" class="stretched-link"></a>
-							</div>
-							<div class="ml-2 d-flex flex-column justify-content-center">
-								<a href="#">
-									<h6 class="text-dark hover-blue">The X Factor</h6>
-								</a>
-								<span class="text-muted small">7,325 followers</span>
-							</div>
-						</div>
-						<div class="d-flex align-items-center">
-							<div style="width: 60px; height: 60px;" class="position-relative">
-								<img src="../images/12.svg">
-								<a href="#" class="stretched-link"></a>
-							</div>
-							<div class="ml-2 d-flex flex-column justify-content-center">
-								<a href="#">
-									<h6 class="text-dark hover-blue">GetBootstrap</h6>
-								</a>
-								<span class="text-muted small">7,325 followers</span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

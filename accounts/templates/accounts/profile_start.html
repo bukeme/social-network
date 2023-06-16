@@ -1,6 +1,6 @@
 {% load accounts_filters %}
 {% sent_friend_request user request.user as friend_request_sent %}
-<div class="row p-3">
+<div class="row p-3 pb-0">
 	<div class="col-12">
 		<div class="bg-white rounded-top">
 			<div style="height: 250px; background: url('{{ user.userprofile.get_coverimage }}') no-repeat center; background-size: cover;" class="rounded-top position-relative">
@@ -59,8 +59,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-white profile__pre-about px-3 pb-1 mt-2">
-				<div class="d-flex justify-content-between justify-content-lg-start">
+			<div class="bg-white profile__pre-about {% if user == request.user or request.user in user.userprofile.friends.all %}profile-cm{% endif %} px-3 pb-1 mt-2">
+				<div class="d-flex flex-column flex-md-row">
 					<div class="text-muted mr-3">
 						<i class="fa fa-briefcase mr-1"></i>
 						{% if user.userprofile.occupation %}

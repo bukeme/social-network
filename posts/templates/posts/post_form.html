@@ -9,6 +9,11 @@
 		label {
 			font-weight: 700;
 		}
+		{% if post.group %}
+		#div_id_visibility {
+			display: none;
+		}
+		{% endif %}
 	</style>
 {% endblock style %}
 
@@ -35,7 +40,7 @@
 
 						<div>
 							<span class="font-weight-bold">Image(s)</span>
-							<div class="d-flex align-items-center">
+							<div class="d-flex flex-wrap align-items-center">
 								{% if post.postimage_set.all %}
 									{% for image in post.postimage_set.all %}
 										<div class="rounded position-relative mx-1 my-2" style="width: 80px; height: 80px;">

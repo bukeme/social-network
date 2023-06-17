@@ -375,4 +375,8 @@ a.left-nav-link:hover,
 	.post-img-detail > div.img-modal-trigger {
 		height: 250px;
 	}
+
+	.about-grid {
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+	}
 }

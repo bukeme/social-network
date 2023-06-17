@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from django.core.validators import FileExtensionValidator
 from groups.models import CustomGroup
 
@@ -26,6 +27,9 @@ class Post(models.Model):
 
 	def __str__(self):
 		return f'{self.pk} -- {self.user}'
+
+	def get_absolute_url(self):
+		return reverse('post_detail', kwargs={'pk': self.pk})
 
 	@property
 	def comment_count(self):

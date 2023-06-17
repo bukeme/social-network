@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if request.user == user %}
+	Your
+{% else %}
+	{{ user.username }}'s
+{% endif %}
+Groups
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+	{% include 'accounts/profile_start.html' %}
+	<div class="row p-3">
+		<div class="col-12">
+			<div class="card p-3 bg-white">
+				<h3>Groups</h3>
+				<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-gap: 10px;" class="text-muted mt-1">
+				    {% for group in user.group.all %}
+				        <div class="bg-white group-item rounded-lg border border-light p-2 p-md-2">
+				            <div class="d-flex flex-nowrap align-items-center">
+				                <div class="rounded group-img-con">
+				                    <img src="{{ group.get_profileimage }}" class="rounded">
+				                </div>
+				                <div class="ml-3 d-flex flex-column">
+				                    <a href="{{ group.get_absolute_url }}">
+				                        <span class="text-dark hover-blue f-w6">{{ group.name }}</span>
+				                    </a>
+				                    <span class="small">{{ group.members.all.count }} members</span>
+				                </div>
+				            </div>
+				            <div class="d-none d-md-flex mt-3">
+				                <a href="{{ group.get_absolute_url }}" class="btn bg-secondary-light blue-link rounded-lg flex-grow-1">View group</a>
+				                <div class="dropdown">
+				                    <button class="h-100 ml-3 btn btn-light dropdown-toggle" data-toggle="dropdown" type="button">
+				                        <i class="fa fa-ellipsis-h"></i>
+				                        <div class="dropdown-menu dropdown-menu-right">
+				                            <a href="#" class="dropdown-item">
+				                                <i class="fa fa-user-times mr-2 text-danger"></i>
+				                                Leave group
+				                            </a>
+				                        </div>
+				                    </button>
+				                </div>
+				            </div>
+				        </div>
+				    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

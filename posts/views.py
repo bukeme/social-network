@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from django.views.generic import TemplateView, DetailView, View
+from django.views.generic import TemplateView, DetailView, View, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
@@ -23,9 +23,6 @@ class HomePageView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
-		# context['posts'] = Post.objects.filter(
-		# 	Q(visibility='public') | Q(user=self.request.user)
-		# ).order_by('-created')
 		context['posts'] = get_feeds_queryset(self.request)
 		context['page'] = 'home'
 		return context
@@ -64,28 +61,11 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 
 post_detail_view = PostDetailView.as_view()
 
-
-class PostEditView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
-	template_name = 'posts/post_edit.html'
-
-	def get_context_data(self, *args, **kwargs):
-		context = super().get_context_data(*args, **kwargs)
-		post = Post.objects.get(pk=kwargs['post_pk'])
-		context['post'] = post
-		context['form'] = PostEditForm(initial=model_to_dict(post))
-		return context
-
-	def post(self, request, *args, **kwargs):
-		form = PostEditForm(request.POST)
-		post = Post.objects.get(pk=kwargs['post_pk'])
-		if form.is_valid():
-			content = form.cleaned_data.get('content')
-			post.content = content
-			post.save()
-		return redirect(request.POST.get('next'))
-
+class PostEditView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+	model = Post
+	fields = ['content', 'visibility']
 	def test_func(self):
-		return self.request.user == Post.objects.get(pk=self.kwargs['post_pk']).user 
+		return self.request.user == self.get_object().user
 
 post_edit_view = PostEditView.as_view()
 
@@ -272,21 +252,6 @@ class ReplyLikesView(AjaxRequiredOnlyMixin, View):
 		return JsonResponse({'status': 'ok', 'action': action, 'num_of_likes': reply.likes.all().count()})
 
 reply_likes_view = ReplyLikesView.as_view()
-
-# class SharedPostCreateView(LoginRequiredMixin, View):
-# 	def post(self, request, *args, **kwargs):
-# 		print('post')
-# 		post = Post.objects.get(pk=kwargs['post_pk'])
-# 		shared_post_form = SharedPostForm(request.POST)
-# 		print('Post:', request.POST)
-# 		if shared_post_form.is_valid():
-# 			form = shared_post_form.save(commit=False)
-# 			form.post = post
-# 			form.user = request.user
-# 			form.save()
-# 		return redirect('home')
-
-# shared_post_create_view = SharedPostCreateView.as_view()
 
 
 

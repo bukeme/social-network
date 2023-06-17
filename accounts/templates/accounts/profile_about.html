@@ -71,14 +71,14 @@
 						{% include 'accounts/pa_modalform.html' with field_name='overview' model=user.userprofile model_name='userprofile' %}
 						
 					</div>
-					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); grid-gap: 20px;" class="text-muted mt-4">
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px;" class="text-muted mt-4 about-grid">
 						{% for field_name, content in field_dict.items %}
 							<div class="d-flex flex-wrap align-items-center justify-content-between p-2 rounded border">
 								{% if content.field_value %}
 
 									<div class="d-flex flex-wrap align-items-center">
 										<i class="{{ content.icon_class }} mr-2"></i>
-										<span class="mr-2">{{ content.field_note }}: </span>
+										<span class="mr-2 text-break">{{ content.field_note }}: </span>
 										<span class="font-weight-bold">
 											{% if field_name == 'birth_date' or field_name == 'date_joined' %}
 												{{ content.field_value | date:"F d, Y" }}

@@ -5,6 +5,7 @@ urlpatterns = [
 	path('profile/<int:user_pk>/post/', views.profile_post_view, name='profile_post'),
 	path('profile/<int:user_pk>/about/', views.profile_about_view, name='profile_about'),
 	path('profile/<int:user_pk>/photos/', views.profile_photos_view, name='profile_photos'),
+	path('profile/<int:pk>/groups/', views.user_group_list, name='profile_groups'),
 	path('userprofile/<int:user_pk>/update', views.update_user_profile_data_view, name='userprofile_update'),
 	path('user/<int:user_pk>/update', views.update_user_data_view, name='user_update'),
 	path('user/settings/', views.user_settings_view, name='user_settings'),

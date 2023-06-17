@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.db.models import Q
-from django.views.generic import TemplateView, View, ListView
+from django.views.generic import TemplateView, View, ListView, DetailView
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
@@ -348,5 +348,16 @@ class UserSearchView(LoginRequiredMixin, ListView):
 		return queryset
 
 user_search_view = UserSearchView.as_view()
+
+class UserGroupList(LoginRequiredMixin, DetailView):
+	model = User
+	template_name = 'accounts/profile_groups.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['page'] = 'profile_groups'
+		return context
+
+user_group_list = UserGroupList.as_view()
 
 

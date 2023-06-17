@@ -1,6 +1,6 @@
 {% load accounts_filters %}
 {% sent_friend_request user request.user as friend_request_sent %}
-<div class="row p-3 pb-0">
+<div class="row px-3 pt-3">
 	<div class="col-12">
 		<div class="bg-white rounded-top">
 			<div style="height: 250px; background: url('{{ user.userprofile.get_coverimage }}') no-repeat center; background-size: cover;" class="rounded-top position-relative">
@@ -97,7 +97,7 @@
 						<a href="{% url 'profile_photos' user.pk %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_photos' %}active{% endif %}" style="font-size: 17px;">Photo</a>
 					</li>
 					<li class="nav-item">
-						<a href="../pages/profile-groups.html" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_groups' %}active{% endif %}" style="font-size: 17px;">Groups</a>
+						<a href="{% url 'profile_groups' user.pk %}" class="nav-link nav-item-line text-muted font-weight-bold profile__profile-nav-link {% if page == 'profile_groups' %}active{% endif %}" style="font-size: 17px;">Groups</a>
 					</li>
 				</ul>
 			</div>

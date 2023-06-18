@@ -7,12 +7,12 @@
 {% block content %}
 
 	<div style="height: calc(100vh - 68px);">
-	    <div style="height: 100%;" class="d-flex flex-column justify-content-center align-items-center chat-container">
+	    <div class="d-flex flex-column justify-content-center align-items-center h-100 chat-container">
 	        
-	        <div class="d-flex flex-column flex-lg-row my-3" style="height: calc(100% - 40px); width: 90%;">
+	        <div class="d-flex flex-column flex-lg-row my-3 h-100 w-100">
 	            {% thread_list %}
 
-	            <div class="rounded border bg-white px-4 py-3 d-none d-lg-flex justify-content-center align-items-center" style="height: 100%; width: 66.66%;">
+	            <div class="rounded border bg-white px-4 py-3 d-none d-lg-flex justify-content-center align-items-center" style="height: 100%; width: 75%;">
 	            	<div style="width: 400px;">
 	            		<img src="{% static 'images/chat.png' %}">
 	            	</div>

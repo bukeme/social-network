@@ -327,15 +327,23 @@ a.left-nav-link:hover,
 		padding-top: 220px !important;
 	}
 
-	.chat-container,
+	/*.chat-container,
 	.chat-container > div {
 		height: initial !important;
-	}
+	}*/
 
 	.chat-container .chat-left,
 	.chat-container .main-chat{
 		width: 100% !important;
+		/*height: initial !important;*/
+	}
+
+	.chat-container .chat-left {
 		height: initial !important;
+	}
+
+	.chat-container .main-chat {
+		height: calc(100% - 113px) !important;
 	}
 
 	.modal-height {

@@ -7,17 +7,9 @@
 {% block content %}
 
 	<div style="height: calc(100vh - 68px);">
-	    <div style="height: 100%;" class="d-flex flex-column justify-content-center align-items-center chat-container">
+	    <div class="d-flex flex-column justify-content-center align-items-center chat-container h-100">
 	        
-	        <div class="d-flex flex-column flex-lg-row my-3" style="height: calc(100% - 40px); width: 90%;">
-
-	        	<!-- Hamburger Menu -->
-
-	        	<div class="bg-primary rounded chat-hamburger-menu d-flex flex-column justify-content-center align-items-center d-lg-none my-2" style="width: 45px; height: 45px; cursor: pointer;">
-	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 10px 1.5px 0;"></div>
-	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px 0;"></div>
-	        		<div class="rounded bg-white" style="width: 20px; height: 3px; margin: 1.5px -10px 1.5px 0;"></div>
-	        	</div>
+	        <div class="d-flex flex-column flex-lg-row h-100 w-100">
 
 	        	{% mobile_thread_list %}
 
@@ -27,7 +19,7 @@
 
 	            {% thread_list %}
 
-	            <div class="rounded border bg-white px-4 py-3 d-flex flex-column flex-grow-1 flex-lg-grow-0 main-chat" style="height: 100%; width: 66.66%;">
+	            <div class="rounded border bg-white px-4 py-3 d-flex flex-column flex-grow-1 flex-lg-grow-0 main-chat" style="height: 100%; width: 75%;">
 
 	            	<!-- Main Chat Header -->
 
@@ -37,25 +29,7 @@
 	            				<img src="{{ chat_user.userprofile.get_profileimage }}" class="rounded-circle">
 	            			</div>
 	            			<div class="d-flex flex-column ml-2">
-	            				<span class="font-weight-bold">{{ chat_user.userprofile.full_name }}</span>
-	            				<div class="d-flex align-items-center">
-	            					<span class="bg-success rounded-circle mr-1" style="width: 12px; height: 12px;"></span>
-	            					<span class="small">Online</span>
-	            				</div>
-	            			</div>
-	            		</div>
-	            		<div class="dropdown">
-	            			<button class="btn bg-secondary-light rounded-circle profile-btn d-flex align-items-center justify-content-center dropdown-toggle" data-toggle="dropdown" style="width: 30px; height: 30px;"><i class="fa fa-ellipsis-v"></i></button>
-	            			<div class="dropdown-menu dropdown-menu-right" style="min-width: 200px;">
-	            				<a href="#" class="dropdown-item d-flex align-items-center">
-	            					<i class="fa fa-user mr-1"></i>
-	            					<span>View Profile</span>
-	            				</a>
-	            				<div class="dropdown-divider"></div>
-	            				<a href="#" class="dropdown-item d-flex align-items-center">
-	            					<i class="fa fa-trash-alt mr-1"></i>
-	            					<span>Delete Chat</span>
-	            				</a>
+	            				<a href="{% url 'profile_post' chat_user.pk %}" class="font-weight-bold text-dark">{{ chat_user.userprofile.full_name }}</a>
 	            			</div>
 	            		</div>
 	            	</div>
@@ -66,7 +40,6 @@
 
 	            	<div class="flex-grow-1 chat-list" style="overflow-y: auto;">
 	            		<div class="chat-data">
-	            			<!-- <div class="text-center">Jul 16, 2022, 06:15 am</div> -->
 	            			{% for data in thread_data %}
 		            			{% if data.user == request.user %}
 		            				{% if data.message %}
@@ -74,7 +47,7 @@
 			            				<div class="d-flex justify-content-end my-3">
 			            					<div class="d-flex flex-column align-items-end">
 			            						<span class="rounded bg-primary text-white mb-1 py-1 px-2">{{ data.message }}</span>
-			            						<span class="text-muted small">5:35 PM</span>
+			            						<span class="text-muted small">{{ data.created | date:'d/m/y h:i A' }}</span>
 			            					</div>
 			            				</div>
 
@@ -87,7 +60,7 @@
 				            							<img src="{{ image.image.url }}" style="height: auto;">
 				            						</div>
 			            						{% endfor %}
-			            						<span class="text-muted small">5:36 PM</span>
+			            						<span class="text-muted small">{{ data.created | date:'d/m/y h:i A' }}</span>
 			            					</div>
 			            				</div>
 
@@ -101,7 +74,7 @@
 				            				</div>
 				            				<div class="d-flex flex-column ml-2">
 				            					<span class="rounded background-llgrey mb-1 py-1 px-2">{{ data.message }}</span>
-				            					<span class="text-muted small">6:15 AM</span>
+				            					<span class="text-muted small">{{ data.created | date:'d/m/y h:i A' }}</span>
 				            				</div>
 				            			</div>
 
@@ -117,7 +90,7 @@
 				            							<img src="{{ image.image.url }}" style="height: auto;">
 				            						</div>
 			            						{% endfor %}
-			            						<span class="text-muted small">5:36 PM</span>
+			            						<span class="text-muted small">{{ data.created | date:'d/m/y h:i A' }}</span>
 			            					</div>
 			            				</div>
 
@@ -133,18 +106,18 @@
 
 	            	<div>
 	            		<div class="d-flex uploaded-img-container flex-wrap align-items-center"></div>
-	            		<form class="form-inline chat-form justify-content-end align-items-center chat-form" method="post" action="{% url 'chat_image_upload' thread.pk %}" enctype="multipart/form-data">
+	            		<form class="form-inline chat-form justify-content-end align-items-center flex-nowrap chat-form" method="post" action="{% url 'chat_create' thread.pk %}" enctype="multipart/form-data">
 	            			{% csrf_token %}
 	            			<div class="form-group flex-grow-1 mb-2 mb-md-0">
 	            				<input type="text" name="message" class="form-control w-100 chat-message" placeholder="Type a message">
 	            			</div>
 	            			<div class="form-group ml-2 mb-0">
-	            				<label class="btn background-lgrey py-2">
+	            				<label class="btn btn-sm background-lgrey py-2">
 	            					<input type="file" name="chat-image" class="d-none post-create-img-input chat-image" multiple="multiple">
 	            					<i class="fa fa-images"></i>
 	            				</label>
 	            			</div>
-	            			<button type="submit" class="btn btn-primary ml-2 align-self-start align-self-md-stretch py-2 py-md-0" style="padding: 0.275rem 0.75rem;">
+	            			<button type="submit" class="btn btn-sm btn-primary ml-2 align-self-start align-self-md-stretch py-2 py-md-0" style="padding: 0.275rem 0.75rem;">
 	            				<i class="far fa-paper-plane"></i>
 	            			</button>
 	            		</form>
@@ -166,7 +139,7 @@
 		const formData = new FormData();
 
 		async function submitFormData(formData) {
-			const url = `{% url 'chat_image_upload' thread.pk %}`
+			const url = `{% url 'chat_create' thread.pk %}`
 			try {
 				const response = await fetch(url, {
 					method: 'POST',
@@ -179,7 +152,6 @@
 					body: formData,
 				});
 				const result = await response.json();
-				console.log(result)
 				return result;
 			} catch (error) {
 				console.log('Error', error);
@@ -213,8 +185,6 @@
 		};
 
 		chatSocket.onmessage = function (e) {
-			console.log('message');
-			console.log(JSON.parse(e.data).data.user);
 			updateChat(JSON.parse(e.data).data);
 		};
 
@@ -222,6 +192,16 @@
 		function updateChat(data) {
 			new_chat = ''
 			if (data.user == '{{ request.user.username }}') {
+				if (data.chat_message) {
+					new_chat += `
+						<div class="d-flex justify-content-end my-3">
+							<div class="d-flex flex-column align-items-end">
+								<span class="rounded bg-primary text-white mb-1 py-1 px-2">${data.chat_message}</span>
+								<span class="text-muted small">${data.date}</span>
+							</div>
+						</div>
+					`
+				}
 				if (data.chat_images) {
 					new_chat += `
 						<div class="d-flex justify-content-end my-3">
@@ -235,21 +215,25 @@
 						`
 					}
 					new_chat += `
-								<span class="text-muted small">5:36 PM</span>
-							</div>
-						</div>
-					`
-				} else if (data.chat_message) {
-					new_chat += `
-						<div class="d-flex justify-content-end my-3">
-							<div class="d-flex flex-column align-items-end">
-								<span class="rounded bg-primary text-white mb-1 py-1 px-2">${data.chat_message}</span>
-								<span class="text-muted small">5:35 PM</span>
+								<span class="text-muted small">${data.date}</span>
 							</div>
 						</div>
 					`
 				}
 			} else {
+				if (data.chat_message) {
+					new_chat += `
+						<div class="d-flex my-3">
+							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
+								<img src="{{ chat_user.userprofile.get_profileimage }}" class="rounded-circle">
+							</div>
+							<div class="d-flex flex-column ml-2">
+								<span class="rounded background-llgrey mb-1 py-1 px-2">${data.chat_message}</span>
+								<span class="text-muted small">${data.date}</span>
+							</div>
+						</div>
+					`
+				}
 				if (data.chat_images) {
 					new_chat += `
             			<div class="d-flex my-3">
@@ -266,19 +250,7 @@
 						`
 					}
 					new_chat += `
-								<span class="text-muted small">5:36 PM</span>
-							</div>
-						</div>
-					`
-				} else if (data.chat_message) {
-					new_chat += `
-						<div class="d-flex my-3">
-							<div class="rounded-circle mr-1 flex-shrink-0" style="width: 30px; height: 30px;">
-								<img src="{{ chat_user.userprofile.get_profileimage }}" class="rounded-circle">
-							</div>
-							<div class="d-flex flex-column ml-2">
-								<span class="rounded background-llgrey mb-1 py-1 px-2">${data.chat_message}</span>
-								<span class="text-muted small">6:15 AM</span>
+								<span class="text-muted small">${data.date}</span>
 							</div>
 						</div>
 					`

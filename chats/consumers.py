@@ -8,7 +8,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		thread_pk = await self.get_thread_pk()
 		# print(thread_pk)
 		self.room_group_name = f'thread{thread_pk}'
-		print(self.room_group_name)
 		await self.channel_layer.group_add(
 			self.room_group_name,
 			self.channel_name
@@ -22,11 +21,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		response = {'user': self.scope['user'].username}
 		if chat_message_pk:
 			chat_msg = await self.get_chat_message_text(pk=chat_message_pk)
-			response['chat_message'] = chat_msg
+			response['chat_message'] = chat_msg[0]
+			response['date'] = chat_msg[1].strftime('%d/%m/%y %I:%H %p')
 		if chat_image_frame_pk:
 			chat_images = await self.get_chat_images(pk=chat_image_frame_pk)
-			response['chat_images'] = chat_images
-		print( 'response', response)
+			response['chat_images'] = chat_images[0]
+			response['date'] = chat_images[1].strftime('%d/%m/%y %I:%H %p')
 		await self.channel_layer.group_send(
 			self.room_group_name,
 			{
@@ -54,8 +54,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 	@database_sync_to_async
 	def get_chat_message_text(self, pk):
-		message = ChatMessage.objects.get(pk=int(pk)).message
-		return message
+		message = ChatMessage.objects.get(pk=int(pk))
+		msg, date = message.message, message.created
+		return [msg, date]
 
 	@database_sync_to_async
 	def get_chat_images(self, pk):
@@ -63,6 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		image_url_list = []
 		for image in image_frame.chatimage_set.all():
 			image_url_list.append(image.image.url)
-		return image_url_list
+		date = image_frame.created
+		return [image_url_list, date]
 
 	

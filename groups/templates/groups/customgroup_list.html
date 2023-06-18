@@ -82,25 +82,8 @@
             <div class="col-md-8 h-100" style="overflow-y: auto;">
                 <div class="px-md-3 py-3 h-100">
                     {% if 'my-groups' in request.path and 'search' not in request.path %}
-                        <div class="d-flex justify-content-between mb-2">
+                        <div class="d-flex mb-2">
                             <span class="f-w6" style="font-size: 17px;">All groups you have joined ({{ object_list.count }})</span>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown">Sort</button>
-                                <div class="dropdown-menu dropdown-menu-right" style="width: 250px;">
-                                    <a href="#" class="dropdown-item d-flex justify-content-between">
-                                        <span>Alphabetically</span>
-                                        <i class="fa fa-check text-primary"></i>
-                                    </a>
-                                    <a href="#" class="dropdown-item d-flex justify-content-between">
-                                        <span>Recently joined first</span>
-                                        <i class="fa fa-check text-primary d-none"></i>
-                                    </a>
-                                    <a href="#" class="dropdown-item d-flex justify-content-between">
-                                        <span>Earliest joined first</span>
-                                        <i class="fa fa-check text-primary d-none"></i>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     {% endif %}
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-gap: 10px;" class="text-muted mt-1">

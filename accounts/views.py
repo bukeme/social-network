@@ -17,7 +17,6 @@ from accounts.forms import (
 	UserCoverImageForm
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.forms.models import model_to_dict
 from posts.models import Post, PostImage
 from accounts.utils import get_all_photos, get_friend_request_object, get_user_post_feeds, get_all_post_photos, filter_user_queryset
 from posts.decorators import AjaxRequiredOnlyMixin

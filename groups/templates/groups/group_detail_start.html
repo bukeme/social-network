@@ -13,7 +13,7 @@
     <div class="px-3">
         <div class="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-center py-2 py-lg-3">
             <div class="d-flex flex-column">
-                <span class="font-weight-bold f-xl">{{ group.name }}</span>
+                <a href="{{ group.get_absolute_url }}" class="font-weight-bold f-xl text-dark">{{ group.name }}</a>
                 <span class="f-w6 text-muted">{{ group.members.all.count }} members</span>
             </div>
             <div class="mt-2 mt-lg-0">

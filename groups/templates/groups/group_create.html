@@ -5,14 +5,14 @@
 
 {% block content %}
 
-    <div class="background-grey position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="top: 0; left: 0;">
-        <div class="card p-3 m-2" style="width: 70%">
+    <div class="background-grey position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="top: 0; left: 0; padding-top: 68px;">
+        <div class="card p-3 m-2" style="width: 600px;">
             <h4>Create a group</h4>
             <form method="post">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="btn btn-warning mr-2">Exit</a>
+                    <a href="javascript:history.back()" class="btn btn-warning mr-2">Exit</a>
                     <button type="submit" class="btn btn-primary">Create Group</button>
                 </div>
             </form>

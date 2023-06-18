@@ -42,18 +42,24 @@
 			</a>
 		</li>
 		<li class="nav-item d-sm-none mx-3 position-relative">
-			<a href="#" class="nav-link bar-nav">
+			<a href="javascript:void()" class="nav-link bar-nav">
 				<i class="fa fa-bars icon-lg color-secondary"></i>
 			</a>
 			<div class="position-absolute rounded bg-white shadow d-none mobile-nav" style="top: 105%; right: 0; z-index: 3;">
 				<ul class="list-group">
 					<li class="list-group-item d-flex align-items-center">
-						<a href="#" class="d-flex align-items-center w-100">
+						<a href="{% url 'friend_request_list' %}" class="d-flex align-items-center w-100">
 							<div class="p-1 rounded-circle bg-light">
 								<i class="fa fa-user-friends"></i>
 							</div>
 							<span class="ml-2 mr-3">Friends</span>
-							<span class="badge badge-pill badge-danger ml-auto">9+</span>
+							<span class="badge badge-pill badge-danger ml-auto">
+								{% if fr_count > 9 %}
+									9+
+								{% else %}
+									{{ fr_count }}
+								{% endif %}
+							</span>
 						</a>
 					</li>
 					<li class="list-group-item d-flex align-items-center">
@@ -72,6 +78,14 @@
 							</div>
 							<span class="ml-2 mr-3">Notifications</span>
 							<span class="badge badge-pill badge-danger ml-auto">9+</span>
+						</a>
+					</li>
+					<li class="list-group-item">
+						<a href="{% url 'groups' 'all-groups' %}" class="d-flex align-items-center w-100">
+							<div class="p-1 rounded-circle bg-light">
+								<i class="fa fa-users"></i>
+							</div>
+							<span class="ml-2 mr-3">Groups</span>
 						</a>
 					</li>
 				</ul>

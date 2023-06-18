@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.forms.models import model_to_dict
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -15,6 +14,7 @@ from django.contrib import messages
 from groups.models import CustomGroup
 from groups.forms import GroupCreateForm, GroupProfileImageForm
 from groups.utils import get_all_group_photos, get_all_group_videos
+from accounts.utils import filter_user_queryset
 
 # Create your views here.
 
@@ -76,11 +76,7 @@ class GroupMembersListView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(*args, **kwargs)
         query = self.request.GET.get('search_member')
         if query:
-            group_members = []
-            members = list(self.object.members.all())
-            for member in members:
-                if (query.lower() in member.userprofile.full_name.lower()) or (query.lower() in member.username.lower()):
-                    group_members.append(member)
+            group_members = filter_user_queryset(self.object.members.all(), query)
         else:
             group_members = self.object.members.all().difference(
                 self.object.admin_members.all(),
@@ -128,7 +124,6 @@ group_videos_view = GroupVideosView.as_view()
 
 class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
     template_name = 'groups/group_settings.html'
-    group = None
 
     def dispatch(self, request, *args, **kwargs):
         self.group = CustomGroup.objects.get(pk=kwargs['group_pk'])
@@ -136,10 +131,9 @@ class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        group = self.group
-        context['group'] = group
+        context['group'] = self.group
         context['image_form'] = GroupProfileImageForm()
-        context['group_form'] = GroupCreateForm(initial=model_to_dict(group))
+        context['group_form'] = GroupCreateForm(instance=self.group)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -150,7 +144,6 @@ class GroupSettingsView(UserPassesTestMixin, LoginRequiredMixin, TemplateView):
             group_form.save()
             if request.FILES.get('image'):
                 image_form = image_form.save(commit=False)
-                print(self.group)
                 image_form.group = self.group
                 image_form.save()
             messages.success(request, 'Group Update Was Successful')

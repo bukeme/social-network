@@ -1,0 +1,130 @@
+{% load posts_tags %}
+<div class="modal fade" id="share-post-{{ post.pk }}-modal" tabindex="-1" role="dialog" aria-labelledby="share-post-{{ post.pk }}-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="share-post-{{ post.pk }}-modal-title">Share Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="{% url 'home' post.pk %}">
+      	{% csrf_token %}
+	    <div class="modal-body">
+	    	<div>
+		        <div>
+		        	<div class="d-flex align-items-center">
+						<div class="rounded-circle border border-primary flex-shrink-0" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+							<img src="{{ request.user.userprofile.get_profileimage }}">
+						</div>
+						<div class="d-flex flex-column justify-content-center ml-2">
+							<a href="{% url 'profile_post' post.user.pk %}" class="font-weight-bold text-dark">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+							<a href="{% url 'profile_post' post.user.pk %}" class="text-muted small">@{{ request.user.username }}</a>
+						</div>
+						<div style="width: 100px;" class="ml-auto">
+							<div class="form-group">
+								<select class="form-control" name="visibility">
+									<option value="public">Public</option>
+									<option value="friends">Friends</option>
+									<option value="only me">Only Me</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group mt-3">
+						<textarea class="form-control" name="content" placeholder="What's on your mind?"></textarea>
+					</div>
+		        </div>
+	        </div>
+	        <div class="border border-primary rounded p-3">
+	        	<div class="d-flex">
+					<div class="rounded-circle border border-primary flex-shrink-0 mr-2" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
+						<img src="{{ post.user.userprofile.get_profileimage }}">
+					</div>
+					{% if post.group %}
+
+						<div class="d-flex flex-column">
+							<a href="{{ post.group.get_absolute_url }}">
+								<span class="text-dark font-weight-bold">{{ post.group.name }}</span>
+							</a>
+							<div class="text-muted small d-flex align-items-center font-weight-bold">
+								<a href="{% url 'profile_post' post.user.pk %}" class="text-muted">{{ post.user.userprofile.full_name }}</a>
+								<i class="fa fa-circle mx-2" style="font-size: 5px;"></i>
+								<span class="small">{{ post.created | timesince | truncatechars:5}}</span>
+							</div>
+						</div>
+
+					{% else %}
+
+						<div class="d-flex flex-column justify-content-center">
+							<span class="d-flex align-items-center">
+								<a href="{% url 'profile_post' post.user.pk %}" class="font-weight-bold text-dark">{{ post.user.userprofile.full_name }}</a>
+								<span class="text-muted mx-1 d-flex align-items-center justify-content-center"><i class="fa fa-circle" style="font-size: 5px;"></i></span>
+								<span class="text-muted small">{{ post.created | timesince | truncatechars:5 }}</span>
+							</span>
+							<a href="{% url 'profile_post' post.user.pk %}" class="text-muted small">@{{ post.user.username }}</a>
+						</div>
+
+					{% endif %}
+				</div>
+				<div class="mt-3 text-muted d-flex flex-column align-items-start mb-2">
+					<span>{{ post.content | truncatewords:30 }}</span>
+					<!-- <a href="{% url 'post_detail' post.pk %}">View Details</a> -->
+				</div>
+
+				{% if post.postimage_set.all %}
+					<div class="mt-2 mb-3 post-img-{% if post.postimage_set.all.count > 3 %}3{% else %}{{ post.postimage_set.all.count }}{% endif %}" style="height: 280px;">
+						{% post_imgs post as images %}
+						{% for image in images %}
+							<div class="rounded img-modal-trigger" style="cursor: pointer;" data-toggle="modal" data-target="#post{{ post.pk }}-modal" data-imgid="#modal-img-{{ image.pk }}">
+								<img src="{{ image.image.url }}" class="rounded">
+							</div>
+						{% endfor %}
+						<div class="modal fade" id="post{{ post.pk }}-modal">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content" style="height: 500px;">
+									<div class="modal-body h-100">
+										<div class="carousel slide h-100" id="post{{ post.pk }}-carousel" data-ride="carousel">
+											<div class="carousel-inner h-100">
+												{% for image in post.postimage_set.all %}
+													<div class="carousel-item h-100" id="modal-img-{{ image.pk }}">
+														<img src="{{ image.image.url }}" class="d-block w-100">
+													</div>
+												{% endfor %}
+											</div>
+											<button type="button" class="carousel-control-prev" data-slide="prev" data-target="#post{{ post.pk }}-carousel">
+												<span class="carousel-control-prev-icon"></span>
+												<span class="sr-only">Previous</span>
+											</button>
+											<button type="button" class="carousel-control-next" data-slide="next" data-target="#post{{ post.pk }}-carousel">
+												<span class="carousel-control-next-icon"></span>
+												<span class="sr-only">Next</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				{% if post.video %}
+
+					<div class="mt-4">
+						<div class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
+							<video class="embed-responsive-item" controls>
+								<source src="{{ post.video.url }}#t=0.2" type="video/mp4">
+							</video>
+						</div>
+					</div>
+
+				{% endif %}
+	        </div>
+	    </div>
+	    <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	        <button type="submit" class="btn btn-primary">Share</button>
+	    </div>
+      </form>
+    </div>
+  </div>
+</div>

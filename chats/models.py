@@ -49,6 +49,12 @@ class Thread(models.Model):
 
 	objects = ThreadManager()
 
+	def get_chat_data(self):
+		chat_messages = list(self.chatmessage_set.all())
+		chat_image_frames = list(self.chatimageframe_set.all())
+		chat_data = [*chat_messages, *chat_image_frames]
+		return sorted(chat_data, key=lambda x: x.created)
+
 	class Meta:
 		ordering = ['-updated',]
 

@@ -26,15 +26,16 @@ class ThreadChatView(LoginRequiredMixin, TemplateView):
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
 		user_pk = kwargs['user_pk']
-		thread = Thread.objects.get_or_new(user_pk=self.request.user.pk, other_user_pk=user_pk)
-		context['thread'] = thread[0]
+		thread, created = Thread.objects.get_or_new(user_pk=self.request.user.pk, other_user_pk=user_pk)
+		context['thread'] = thread
 		context['chat_user'] = User.objects.get(pk=user_pk)
-		context['thread_data'] = get_thread_chat_data(thread[0].pk)
+		# context['thread_data'] = get_thread_chat_data(thread[0].pk)
+		context['thread_data'] = thread.get_chat_data()
 		return context 
 
 thread_chat_view = ThreadChatView.as_view()
 
-class ChatImageUploadView(AjaxRequiredOnlyMixin ,View):
+class ChatCreateView(AjaxRequiredOnlyMixin ,View):
 	def post(self, request, *args, **kwargs):
 		if not request.user.is_authenticated:
 			return JsonResponse({'status': 'not logged in'})
@@ -53,5 +54,5 @@ class ChatImageUploadView(AjaxRequiredOnlyMixin ,View):
 
 		return JsonResponse(response)
 
-chat_image_upload_view = ChatImageUploadView.as_view()
+chat_create_view = ChatCreateView.as_view()
 

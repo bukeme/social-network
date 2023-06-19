@@ -27,9 +27,9 @@ class ThreadChatView(LoginRequiredMixin, TemplateView):
 		context = super().get_context_data(*args, **kwargs)
 		user_pk = kwargs['user_pk']
 		thread, created = Thread.objects.get_or_new(user_pk=self.request.user.pk, other_user_pk=user_pk)
+		thread.seen_chat_message(self.request.user.pk)
 		context['thread'] = thread
 		context['chat_user'] = User.objects.get(pk=user_pk)
-		# context['thread_data'] = get_thread_chat_data(thread[0].pk)
 		context['thread_data'] = thread.get_chat_data()
 		return context 
 

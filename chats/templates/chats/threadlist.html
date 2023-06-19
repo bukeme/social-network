@@ -1,4 +1,5 @@
-<div class="rounded border px-3 py-2 py-lg-3 bg-white {% if page != 'thread' %}d-none d-lg-flex{% endif %} flex-column chat-left" style="height: 100%; width: 25%;">
+{% load chats_tags %}
+<div class="rounded border px-3 py-2 py-lg-3 bg-white {% if page != 'thread' %}d-none d-lg-flex{% else %}d-flex{% endif %} flex-column chat-left" style="height: 100%; width: 25%;">
     <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center">
             <h5 class="font-weight-bold" style="font-size: 22px;">Chats</h5>
@@ -29,14 +30,14 @@
             <div class="rounded py-2 px-3 my-2 d-flex align-items-center position-relative {% if user == chat_user %}current-chat{% endif %}">
                 <div class="rounded-circle border border-primary position-relative" style="width: 50px; height: 50px; border-width: 2px !important; padding: 2px;">
                     <img src="{{ user.userprofile.get_profileimage }}" class="rounded-circle">
-                    <!-- <span class="bg-white position-absolute rounded-circle d-flex justify-content-center align-items-center" style="width: 15px; height: 15px; right: -5px; top: 0;">
-                        <span class="bg-success rounded-circle" style="width: 60%; height: 60%;"></span>
-                    </span> -->
                 </div>
                 <div class="d-flex flex-column ml-2">
                     <span class="font-weight-bold">{{ user.userprofile.full_name }}</span>
-                    <!-- <span class="small text-muted">Frances sent a photo.</span> -->
                 </div>
+                {% thread_unseen_chat_count request.user.pk user.pk as ucc %}
+                {% if ucc %}
+                    <span class="badge badge-pill badge-danger f-sm ml-auto">{{ ucc }}</span>
+                {% endif %}
                 <a href="{% url 'thread_chat' user.pk %}" class="stretched-link"></a>
             </div>
 

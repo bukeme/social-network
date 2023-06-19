@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms', 
     'channels',
+    'notifications',
 ]
 
 MIDDLEWARE = [

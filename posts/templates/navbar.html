@@ -1,4 +1,6 @@
 {% load accounts_filters %}
+{% load chats_tags %}
+{% user_unseen_chat_count request.user.pk as uucc %}
 {% friend_request_count request.user as fr_count %}
 <nav class="navbar navbar-expand-sm navbar-light bg-white d-flex justify-content-start justify-content-sm-between fixed-top">
 	<a href="{% url 'home' %}" class="navbar-brand flex-grow-1 flex-sm-grow-0 d-flex justify-content-center">
@@ -27,7 +29,15 @@
 		<li class="nav-item d-none d-sm-block mx-3">
 			<a href="{% url 'threads' %}" class="nav-link nav-item-line position-relative">
 				<i class="fa fa-comments icon-lg"></i>
-				<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
+				{% if uucc %}
+				<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">
+					{% if uucc > 9 %}
+						9+
+					{% else %}
+						{{ uucc }}
+					{% endif %}
+				</span>
+				{% endif %}
 			</a>
 		</li>
 		<li class="nav-item d-none d-sm-block mx-3">
@@ -68,7 +78,15 @@
 								<i class="fa fa-comments"></i>
 							</div>
 							<span class="ml-2 mr-3">Chats</span>
-							<span class="badge badge-pill badge-danger ml-auto">9+</span>
+							{% if uucc %}
+								<span class="badge badge-pill badge-danger ml-auto">
+									{% if uucc > 9 %}
+										9+
+									{% else %}
+										{{ uucc }}
+									{% endif %}
+								</span>
+							{% endif %}
 						</a>
 					</li>
 					<li class="list-group-item">

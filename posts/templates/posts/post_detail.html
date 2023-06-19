@@ -450,7 +450,7 @@
 			</div>
 
 			{% if not post.group %}
-			{% chats %}
+			{% chats request.user.pk %}
 			{% endif %}
 		</div>
 	</div>

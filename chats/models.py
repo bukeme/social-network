@@ -40,6 +40,12 @@ class ThreadManager(models.Manager):
 				thread_users.append(f)
 		return thread_users
 
+	def total_unseen_chat_count(self, user_pk):
+		qs = super().get_queryset().filter(
+			Q(first_id=user_pk) | Q(second_id=user_pk)
+		)
+		return sum([q.unseen_chat_count(user_pk) for q in qs])
+
 
 class Thread(models.Model):
 	first = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
@@ -55,6 +61,19 @@ class Thread(models.Model):
 		chat_data = [*chat_messages, *chat_image_frames]
 		return sorted(chat_data, key=lambda x: x.created)
 
+	def unseen_chat_count(self, user_pk):
+		count = 0
+		for chat_data in self.get_chat_data():
+			if not chat_data.seen and chat_data.user.pk != user_pk:
+				count += 1
+		return count
+
+	def seen_chat_message(self, user_pk):
+		for chat_data in self.get_chat_data():
+			if not chat_data.seen and chat_data.user.pk != user_pk:
+				chat_data.seen = True
+				chat_data.save()
+
 	class Meta:
 		ordering = ['-updated',]
 
@@ -63,17 +82,26 @@ class ChatMessage(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
 	message = models.TextField()
+	seen = models.BooleanField(default=False)
 	created = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):
-		self.thread.updated = timezone.now()
-		self.thread.save()
+		if self.pk:
+			self.thread.updated = timezone.now()
+			self.thread.save()
 		return super(ChatMessage, self).save(*args, **kwargs)
 
 class ChatImageFrame(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
+	seen = models.BooleanField(default=False)
 	created = models.DateTimeField(auto_now_add=True)
+
+	def save(self, *args, **kwargs):
+		if self.pk:
+			self.thread.updated = timezone.now()
+			self.thread.save()
+		return super(ChatImageFrame, self).save(*args, **kwargs)
 
 class ChatImage(models.Model):
 	frame = models.ForeignKey(ChatImageFrame, on_delete=models.Model)

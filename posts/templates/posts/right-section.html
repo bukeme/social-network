@@ -2,96 +2,18 @@
 	<div class="p-3 bg-white">
 		<h5 class="font-weight-bold">Messenger</h5>
 		<ul class="list-unstyled mt-4">
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/05.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Frances Guerrero</span>
-					<i class="fa fa-circle text-success ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/06.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Lori Ferguson</span>
-					<i class="fa fa-circle text-success ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/placeholder.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Samuel Bishop</span>
-					<i class="fa fa-circle text-danger ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/09.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Luis Crawford</span>
-					<span class="ml-auto text-muted">20sec</span>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/04.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Dennis Barrett</span>
-					<i class="fa fa-circle text-success ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/08.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Judy Nguyen</span>
-					<i class="fa fa-circle text-success ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/10.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Bryan Knight</span>
-					<i class="fa fa-circle text-danger ml-auto" style="font-size: 5px;"></i>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/11.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Jacqueline Miller</span>
-					<span class="ml-auto text-muted">1min</span>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/13.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Amanda Reed</span>
-					<span class="ml-auto text-muted">3min</span>
-				</a>
-			</li>
-			<li class="mt-4">
-				<a href="#" class="d-flex align-items-center">
-					<div class="rounded-circle" style="width: 35px; height: 35px;">
-						<img src="../images/12.jpg" class="rounded-circle">
-					</div>
-					<span class="ml-2 font-weight-bold text-dark">Larry Lawson</span>
-					<span class="ml-auto text-muted">1hr</span>
-				</a>
-			</li>
+			{% for user in user_threads %}
+				<li class="mt-4">
+					<a href="{% url 'thread_chat' user.pk %}" class="d-flex align-items-center">
+						<div class="rounded-circle" style="width: 35px; height: 35px;">
+							<img src="{{ user.userprofile.get_profileimage }}" class="rounded-circle">
+						</div>
+						<span class="ml-2 font-weight-bold text-dark">{{ user.userprofile.full_name }}</span>
+					</a>
+				</li>
+			{% empty %}
+				<h4 class="text-muted">No Chat Or Messages</h4>
+			{% endfor %}
 		</ul>
 	</div>
 </div>

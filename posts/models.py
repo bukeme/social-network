@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.core.validators import FileExtensionValidator
 from groups.models import CustomGroup
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 
 
 User = settings.AUTH_USER_MODEL
@@ -19,7 +21,7 @@ class Post(models.Model):
 	shared_post = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
 	group = models.ForeignKey(CustomGroup, on_delete=models.SET_NULL, null=True, blank=True)
 	content = models.TextField()
-	video = models.FileField(upload_to='post_video/%Y-%m-%d/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'ogg', 'webm'])], null=True, blank=True)
+	video = models.FileField(upload_to='post_video/%Y-%m-%d/', storage=VideoMediaCloudinaryStorage(), validators=[validate_video], null=True, blank=True)
 	likes = models.ManyToManyField(User, related_name='+')
 	visibility = models.CharField(max_length=100, choices=STATUSES)
 	created = models.DateTimeField(auto_now_add=True)

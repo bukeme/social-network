@@ -9,3 +9,4 @@ media/post_video
 !media/group_profile_images/placeholder.png
 db.sqlite3
 venv/
+.env

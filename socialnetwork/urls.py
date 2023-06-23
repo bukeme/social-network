@@ -20,7 +20,6 @@ import allauth.account
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import user_signup_view
-import notifications.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +29,6 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('groups/', include('groups.urls')),
     path('chats/', include('chats.urls')),
-    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
 
 if settings.DEBUG:

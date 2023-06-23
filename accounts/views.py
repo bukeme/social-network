@@ -216,11 +216,12 @@ class FollowView(AjaxRequiredOnlyMixin, View):
 		if not request.user.is_authenticated:
 			return JsonResponse({'status': 'not logged in'})
 		userprofile = User.objects.get(pk=kwargs['user_pk']).userprofile
-		if request.user in userprofile.followers.all():
-			userprofile.followers.remove(request.user)
+		user = request.user
+		if user in userprofile.followers.all():
+			userprofile.followers.remove(user)
 			action = 'unfollow'
 		else:
-			userprofile.followers.add(request.user)
+			userprofile.followers.add(user)
 			action = 'follow'
 
 		return JsonResponse(

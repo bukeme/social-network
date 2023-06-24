@@ -53,8 +53,8 @@ class ProfileAboutView(LoginRequiredMixin, TemplateView):
 		user = get_object_or_404(User, pk=kwargs['user_pk'])
 		context['user'] = user
 		context['page'] = 'profile_about'
-		context['userprofile_form'] = UserProfileForm(initial=model_to_dict(user.userprofile))
-		context['user_form'] = UserForm(initial=model_to_dict(user))
+		context['userprofile_form'] = UserProfileForm(instance=user.userprofile)
+		context['user_form'] = UserForm(instance=user)
 		# print(user.userprofile._meta.get_fields())
 		field_dict = {}
 		icon_classes = {'marital_status': 'fa fa-heart', 'birth_date': 'fa fa-calendar', 'occupation': 'fa fa-briefcase', 'location': 'fa fa-map-marker-alt', 'date_joined': 'fa fa-calendar', 'email': 'fa fa-envelope'}
@@ -136,8 +136,8 @@ class UserSettingsView(LoginRequiredMixin, TemplateView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
-		context['profile_form'] = UserProfileSettingsForm(initial=model_to_dict(self.request.user.userprofile))
-		context['user_form'] = UserForm(initial=model_to_dict(self.request.user))
+		context['profile_form'] = UserProfileSettingsForm(instance=self.request.user.userprofile)
+		context['user_form'] = UserForm(instance=self.request.user)
 		context['password_form'] = PasswordChangeForm(self.request.user)
 		return context
 

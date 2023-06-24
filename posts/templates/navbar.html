@@ -40,12 +40,12 @@
 				{% endif %}
 			</a>
 		</li>
-		<li class="nav-item d-none d-sm-block mx-3">
+		<!-- <li class="nav-item d-none d-sm-block mx-3">
 			<a href="#" class="nav-link nav-item-line position-relative">
 				<i class="fa fa-bell icon-lg"></i>
 				<span class="badge badge-pill badge-danger f-sm" style="position: absolute; top: -3px; right: -5px;">9+</span>
 			</a>
-		</li>
+		</li> -->
 		<li class="nav-item d-none d-sm-block mx-3">
 			<a href="{% url 'groups' 'all-groups' %}" class="nav-link nav-item-line position-relative {% if 'groups' in request.path and 'group-search' not in request.path %}active{% endif %}">
 				<i class="fa fa-users icon-lg"></i>
@@ -89,7 +89,7 @@
 							{% endif %}
 						</a>
 					</li>
-					<li class="list-group-item">
+					<!-- <li class="list-group-item">
 						<a href="#" class="d-flex align-items-center w-100">
 							<div class="p-1 rounded-circle bg-light">
 								<i class="fa fa-bell"></i>
@@ -97,7 +97,7 @@
 							<span class="ml-2 mr-3">Notifications</span>
 							<span class="badge badge-pill badge-danger ml-auto">9+</span>
 						</a>
-					</li>
+					</li> -->
 					<li class="list-group-item">
 						<a href="{% url 'groups' 'all-groups' %}" class="d-flex align-items-center w-100">
 							<div class="p-1 rounded-circle bg-light">

@@ -131,6 +131,7 @@
 {% block js %}
 	<script src="{% static 'js/chat.js' %}"></script>
 	<script src="{% static 'js/media-uploader.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js" integrity="sha512-SxQulwFs2B38bmUJtBSo9tD07MDrtCbY8me3AOZ14tRknCPTeMDLvCQV4ekhs8R0o9QPnW5HQanKfveexVcwLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		const chatForm = document.querySelector('.chat-form');
 		const chatMessage = document.querySelector('.chat-message');
@@ -178,7 +179,7 @@
 		let loc = window.location;
 		let wsProtocol = loc.protocol == 'http:' ? 'ws://' : 'wss://';
 		const path = wsProtocol + loc.host + '/ws' + loc.pathname;
-		const chatSocket = new WebSocket(path);
+		const chatSocket = new ReconnectingWebSocket(path);
 
 		function sendChatData(response) {
 			chatSocket.send(JSON.stringify(response));

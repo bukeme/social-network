@@ -22,7 +22,7 @@ In building this projects, I've learnt
 - Using media and static files in production.
 - Deploying ASGI applications.
 
-## Functionalities Implimented / How To Use It
+## Functionalities Implimented
 Here are the functionalites I implimented in building this project.
 1. Authentication (Signup, Login, Logout, Change Password, Reset Password).
 2. Update User Profile (Profile Image, Cover Image, Names, Overview, Occupation, Username, Email, Phone, Marital Status).

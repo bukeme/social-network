@@ -1,6 +1,6 @@
 # Social Media Website
 
-![]()
+![](/readme-imgs/socialnet3.png)
 
 ## Project Description:
 This project is a social media website where users can create cotents, engage with contents, follow people, chat privately with friends and create groups for group conversations.
@@ -33,3 +33,8 @@ Here are the functionalites I implimented in building this project.
 7. Chat With Friends Privately (Real Time Chat System).
 8. Create Group, Join Group, Search Group, Engage in Group.
 9. Search Functionality.
+
+## 1. Authentication (Signup, Login, Logout, Change Password, Reset Password).
+![](/readme-imgs/signup1.png)
+![](/readme-imgs/login1.png)
+![](/readme-imgs/logout1.png)

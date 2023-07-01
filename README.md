@@ -29,7 +29,7 @@ Here are the functionalites I implimented in building this project.
 3. Create Post, Edit Post and Delete Post.
 4. Like Post, Comment on post, Edit and Delete Comments, and Share Post.
 5. Like Comment on post, Reply Comment on post, Edit and Delete Reply on comment, and Like Reply on comment.
-6. Follow User, Unfollow User, Send Friend Request , Accept Friend Request and Delete Friend Request.
+6. Follow User, Unfollow User, Send Friend Request, Accept Friend Request and Delete Friend Request.
 7. Chat With Friends Privately (Real Time Chat System).
 8. Create Group, Join Group, Search Group, Engage in Group.
 9. Search Functionality.
@@ -37,4 +37,5 @@ Here are the functionalites I implimented in building this project.
 ## 1. Authentication (Signup, Login, Logout, Change Password, Reset Password).
 ![](/readme-imgs/signup1.png)
 ![](/readme-imgs/login1.png)
-![](/readme-imgs/logout1.png)
+
+## Update User Profile

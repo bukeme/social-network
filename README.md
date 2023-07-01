@@ -35,3 +35,6 @@ Here are the functionalites I implimented in building this project.
 9. Search Functionality.
 
 ## 1. Authentication (Signup, Login, Logout, Change Password, Reset Password).
+![](/readme-imgs/signup1.png)
+![](/readme-imgs/login1.png)
+![](/readme-imgs/logout1.png)

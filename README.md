@@ -3,8 +3,8 @@
 ![](/readme-imgs/socialnet3.png)
 
 ## Project Description:
-This project is a social media website where users can create cotents, engage with contents, follow people, chat privately with friends and create groups for group conversations.
-I built this project to enhance my web development skills and ground myself in technologies like Django, Django Channels and JavaScript.
+This project is a social media website that allows users to create content, engage with content, follow people, chat privately, and create groups.
+I created this project to improve my web development abilities. Here is the link to the live website. [Click](https://web-production-adb4.up.railway.app)
 
 The technologies I used in building this project are:
 - Python
@@ -15,21 +15,21 @@ The technologies I used in building this project are:
 - CSS
 - HTML
 
-In building this projects, I've learnt
+In building this project, I learnt
 - Django ORM and Database Manipulation.
 - Django Channels and how it works.
 - JavaScript, APIs and how the frontend and the backend communicate.
 - Using media and static files in production.
 - Deploying ASGI applications.
 
-## Functionalities Implimented
-Here are the functionalites I implimented in building this project.
+## Functionalities Implemented
+Here are the functionalities I implemented in building this project.
 1. Authentication (Signup, Login, Logout, Change Password, Reset Password).
 2. Update User Profile (Profile Image, Cover Image, Names, Overview, Occupation, Username, Email, Phone, Marital Status).
 3. Create Post, Edit Post and Delete Post.
 4. Engage Post (Like, Comment, Share, and so on)
 5. Follow User, Unfollow User, Send Friend Request, Accept Friend Request and Delete Friend Request.
-6. Chat With Friends Privately (Real Time Chat System).
+6. Chat With Friends Privately (Real-Time Chat System).
 7. Create Group, Join Group, Search Group, Engage in Group.
 8. Search Functionality.
 

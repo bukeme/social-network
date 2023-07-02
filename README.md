@@ -3,7 +3,7 @@
 ![](/readme-imgs/socialnet3.png)
 
 ## Project Description:
-This project is a social media website that allows users to create content, engage with content, follow people, chat privately, and create groups.
+This project is a social media website that allows users to create content, engage with content, follow people, chat privately, create groups and so on.
 I created this project to improve my web development abilities. Here is the link to the live website. [Click](https://web-production-adb4.up.railway.app)
 
 The technologies I used in building this project are:

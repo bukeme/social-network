@@ -1,0 +1,1105 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$1qms9XyQV3uEE2MCTBTRWx$7JupeMTjf7WC2Ih9hjung30PVe3KHQdX3eqvvCiOnow=",
+    "last_login": "2023-06-24T19:41:14.249Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Admin",
+    "last_name": "User",
+    "email": "ukemmebassey@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-06-24T13:00:14.206Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$DqEzTy5RWwhQ06aILFws3S$RZ+bkNtkJDDop7QcBS4YKaI923nobhISa7oKAwvEv3U=",
+    "last_login": "2023-07-23T07:22:02.340Z",
+    "is_superuser": false,
+    "username": "madeline",
+    "first_name": "Madeline",
+    "last_name": "Miller",
+    "email": "basseyukemme@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-06-24T18:47:00.967Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$7JVp3S1dg5CSYB71STigrg$1NtzuSGXGSChsrrBNLeSfnfRisbdMb7riDwb0k6Ztoc=",
+    "last_login": "2023-07-01T19:47:27.007Z",
+    "is_superuser": false,
+    "username": "jamie",
+    "first_name": "Jamie",
+    "last_name": "Morton",
+    "email": "JamieSMorton@teleworm.us",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-06-24T18:59:11.036Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ZlhDT12ITy2UpJ4unAyJSU$oHoatyOxre0fFQ/xGO18v+V7jlBtSh2k7l1SYACpTOQ=",
+    "last_login": "2023-06-24T19:43:00.341Z",
+    "is_superuser": false,
+    "username": "denise",
+    "first_name": "Denise",
+    "last_name": "Daniels",
+    "email": "DeniseCDaniels@armyspy.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-06-24T19:25:01.605Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$SYw6EOPkIFijPPHVO3gAtf$HxBpHdCxHuxZpUuGSAKhXBCxfXx6PLr2k2izhlVaEXQ=",
+    "last_login": "2023-07-01T19:37:18.303Z",
+    "is_superuser": false,
+    "username": "jennifer",
+    "first_name": "Jennifer",
+    "last_name": "Chastain",
+    "email": "JenniferSChastain@armyspy.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-07-01T19:37:17.936Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "64jr7bkgm78nhluybxml927s2si72aq1",
+  "fields": {
+    "session_data": ".eJxVjMsOgjAQRf-la9O0HVoGlu79hmb6QKqmJRQSjfHfhYSFbu8597yZpXUZ7VrjbFNgPVPs9Ls58veYdxBulK-F-5KXOTm-K_yglV9KiI_z4f4FRqrj9u6cUggOu0DKGD8YMCRCIwmFUk63BAhIWrQDNo30UsvNNwgQETqt4x6tsdZUso3PKc0v1ovPF0YnPZU:1qFgTt:NLKqsCHAYE71_cLAHdq4Ux3E-SJixc_WWRY6iLU04D0",
+    "expire_date": "2023-07-15T19:42:05.283Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6qkct11yf561ukcv17ilfxlb5d2jpyo6",
+  "fields": {
+    "session_data": ".eJxVjsEOgjAQRP-lZ9N0BQvL0bvf0OzSrVRNaygkGuO_C4aDHmfmzWReytE8DW4uMrroVacqtfv1mPqrpDXwF0rnrPucpjGyXhG9pUWfspfbcWP_BgYqw9K2gKHmBgFwb4OppDbUgAdqwyI9MgMZOVgE6REJiQPV2PiWmaC131dFSok5OXnc4_hUnXl_AIN-P0g:1qFgZ5:bw3pIyxLZbkUhxwQyiWntfcmhecR49l_bLlLcBpz6U8",
+    "expire_date": "2023-07-15T19:47:27.013Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8alxj0t7k88y9ikawtbz4w6x31nxtm15",
+  "fields": {
+    "session_data": ".eJxVjMsOgjAQRf-la9O0HVoGlu79hmb6QKqmJRQSjfHfhYSFbu8597yZpXUZ7VrjbFNgPVPs9Ls58veYdxBulK-F-5KXOTm-K_yglV9KiI_z4f4FRqrj9u6cUggOu0DKGD8YMCRCIwmFUk63BAhIWrQDNo30UsvNNwgQETqt4x6tsdZUso3PKc0v1ovPF0YnPZU:1qD9It:WtNVYOsz6rwcn7SoJm6P_dmIjOnyfp0_zCdiOloifyI",
+    "expire_date": "2023-07-08T19:52:15.503Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fce2qaeql1kdzvlqbmx1p8ohzxmrzpn0",
+  "fields": {
+    "session_data": ".eJxljEEOgjAQRe_SNSHQFqgu3XuGZtqZkWptE6BujHcXDDExbt97_z8FeJ9LWuyDpsCB0NIdQhTHVGKsvrbMNImj0KISFsoyfoAN-M8c-BulTeAV0iXXPqdlCq7eknq3c33OSPG0tz8HI8zjum59K6WSPSiAQWvkQWpGhXLlruFOd0xGO9M4ZlLcQ2Pk4LvWKCUNwkG83nMgSVY:1qD8sY:IpomoKiA3wNOHz0zWPAp4Egis6AIMqFbggPu2gHaQ8o",
+    "expire_date": "2023-07-08T19:25:02.361Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "sdo6c39w6qhzgf7tf1cyfc0skh92bn1t",
+  "fields": {
+    "session_data": ".eJxVjMsOgjAQRf-la9O0HVoGlu79hmb6QKqmJRQSjfHfhYSFbu8597yZpXUZ7VrjbFNgPVPs9Ls58veYdxBulK-F-5KXOTm-K_yglV9KiI_z4f4FRqrj9u6cUggOu0DKGD8YMCRCIwmFUk63BAhIWrQDNo30UsvNNwgQETqt4x6tsdZUso3PKc0v1ovPF0YnPZU:1qNTPm:12e1rh-DoOxOw2VKRnTTaRhQp3kDngEfk_m7Zywvdf4",
+    "expire_date": "2023-08-06T07:22:02.398Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zm1736c47jvk4ce1ml35bt3zyl2m1ime",
+  "fields": {
+    "session_data": ".eJxljMsOgjAUBf-la0K4FYtl6d5vaO6jSLW2CVA3xn9XDDExbmfmnIdC5lzS4u5-CkPw4vwNQ1R9KjFWX1tmP6legaqUw7KMH-CC_DNCvvq0CrlgOueac1qmQPWa1Jud61MWH49b-3Mw4jy-1yxtQ4x6x8yGrQVD0GkNgLrrRDQy7W0r1LAlLaaxB20H2IF4JGOB1fMFid5J1w:1qD2sO:kpAuKjhHK-IShUpiHqKYGuEhUfJt0jdWmNPF5V8rkWA",
+    "expire_date": "2023-07-08T13:00:28.757Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "other_name": null,
+    "birth_date": null,
+    "phone": null,
+    "occupation": null,
+    "location": null,
+    "overview": null,
+    "marital_status": null,
+    "followers": [],
+    "friends": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "other_name": null,
+    "birth_date": null,
+    "phone": "979-571-3975",
+    "occupation": "Software Developer",
+    "location": null,
+    "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum.",
+    "marital_status": null,
+    "followers": [
+      [
+        "jamie"
+      ],
+      [
+        "denise"
+      ]
+    ],
+    "friends": [
+      [
+        "jamie"
+      ],
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "other_name": "S",
+    "birth_date": null,
+    "phone": "434-971-2316",
+    "occupation": "Reporter",
+    "location": null,
+    "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.",
+    "marital_status": "Single",
+    "followers": [
+      [
+        "denise"
+      ],
+      [
+        "jennifer"
+      ]
+    ],
+    "friends": [
+      [
+        "madeline"
+      ],
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "other_name": null,
+    "birth_date": null,
+    "phone": "310-737-4731",
+    "occupation": "Radiologist",
+    "location": null,
+    "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.",
+    "marital_status": "Married",
+    "followers": [
+      [
+        "madeline"
+      ],
+      [
+        "jennifer"
+      ]
+    ],
+    "friends": [
+      [
+        "madeline"
+      ],
+      [
+        "jamie"
+      ]
+    ]
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "jennifer"
+    ],
+    "other_name": null,
+    "birth_date": null,
+    "phone": "830-879-1851",
+    "occupation": "Truck dispatcher",
+    "location": null,
+    "overview": "",
+    "marital_status": null,
+    "followers": [
+      [
+        "madeline"
+      ]
+    ],
+    "friends": []
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 1,
+  "fields": {
+    "userprofile": 1,
+    "profile_image": "profile_images/placeholder.jpg",
+    "created": "2023-06-24T13:00:16.449Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 2,
+  "fields": {
+    "userprofile": 2,
+    "profile_image": "profile_images/placeholder.jpg",
+    "created": "2023-06-24T18:47:01.319Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 3,
+  "fields": {
+    "userprofile": 2,
+    "profile_image": "social-network/media/profile_images/2023-06-24/team-2_fjbes7",
+    "created": "2023-06-24T18:50:02.164Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 4,
+  "fields": {
+    "userprofile": 3,
+    "profile_image": "profile_images/placeholder.jpg",
+    "created": "2023-06-24T18:59:11.386Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 5,
+  "fields": {
+    "userprofile": 3,
+    "profile_image": "social-network/media/profile_images/2023-06-24/team-3_vblnnc",
+    "created": "2023-06-24T19:02:44.419Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 6,
+  "fields": {
+    "userprofile": 4,
+    "profile_image": "profile_images/placeholder.jpg",
+    "created": "2023-06-24T19:25:01.961Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 7,
+  "fields": {
+    "userprofile": 4,
+    "profile_image": "social-network/media/profile_images/2023-06-24/testimonial-2_ecnmfx",
+    "created": "2023-06-24T19:29:28.403Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 8,
+  "fields": {
+    "userprofile": 5,
+    "profile_image": "profile_images/placeholder.jpg",
+    "created": "2023-07-01T19:37:18.283Z"
+  }
+},
+{
+  "model": "accounts.profileimage",
+  "pk": 9,
+  "fields": {
+    "userprofile": 5,
+    "profile_image": "social-network/media/profile_images/2023-07-01/team-3_fcrod8",
+    "created": "2023-07-01T19:40:21.229Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 1,
+  "fields": {
+    "userprofile": 1,
+    "cover_image": "cover_images/placeholder.jpg",
+    "created": "2023-06-24T13:00:17.401Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 2,
+  "fields": {
+    "userprofile": 2,
+    "cover_image": "cover_images/placeholder.jpg",
+    "created": "2023-06-24T18:47:01.322Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 3,
+  "fields": {
+    "userprofile": 3,
+    "cover_image": "cover_images/placeholder.jpg",
+    "created": "2023-06-24T18:59:11.389Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 4,
+  "fields": {
+    "userprofile": 4,
+    "cover_image": "cover_images/placeholder.jpg",
+    "created": "2023-06-24T19:25:01.964Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 5,
+  "fields": {
+    "userprofile": 4,
+    "cover_image": "social-network/media/cover_images/2023-06-24/cat-1_qluvf4",
+    "created": "2023-06-24T19:30:21.813Z"
+  }
+},
+{
+  "model": "accounts.coverimage",
+  "pk": 6,
+  "fields": {
+    "userprofile": 5,
+    "cover_image": "cover_images/placeholder.jpg",
+    "created": "2023-07-01T19:37:18.287Z"
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "shared_post": null,
+    "group": null,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in tellus interdum eros vulputate placerat sed non enim. Pellentesque eget.",
+    "video": "social-network/media/post_video/2023-06-24/013._Variable_Modifiers__Register_uf0xjz",
+    "visibility": "public",
+    "created": "2023-06-24T18:55:20.855Z",
+    "updated": "2023-06-24T18:55:20.855Z",
+    "likes": [
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "shared_post": null,
+    "group": null,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.",
+    "video": "",
+    "visibility": "public",
+    "created": "2023-06-24T18:59:56.337Z",
+    "updated": "2023-06-24T18:59:56.337Z",
+    "likes": [
+      [
+        "madeline"
+      ],
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "shared_post": null,
+    "group": 1,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.",
+    "video": "social-network/media/post_video/2023-06-24/028._Bitwise_Operators_in_C_Part_3_nwtpv6",
+    "visibility": "public",
+    "created": "2023-06-24T19:06:29.722Z",
+    "updated": "2023-06-24T19:06:29.722Z",
+    "likes": [
+      [
+        "jamie"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "shared_post": 1,
+    "group": null,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et.",
+    "video": "",
+    "visibility": "public",
+    "created": "2023-06-24T19:27:20.167Z",
+    "updated": "2023-06-24T19:27:20.167Z",
+    "likes": []
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "shared_post": null,
+    "group": 1,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.",
+    "video": "",
+    "visibility": "public",
+    "created": "2023-06-24T19:33:22.293Z",
+    "updated": "2023-06-24T19:33:22.293Z",
+    "likes": [
+      [
+        "jamie"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "shared_post": null,
+    "group": 2,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.",
+    "video": "",
+    "visibility": "public",
+    "created": "2023-06-24T19:35:19.146Z",
+    "updated": "2023-06-24T19:35:19.146Z",
+    "likes": []
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "shared_post": 6,
+    "group": null,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit.",
+    "video": "",
+    "visibility": "public",
+    "created": "2023-06-24T19:54:35.490Z",
+    "updated": "2023-06-24T19:54:35.490Z",
+    "likes": [
+      [
+        "madeline"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 1,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/carousel-1_akoize",
+    "post": 1,
+    "created": "2023-06-24T18:55:21.363Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 2,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/carousel-2_prlhed",
+    "post": 1,
+    "created": "2023-06-24T18:55:21.894Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 3,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-1_b2kusp",
+    "post": 1,
+    "created": "2023-06-24T18:55:22.433Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 4,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/carousel-2_g4pqjj",
+    "post": 2,
+    "created": "2023-06-24T18:59:56.863Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 5,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-1_umyx9x",
+    "post": 2,
+    "created": "2023-06-24T18:59:57.354Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 6,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-2_uallrm",
+    "post": 2,
+    "created": "2023-06-24T18:59:57.692Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 7,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-3_gzxruf",
+    "post": 2,
+    "created": "2023-06-24T18:59:58.107Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 8,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-4_bd5opz",
+    "post": 2,
+    "created": "2023-06-24T18:59:58.632Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 9,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/carousel-2_icsngq",
+    "post": 3,
+    "created": "2023-06-24T19:06:30.166Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 10,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-2_vhyawx",
+    "post": 3,
+    "created": "2023-06-24T19:06:30.741Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 11,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-4_astdpu",
+    "post": 3,
+    "created": "2023-06-24T19:06:31.276Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 12,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/course-1_bdtxzc",
+    "post": 3,
+    "created": "2023-06-24T19:06:31.802Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 13,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/carousel-2_qs1vib",
+    "post": 6,
+    "created": "2023-06-24T19:33:22.774Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 14,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-2_aymdjh",
+    "post": 6,
+    "created": "2023-06-24T19:33:23.383Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 15,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/about_u7msjp",
+    "post": 7,
+    "created": "2023-06-24T19:35:19.636Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 16,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-2_pin4fx",
+    "post": 7,
+    "created": "2023-06-24T19:35:20.232Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 17,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/cat-4_yfzku6",
+    "post": 7,
+    "created": "2023-06-24T19:35:20.710Z"
+  }
+},
+{
+  "model": "posts.postimage",
+  "pk": 18,
+  "fields": {
+    "image": "social-network/media/post_images/2023-06-24/course-1_uddzvp",
+    "post": 7,
+    "created": "2023-06-24T19:35:21.298Z"
+  }
+},
+{
+  "model": "posts.comment",
+  "pk": 1,
+  "fields": {
+    "post": 6,
+    "user": [
+      "jamie"
+    ],
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et.",
+    "created": "2023-06-24T19:46:00.411Z",
+    "updated": "2023-06-24T19:46:00.411Z",
+    "likes": [
+      [
+        "jamie"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.comment",
+  "pk": 2,
+  "fields": {
+    "post": 1,
+    "user": [
+      "jamie"
+    ],
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam.",
+    "created": "2023-06-24T19:46:36.834Z",
+    "updated": "2023-06-24T19:46:36.834Z",
+    "likes": []
+  }
+},
+{
+  "model": "posts.comment",
+  "pk": 3,
+  "fields": {
+    "post": 6,
+    "user": [
+      "denise"
+    ],
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam.",
+    "created": "2023-06-24T19:51:15.390Z",
+    "updated": "2023-06-24T19:51:15.390Z",
+    "likes": [
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "posts.reply",
+  "pk": 1,
+  "fields": {
+    "comment": 1,
+    "user": [
+      "jamie"
+    ],
+    "reply": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci.",
+    "created": "2023-06-24T19:46:16.659Z",
+    "updated": "2023-06-24T19:46:16.659Z",
+    "likes": [
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "groups.customgroup",
+  "pk": 1,
+  "fields": {
+    "owner": [
+      "jamie"
+    ],
+    "name": "Writers' Write",
+    "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in tellus interdum eros vulputate placerat sed non enim. Pellentesque eget.",
+    "created": "2023-06-24T19:04:37.209Z",
+    "members": [
+      [
+        "madeline"
+      ],
+      [
+        "jamie"
+      ],
+      [
+        "denise"
+      ]
+    ],
+    "admin_members": [
+      [
+        "jamie"
+      ]
+    ]
+  }
+},
+{
+  "model": "groups.customgroup",
+  "pk": 2,
+  "fields": {
+    "owner": [
+      "denise"
+    ],
+    "name": "Software Engineering",
+    "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum.",
+    "created": "2023-06-24T19:34:34.133Z",
+    "members": [
+      [
+        "denise"
+      ]
+    ],
+    "admin_members": [
+      [
+        "denise"
+      ]
+    ]
+  }
+},
+{
+  "model": "groups.groupprofileimage",
+  "pk": 1,
+  "fields": {
+    "image": "group_profile_images/placeholder.png",
+    "group": 1,
+    "created": "2023-06-24T19:04:37.213Z"
+  }
+},
+{
+  "model": "groups.groupprofileimage",
+  "pk": 2,
+  "fields": {
+    "image": "social-network/media/group_profile_images/2023-06-24/course-2_l0kv4k",
+    "group": 1,
+    "created": "2023-06-24T19:10:56.998Z"
+  }
+},
+{
+  "model": "groups.groupprofileimage",
+  "pk": 3,
+  "fields": {
+    "image": "group_profile_images/placeholder.png",
+    "group": 2,
+    "created": "2023-06-24T19:34:34.135Z"
+  }
+},
+{
+  "model": "groups.groupprofileimage",
+  "pk": 4,
+  "fields": {
+    "image": "social-network/media/group_profile_images/2023-06-24/datasci_xxis2p",
+    "group": 2,
+    "created": "2023-06-24T19:36:15.091Z"
+  }
+},
+{
+  "model": "chats.thread",
+  "pk": 1,
+  "fields": {
+    "first": [
+      "jamie"
+    ],
+    "second": [
+      "denise"
+    ],
+    "created": "2023-06-24T19:46:57.098Z",
+    "updated": "2023-07-01T19:48:02.107Z"
+  }
+},
+{
+  "model": "chats.thread",
+  "pk": 2,
+  "fields": {
+    "first": [
+      "madeline"
+    ],
+    "second": [
+      "denise"
+    ],
+    "created": "2023-07-01T19:44:57.261Z",
+    "updated": "2023-07-01T19:44:57.260Z"
+  }
+},
+{
+  "model": "chats.thread",
+  "pk": 3,
+  "fields": {
+    "first": [
+      "madeline"
+    ],
+    "second": [
+      "jamie"
+    ],
+    "created": "2023-07-01T19:45:05.038Z",
+    "updated": "2023-07-01T19:45:05.038Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "thread": 1,
+    "message": "Hello man",
+    "seen": true,
+    "created": "2023-06-24T19:47:19.328Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "thread": 1,
+    "message": "How's it going",
+    "seen": true,
+    "created": "2023-06-24T19:47:33.821Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "thread": 1,
+    "message": "Here are some images",
+    "seen": true,
+    "created": "2023-06-24T19:48:05.411Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "thread": 3,
+    "message": "Hello Madeline",
+    "seen": false,
+    "created": "2023-07-01T19:48:56.140Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "thread": 3,
+    "message": "Hey, how're doing?",
+    "seen": false,
+    "created": "2023-07-01T19:49:39.371Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "thread": 3,
+    "message": "I'm great",
+    "seen": false,
+    "created": "2023-07-01T19:49:51.435Z"
+  }
+},
+{
+  "model": "chats.chatmessage",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "thread": 3,
+    "message": "Here are some photos",
+    "seen": false,
+    "created": "2023-07-01T19:50:26.328Z"
+  }
+},
+{
+  "model": "chats.chatimageframe",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "thread": 1,
+    "seen": true,
+    "created": "2023-06-24T19:48:05.414Z"
+  }
+},
+{
+  "model": "chats.chatimageframe",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "thread": 3,
+    "seen": false,
+    "created": "2023-07-01T19:50:26.332Z"
+  }
+},
+{
+  "model": "chats.chatimage",
+  "pk": 1,
+  "fields": {
+    "frame": 1,
+    "image": "social-network/media/chat_images/2023-06-24/cat-4_u0rjio",
+    "created": "2023-06-24T19:48:06.208Z"
+  }
+},
+{
+  "model": "chats.chatimage",
+  "pk": 2,
+  "fields": {
+    "frame": 1,
+    "image": "social-network/media/chat_images/2023-06-24/course-1_e0x9qs",
+    "created": "2023-06-24T19:48:06.590Z"
+  }
+},
+{
+  "model": "chats.chatimage",
+  "pk": 3,
+  "fields": {
+    "frame": 2,
+    "image": "social-network/media/chat_images/2023-07-01/cat-1_yaczju",
+    "created": "2023-07-01T19:50:27.003Z"
+  }
+},
+{
+  "model": "chats.chatimage",
+  "pk": 4,
+  "fields": {
+    "frame": 2,
+    "image": "social-network/media/chat_images/2023-07-01/cat-2_fylezr",
+    "created": "2023-07-01T19:50:27.493Z"
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "email": "ukemmebassey@gmail.com",
+    "verified": true,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "madeline"
+    ],
+    "email": "basseyukemme@gmail.com",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "jamie"
+    ],
+    "email": "JamieSMorton@teleworm.us",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "denise"
+    ],
+    "email": "DeniseCDaniels@armyspy.com",
+    "verified": false,
+    "primary": true
+  }
+}
+]

@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://web-production-adb4.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://socialnet-website.vercel.app']
 
 
 # Application definition

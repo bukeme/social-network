@@ -4,7 +4,7 @@
 
 ## Project Description:
 This project is a social media website that allows users to create content, engage with content, follow people, chat privately, create groups and so on.
-I created this project to improve my web development abilities. Here is the link to the live website. [Click](https://web-production-adb4.up.railway.app)
+I created this project to improve my web development abilities. Here is the link to the live website. [Click](https://socialnet-website.onrender.com/)
 
 The technologies I used in building this project are:
 - Python

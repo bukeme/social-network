@@ -7,6 +7,5 @@ media/post_video
 !media/cover_images/placeholder.jpg
 !media/profile_images/placeholder.jpg
 !media/group_profile_images/placeholder.png
-db.sqlite3
 venv/
 .env

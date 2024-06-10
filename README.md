@@ -1,6 +1,6 @@
 # Social Media Website
 
-![](https://i.ibb.co/TKR8Gqs/socialnet3.png)
+![Website Preview](https://i.ibb.co/TKR8Gqs/socialnet3.png)
 
 ## Project Description:
 This project is a social media website that allows users to create content, engage with content, follow people, chat privately, create groups and so on.

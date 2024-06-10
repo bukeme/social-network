@@ -1,6 +1,6 @@
 # Social Media Website
 
-![Website Preview](https://besthqwallpapers.com/Uploads/5-1-2021/150475/thumb2-dj-alok-4k-violet-neon-lights-free-fire-battlegrounds-alok.jpg)
+![Website Preview](https://i.ibb.co/TKR8Gqs/socialnet3.png)
 
 ## Project Description:
 This project is a social media website that allows users to create content, engage with content, follow people, chat privately, create groups and so on.

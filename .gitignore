@@ -9,3 +9,6 @@ media/post_video
 !media/group_profile_images/placeholder.png
 venv/
 .env
+__pycache__/
+*.py[cod]
+*$py.class

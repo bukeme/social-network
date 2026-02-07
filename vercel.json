@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "socialnetwork/wsgi.py",
+      "src": "socialnetwork/asgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }
@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "socialnetwork/wsgi.py"
+      "dest": "socialnetwork/asgi.py"
     }
   ]
 }
